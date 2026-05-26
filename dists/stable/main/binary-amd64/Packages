@@ -1,0 +1,1535 @@
+Package: m3tal
+Architecture: amd64
+Version: 1.0.0
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 24888
+Filename: pool/main/m3tal_v1.0.0_amd64.deb
+Size: 14114870
+MD5sum: 490c1156dafb12e2dfc16593fb72dddc
+SHA1: 232d7abbd4c487adcc7fde8e2a8a27abcd16b825
+SHA256: 0f74d46d3ff1b3385e3a69a05628f976cbfab59e9a42421927a5597d004f2cf1
+SHA512: 479e5b382ebbc6efdd924080d68a86914da41b90f382f17cca17939698aa68e9a498ab9618abf047f7a6713d6840a265c2334e877f9cc04be0787dfa82be63d1
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.10
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40533
+Filename: pool/main/m3tal_v1.0.10_amd64.deb
+Size: 22877294
+MD5sum: 4a3599f71e63f0491eef4bd86bd60f58
+SHA1: cce00d94122115945bc6abd064f0ec3af8729929
+SHA256: d73e7d422e9011e07e2c7fd1e390d5d74f22bdb092fe8b76bf13f46ba4260815
+SHA512: 790728babb818acfd72d1a6fbd537d9015341195ae05e0a5d6e1cb4a7ac2b32cf1474072f0be392e5e46d9af66b290d8347dd859e1c7d2b4441816c43741a5da
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.11
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40550
+Filename: pool/main/m3tal_v1.0.11_amd64.deb
+Size: 22884614
+MD5sum: 753d794b1e8cb749001c69828cf84abd
+SHA1: 2c3b200bb35f03279e93971dd7a1559ef1ceb303
+SHA256: e4f90609a991a6dbb913a61e97ca218cbc0530a2114415e44be04ded636edfa4
+SHA512: 1957e1ee5383e47b6e497285cfc70f36e88c7d09886f3a8c2e25d8b54180b930198ebf40e73e19cfc6cca4502121f6000ac13d4b11411dee765d735412d686a0
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.12
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40554
+Filename: pool/main/m3tal_v1.0.12_amd64.deb
+Size: 22885920
+MD5sum: c5784c78acd9186fd381160d6bddf061
+SHA1: 444fb940449c8229066ad848f1fd3d7a6ff88558
+SHA256: a97ced418fa94b7e3d041bcff982c5bcdd4464b824d5b5d7bca905c0d0677505
+SHA512: 62b4d4511c33cc8bccdee9dc1f107bbc9b333a554e58e95c2c9f39d589e93b7b661a6a821cd2d84ca1bf31058b5995560e31fc9bec0615e1195cbd6a33f6104d
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.13
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.13_amd64.deb
+Size: 22887498
+MD5sum: dec739f073f679f1dad637d6aaf323dc
+SHA1: 794553fce21f0da704ec3c148c2a057db43c43c1
+SHA256: 4150cd179185e879df31ecb00b27a42194eeb4a03f3b48fe363e780a510680cd
+SHA512: 6010108e685ba061dbe1508eb0625335325d12018a9096fc759ae0e4dccba439988a726b1fc7a899909685899f770146524299329c67e59ed70da5f36ba16761
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.14
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.14_amd64.deb
+Size: 22887492
+MD5sum: a62760d069cd56c49348f24194885096
+SHA1: fc75661099c896b1c798cb9e640b765607a000ed
+SHA256: cead582f4cf5e18011b64af74dbe77dba702362c6790b42889b19bfec5b800cb
+SHA512: 5b85f6c031327e8219bf0ffb7cc8af754a318f89a663d500ad6425e39658b22289a600341c9e4fd9088b4281cf0c65be22c025b256359d5feb05a430d33e4397
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.15
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.15_amd64.deb
+Size: 22887484
+MD5sum: 9c19c70b8d50462ac468faf0ecec6c56
+SHA1: 76e439429ebf2d82da35aa1ab2e756f9a08309f6
+SHA256: 93fe76faa55a04cdde8c400995fe8b6f6ac6fd2a7d1ed92abfef2dfe675c9948
+SHA512: db23fcc7d6a4887df450284cda02adbcd691cb3628ae08ad6f799811bd573b32b4cc05dac4e13611b74592e318f0d626297db61bef14ab0e9954331b5db1ee96
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.16
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.16_amd64.deb
+Size: 22887500
+MD5sum: 96fb805f319be8bba62eaf054e36d9da
+SHA1: 966036638bb97ff646c122eeab76156d45cf3f54
+SHA256: 57fd8a8596ebe71a076b450e54ec01f6054c00ca6eab4b4ef1d77847bd91fb1c
+SHA512: d44a98af7c4d17925b0b85216be9350148ed2fc52307ba154a1d4eb8a86cffdf51b9c6eeacf20ea36f19cc86c3a6ad66f1044942fb070c393ce105e61aa8a1cc
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.17
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.17_amd64.deb
+Size: 22887500
+MD5sum: 71330c6e17e8f2b0443b6c9e8463b51f
+SHA1: 8409e07eb9357b0870ff5e42f01088267d822718
+SHA256: 0907b49f520d1180013908110ad526f672f3ab8885a77ac402e01bccc2900ad4
+SHA512: 0d03a5393bbbc8ea01ec67255de7a59350eef2d107cde670e96de9d1c1a545e7359ff0532f4d642fcf0e72aadce71da51874dbe6ac7025d9621048b583b13c66
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.18
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.18_amd64.deb
+Size: 22887494
+MD5sum: 4cb2cd87775a1809d1c5801c78fd52fa
+SHA1: 5367ea96aa1a180998c76449d6f69c681c0a88dd
+SHA256: 7e89d6f5a71db87d61576c81c5c9ace41917926aee3450549b5e48e3d1654865
+SHA512: ea1ac3b71809ee79fe9178afa512ee497e549365f3d6b6f4a6ddb4ff6c859cd4d65a8403ecfce19f68f1c2045f3950ee6b5782e872b3f1b69c2ffd3e2187db4e
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.19
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40555
+Filename: pool/main/m3tal_v1.0.19_amd64.deb
+Size: 22887508
+MD5sum: 560ddda99d4598193e131839b7d20c36
+SHA1: 5fff4b140a32bd79a9c640a6fc600680f4c83f2e
+SHA256: 84f8a4b4cf9e241704498f60a7415a5c27803b83b222781a00dba35a0487256a
+SHA512: 5d189f7f57809d8978c97795107efed00e83a1d28fba2ce45fe9e4ff85e798cf5d3b5f0d3de5832e318868ceca07886e55e83c795e481d4dca8df9ae086cc83d
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.1
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 24887
+Filename: pool/main/m3tal_v1.0.1_amd64.deb
+Size: 14113980
+MD5sum: caf6002274bf2a3e6e38df437e98a7c6
+SHA1: 6227ffb0cfe34cd4ef5245a98788ac6e37fdcfdb
+SHA256: d6d52dbdd24b3c9d344058d7d97252ada8df996d11366f298f10b45724b6f65f
+SHA512: 5436a88f59af89510522d927faa19a5717753889ddd8364a7c0ddd91c88157de6852a9257223be6168f639cc19d1d0b1840064536ca7cac92871bd56e3aca081
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.20
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41077
+Filename: pool/main/m3tal_v1.0.20_amd64.deb
+Size: 23020156
+MD5sum: 4f4fb43c6b3456fb79b980208799a869
+SHA1: f1203de50ea0f9c7427255274b4dc32fb562542a
+SHA256: d917ec790e0d98580bb78e1bf43d98b17da16abcd180d574e0af3196908d3ee2
+SHA512: 78f9a99c613f7ecf1fc86149353449b112f5207930cb93957076e9b79d35cfd83a5bc0ae9d42e2ac69972626fda11dc5fe30f376b82df5b28d8c8221aedc8103
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.21
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41077
+Filename: pool/main/m3tal_v1.0.21_amd64.deb
+Size: 23020156
+MD5sum: 917df0dded79bdf6e44359ed09ccea96
+SHA1: 7ae7d36bbe9a3e1863e6e0cb811dd74021c6d4aa
+SHA256: 20e5b92d0e93f1482a52912a67e3ff6b231ba1507bde8188f919d3bc11367fce
+SHA512: 2ad04ddad224b7d833d99f4c1e190ac523573641909ee52e874610ef17fc0bbfc405387966bbb47491bcffc81e8cea5c3c13ee17090e5bbf2b63931e31e4f70b
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.22
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41077
+Filename: pool/main/m3tal_v1.0.22_amd64.deb
+Size: 23020162
+MD5sum: d08e5032d36074113f651ed16f6cf4e5
+SHA1: c1e29d9dcc8c3c00752c53cb1984b3e3c58d649b
+SHA256: 0c293a88cb7e45e8cad6635a348b34c90b9f447c1c9d3b1df53afe983044aaa5
+SHA512: bd5ab6217bf018f30c84e326c53e98a59b4c49bc3ef49bfa0cd2dfb1eef2772d6d9c89f228b2f8829a4b264e3d3555c41c62a38fa150eac15aa46885d78e227d
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.23
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41077
+Filename: pool/main/m3tal_v1.0.23_amd64.deb
+Size: 23020164
+MD5sum: 580cc384615878157cf3fccfd58db945
+SHA1: 018cba825511a7a8bb36794f64564c198838bcab
+SHA256: eaa9df5a24aabfa03a22b49b656e9dd9ad81b863464b69a214efd115336ba6c7
+SHA512: 51178977b27af53abb97fb24b2e74b8f86b1186368621fd2942cff96ef7933e5b807178fb13ff7e3b24ad57c14fe84a322978fb76924058bac5aef45f53a21ff
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.24
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41103
+Filename: pool/main/m3tal_v1.0.24_amd64.deb
+Size: 23031174
+MD5sum: 9244ca38aeb35175b5ae2cf33374a10d
+SHA1: 50399a43dc892a45415fb70adb8c6d5754799d99
+SHA256: a426061263c57285e455abd8684b78959a17a18b57681fed834311d68ec565ff
+SHA512: 5a0fd6a63f3583f58a77d4064073443813315cbb42bc7b90f18c3fddc3d67859944c1e831b81d0a1e40d1eeaa550709f648ca9f85aa394709b25195a4f7ee661
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.25
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41103
+Filename: pool/main/m3tal_v1.0.25_amd64.deb
+Size: 23031186
+MD5sum: 799a0ee5640f71e29abd8b3a38f9116d
+SHA1: f257f9ef7d9a44d303e17172c302560b5135b2d5
+SHA256: c5eaf69a0fe6ae51e05680e776f51c47a39e3f4269c60df3595d15ab64f12c37
+SHA512: 24a16559351b11e3f76122b0977583f607c520a3b05161171f8520ca399c9cd580e5bd01b2d4c4263a72dcfedd0b0e6a2b05bdafceeb0bea6f260aeb619bcdbe
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.26
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41103
+Filename: pool/main/m3tal_v1.0.26_amd64.deb
+Size: 23031186
+MD5sum: 6c0c90996074a3bc11e4d3abd7bca4fe
+SHA1: d4381644e1ff6069f551b20832d08abc9782846e
+SHA256: dd2d636949d1cd1206d6e2db3d8b19663ce2eb1de55d3d5711eb91e2cc5147d7
+SHA512: 07f7be3d6571ccb4e9f346f4033667d0c337c1868ebd707150e04865a6402151058913812fb5d44c7825fc8c14d59c004109aac6692b64be88983868de3b95b7
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.27
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41103
+Filename: pool/main/m3tal_v1.0.27_amd64.deb
+Size: 23032388
+MD5sum: f399fe56691637d4298e188875485509
+SHA1: 6e139f79a22b154b5576475f4bb7171485cc800f
+SHA256: 5ffdaf78ebae67f03b5ce15c02a6b7a3b53eea40d8f85848c3f8113c2c75f26c
+SHA512: 443fa817f48cc7ff9e236b4a3e881bb874de952411add2a68136948bc80093641c1b7c8d6772c5a136a602106524e06f0dea917b2b6d6a2ea3951c597e2b6a66
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.28
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41125
+Filename: pool/main/m3tal_v1.0.28_amd64.deb
+Size: 23045538
+MD5sum: 6e137d498b03c93e57f292bb190eecca
+SHA1: 75e3e480a67fc90fd10864bd937d8d09c616648d
+SHA256: 7104d946cf679676c0f6be44318eede3676b05e0c6bf7ddf2916cda0fc5f2abe
+SHA512: 4ac7feec952d8f314947784b7eff3c61ae4ae5513a6ed38142c8c531ef87b02822e1509a777876081cc3dcedb3b3e54caf00910e97c9ed8cab3ff0d0a69b235f
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.29
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41125
+Filename: pool/main/m3tal_v1.0.29_amd64.deb
+Size: 23045772
+MD5sum: af615e8bdb71015a1b81b371f749204c
+SHA1: 19ea30744f7813d080a6b96dfc201307dfeff84e
+SHA256: 9226472e870e634d84f4bf6182bd9c6d9cfbbd0478ea7b82a9834be75ec5f06e
+SHA512: a69baa3feb2bd7abfb7ea7e5a31e9d7b2aa22f5d54bbef37731362eb87c62d78213c12055edbf6cf353a118960356b9619460643f2ebdb78ba53e0dbc91bd03c
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.2
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 24887
+Filename: pool/main/m3tal_v1.0.2_amd64.deb
+Size: 14113980
+MD5sum: bb356de93700fd9f90d63fe410029d93
+SHA1: a274d473c0c21f76ed22d565c955d37bb2742d93
+SHA256: 9aa51d384d1db2d5d7914bd3ddc5a526b682a0bd4d7e93b5fe57e745cbc54c32
+SHA512: 9213d9a9d8b9cbd8df86df3c07cdf30ebb8c3d03ea6f94b68db0213395a9fd23fa00b0edc697a9cc9e508a2a2dffb32b1a10dc15914b567f8e056e0eb75e36c8
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.30
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 41125
+Filename: pool/main/m3tal_v1.0.30_amd64.deb
+Size: 23045524
+MD5sum: 21b50aa972caf15d63e75c0684f67586
+SHA1: 1da0ab45fc9ea9ca0399341830acf65bd5c263c7
+SHA256: 32f9c6481705dc4afe1b89e96f72a5eb2a1450e4d06c00e0f2328d2d3d569a5e
+SHA512: ae699ee860627dc51c960bc2fbcca9b9d78c4deb10e1cf1422b5dd9c59bc9da43bc0c2963938d375b961996e999a5b85d623c5b19e93a013c478df5557f3eb82
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.31
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42371
+Filename: pool/main/m3tal_v1.0.31_amd64.deb
+Size: 23717550
+MD5sum: 8d07cc5ff478f47eb2f2a5e0e03513d9
+SHA1: 6aa5aeb909d2cc567e965c584c5ca6ffb40c7d09
+SHA256: 50523b1487c7d6289aa160b9e079087045f2b455f05b7002e1a662aadae6f47f
+SHA512: 0ce3bcc73e1cf4f5229a5bf10accfb1ae4e5c8d13a6e61ead7fd504e04b8449a19b957f531739c7921e93a55b68b50cee90431261a2219fba1651c9491ac0e28
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.32
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42371
+Filename: pool/main/m3tal_v1.0.32_amd64.deb
+Size: 23718662
+MD5sum: e80d44261a49b324b9560d3a77130798
+SHA1: e14af04b58d7a7079f1c168351ded7438dc210e6
+SHA256: 3f63d36d0499da3ef69001a99bf0cd324b2b0d927d024684f96909c9e732114c
+SHA512: ef3ba49f2a8f3e47cb9881a5f9cc655cff4b2929af16845dc0bfb95ed8c9913c8e87a8370445ce0487b8e64b105869ef0769abdebf9a63d043c76809e860ab6c
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.33
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42371
+Filename: pool/main/m3tal_v1.0.33_amd64.deb
+Size: 23718520
+MD5sum: 8098cbe997b6674d2ced24e2ffb72a86
+SHA1: 5ee8f9b82283039aed1bc906c207ebb77328c62d
+SHA256: 18a17be2a5a54966d936729cb07356cb925e592a6322139fee110aa1aab38c43
+SHA512: 0aee1bf44fd1b9209421cecea8aeed4e16554500c027ce709bfb59330ce22bdc0d8effdaf9ce403ef4bdacb350a502930928e80a4561690a8bf1d55b36383563
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.34
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42372
+Filename: pool/main/m3tal_v1.0.34_amd64.deb
+Size: 23719394
+MD5sum: 9663465fd9f34be51f24bf951f67cada
+SHA1: 0ee5a6b31cf5c457e424764a519d6b795f858f48
+SHA256: 530407e46141b37c1cd3baee59d797c1d12110499fb6ecfc17c9676e4ad21c7e
+SHA512: ed045db6ba74c64b9d108d2b51fa21daa97edb53bffb31633f943c40bdff8893e1a5d7de6dd8692b49c8ba08be5690fe3e5350098ef1bdb14b263b21367cb79c
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.35
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42616
+Filename: pool/main/m3tal_v1.0.35_amd64.deb
+Size: 23854896
+MD5sum: 601b30f601ad986b1b9653dc37e9efb8
+SHA1: b1d567e39f8b15c92956db5321cb928670d74c84
+SHA256: 5e6c52f910aac34f48a1e7450e1ea5cb6575aa24027867e9a9a267f7a022fa2c
+SHA512: 51d3fd5b827fddb5da9a39458b0e90d4e609afeb9a2874d75ee29f795a703a929ccd385e64b5759b2df8dcf80c2b9d1f9a7876ace5f93a9184b95065e69da5b2
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.36
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42716
+Filename: pool/main/m3tal_v1.0.36_amd64.deb
+Size: 23908094
+MD5sum: e0e25c698870bb4989cda1ea4ee350a4
+SHA1: 7d701ddd87cb5742c90e6de3b2cb8add6efe81b3
+SHA256: 18362f4b8549b8bb268926e200e8ca893f6133bb818ac8a0a07aef1b0711b8ea
+SHA512: d7c97564c01d49a7762746383dbeb681633fc4ec63c76d10f6d9384d3e711463863ad2acb7aba015ef95765f40281e2f5a208caf92d5ddf8440f03873d4eb59d
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.37
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42716
+Filename: pool/main/m3tal_v1.0.37_amd64.deb
+Size: 23908096
+MD5sum: 90e6f49e79021f8462853d215b258a64
+SHA1: 586c83368ae69cd8b728a9c83a9f0b1cdd5a97d2
+SHA256: cb9fed6234d97703cabc2051d945cd331139023967b9f24377ef4984f672090f
+SHA512: 36a9de36dd22afdff33bf6cd4f0cc00f3da46da1cdbe7ed1938cea432e01d291d2ed393ce56138b8c8967d576306777b4283f31ee0de3d452a7a27734bcd9fb9
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.38
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42708
+Filename: pool/main/m3tal_v1.0.38_amd64.deb
+Size: 23904706
+MD5sum: f3293101b7e3c7cde496bca12a1923e8
+SHA1: 7fc47d9046450eccf91b5a6b4e83811e7125f33a
+SHA256: 5b72795eec8ac8f9552e7a2684c8464649f3d74d6143c10a44dabb16dbbbd892
+SHA512: abc44ae7a38bd4cc82caa2f75ce97dcc73dfda0173405b2d7aa3a251b2a4f19a94262d42593353b56537bc14e97ea7b4a7b743bb54379d4a6f8db68099b20206
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.39
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42712
+Filename: pool/main/m3tal_v1.0.39_amd64.deb
+Size: 23905656
+MD5sum: 6300449aedaed3d97b4f4a1595395224
+SHA1: 4d72d29b9b1cbc72b0987998e5948a28492cb26b
+SHA256: 505c3f85fa2b9025c1b45381ced46020d2e634347e6c57e6146efa1d6bae3a9d
+SHA512: 8ff96c1b5a2dd0adef858d2d3a5a9a18665ea69df9e6eec2271a995755c577e5a98b551bf19c919a89cd8771f2fa81a8dae33bf987e879a8dc56365e93328f51
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.3
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 24887
+Filename: pool/main/m3tal_v1.0.3_amd64.deb
+Size: 14113574
+MD5sum: 5915c749613f2a215a31390f1a7a8650
+SHA1: b9dd3f32915ceac260add5688ec06e2bc4c51521
+SHA256: 48f47e91271babf146f01104c48c05b69b160e9b0a5ff9ddb60234641e41ad0b
+SHA512: a52e3cdd6ee850fc175f75ad3e7391a11e9337c11d36add5f5af27e66322b4c33984d73ef59907857ee83df85a67653d0e9ca66213a48c5833c8310fc2cd4b08
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.40
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42712
+Filename: pool/main/m3tal_v1.0.40_amd64.deb
+Size: 23905092
+MD5sum: 23b251ef83d2e38818edb40239451c44
+SHA1: 78ffb75acf4b3fb4af7fd57ea770707065354ad5
+SHA256: 9350ef6e5ab07d42863f6222592f70c56a931045183ff29265a59c8957b80d23
+SHA512: 8a7c4367cb3976db52f8918d1b5ca7680b1e8a73c8f1253ff998d01b8a9d0add26039027d0dc990c9c51a9972bd244cf69d54358224b0beb517ea6bb7ac6a4a0
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.41
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42720
+Filename: pool/main/m3tal_v1.0.41_amd64.deb
+Size: 23907596
+MD5sum: f343814f1538bc494e29027dad3e2aaa
+SHA1: 4f32dc1b5b1259bdb48f1562df3243863659239a
+SHA256: 8f57fd3668d8097739cfbbf4697338a5df58bb97406b8b5f6bc2bedaa2332ca0
+SHA512: 59fe7711e2fe04c1c73b6800c634d1becfd133cc144ad95d968cd9d6988da179afd2c1b6ccb0bdda86e275209aeb460ffb08b86a332d6263a5507717c29311b5
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.42
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42720
+Filename: pool/main/m3tal_v1.0.42_amd64.deb
+Size: 23907668
+MD5sum: b012bd47412d899bbd3a31d1a07a2ba7
+SHA1: 9139066f8bfd9dae22ff1451432b4b6486b5f740
+SHA256: 7a8eb92990ad73e8309798147698c4dcbdc904ec5368e25c0b76c676e7f7ff0e
+SHA512: 933980762e5d3ee45c9436f123cc86a7943901891884e283031eae449dbc661819433a944db09c95718e0ad450a8925e7648a8edb8168abbc48d20759c7c22a1
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.43
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42721
+Filename: pool/main/m3tal_v1.0.43_amd64.deb
+Size: 23909022
+MD5sum: 048668057eae824aae54b09374226216
+SHA1: d2c18d913e2203b367098ad5bb8a77e52996425b
+SHA256: dd06016b73c49d416bc582bf585a1dbda0dfa23f62567917583ec6c9ac7e45a9
+SHA512: db25bc11a1ae613fff219c852548b4c4ec1612d3eedcb2fe143c439d94217d0a5298e7c32b15ca5809dd38b54eff1264c7895e43bcfc4856f2b400b22e42f342
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.44
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42725
+Filename: pool/main/m3tal_v1.0.44_amd64.deb
+Size: 23910380
+MD5sum: 4ae090a45fb3a701f7d35984bc1f271f
+SHA1: de73c7b2dee7d2fed7b0072272f295d7d7aa4217
+SHA256: 0cfb73d57a657c77706982d8bc2ded3992d7b614cd0d87cc288d8db093f0b390
+SHA512: 1d2df2439fa57f65dbd820be95e06c19d80c2ce427ed7420cccc28ed138a383ca9b3b142105c2f222eecca39333eaea6e4e09989fcfa8806e9ed39d59079ed12
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.45
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42725
+Filename: pool/main/m3tal_v1.0.45_amd64.deb
+Size: 23910992
+MD5sum: 74a6450485dfcd6a3ef5983d91eb4106
+SHA1: aef57a710fdceb5050bbe1971256be74cf43efbe
+SHA256: 5e267e200e149ee255fdd40ab5e72da41daea909a6f5e8da1cecd648cbb23117
+SHA512: 9f8d359163dc67e034be1c133ad25afa7890db157d0243253219cb6f955db0e5b5bf939e0378fea4ed09b10a5c4212d35b9a2238792139203c496083edaab9d9
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.46
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42725
+Filename: pool/main/m3tal_v1.0.46_amd64.deb
+Size: 23913112
+MD5sum: 741f0d478b259f6d449c623de81fe1fc
+SHA1: 1cdd17352b99ff8e066e85ee477733db3c17d60a
+SHA256: ae288a329e50e9607f40f4aac366d96ab17e8e10fbec05ec84d2e695233bf6ed
+SHA512: 029c870e19f0f648cf16cfd0a15e1e62a64f116f9951a7b3baf43094a25dd13dd2cafd41d3849767669a3a5dc62f9654815ba434a07413eaf896b6dba78112a7
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.47
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42725
+Filename: pool/main/m3tal_v1.0.47_amd64.deb
+Size: 23912286
+MD5sum: 2f1f533c2a38550b9d0a5a4f62b7943c
+SHA1: 46728e21304bc4ae01fdd199b5435d49c6dde463
+SHA256: 5bcd3068158d08031843715e3909867d23ae2f535e1c46fa255c406b12ea7c8f
+SHA512: 8205dbdade8e38f5305be0c224b2de6b3b3f48a16f281a1d9c239fa548af3cfe83b0a390f96e2314078f3ceefbafaa63a4994a158c763464158f29dfba19fdeb
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.48
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42798
+Filename: pool/main/m3tal_v1.0.48_amd64.deb
+Size: 23954370
+MD5sum: 79a786a843d877a457e99ab6c911fb69
+SHA1: d73a0e79f074aff3484ad8ee86cca34b19b84230
+SHA256: 83c697f030134616b8897e8c140a733949011f9b38e5ae2be205995b27ed4052
+SHA512: 5dbf4612417048d415c386b13eb12ba60dc779f20276211c82cbee37f36a33f0c25de494914b42aa4b1c026530e4ac5d9d2afbf4fad7ff2014fa9a39a80cd2eb
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.49
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42806
+Filename: pool/main/m3tal_v1.0.49_amd64.deb
+Size: 23956572
+MD5sum: 88166ace996f14720dc76acf542e4e76
+SHA1: 79728195c1e291a206e355288c4e0dc059ee9ed8
+SHA256: 1e2552c595bac95140f080be1703e8fe5c599c05d9b4bb8cd01d2b71ea696921
+SHA512: 06cd664c9309695f80b202baa0a42500daea8ba76f0a80926e542017ec0b495a7a6c39f0581cb376c213ae3a0eb8d395bf3ea3133c6646ef30f56e4f0058fbb8
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.4
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 24889
+Filename: pool/main/m3tal_v1.0.4_amd64.deb
+Size: 14115424
+MD5sum: f3181cee36c4f0afdde07a755554a7a6
+SHA1: c2db150b6c90f20a65ca3b2e16cbf33cf39610d8
+SHA256: d0b8290348493b596e1b806712207d40230448c382cb12e15c34b12ee25ec54c
+SHA512: a7c2ab9c04218a87695e9aca1419a26fa2a83ec38ea241866c9fe4199d01cb6780bf935c057c34d2ff875b85dac40c9d79439ade9cf9c53d9a99db2dceecc0a4
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.50
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42806
+Filename: pool/main/m3tal_v1.0.50_amd64.deb
+Size: 23956580
+MD5sum: 2ea471cb7900644e03047fcf852ef612
+SHA1: 9d00e47aea199a31cd2ff19f926e6938ac1d474b
+SHA256: d00c805445a109ec2d26652b71f4163b3ef2f2bfb2249d445b533bec358018a3
+SHA512: 6c2fc64537f904764ec404620d59d72b96f73635bee6c92da37f0b159593b84361f6a13f12b6f9aa0d0a6a30f7e0b7162174a274af836c01be788d68d1c1eb7d
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.51
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42828
+Filename: pool/main/m3tal_v1.0.51_amd64.deb
+Size: 23966004
+MD5sum: 944dd5eac51cb111000c825f3e1cd886
+SHA1: c82673c71a756f6bfb483257e6ab4c9d3cc5c800
+SHA256: 4ce19e4ebf817d5b10c00021f26a6c8b4e6ad67390e29c8226671eba4fb73a26
+SHA512: 728bd1a82da258829b038eda31ace219d1c71bcebeced564d25199f425879e2f3b8dca529dcf658565d36d303924be8ee83f174de953f5ec52ebc03f35d6d62a
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.52
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42828
+Filename: pool/main/m3tal_v1.0.52_amd64.deb
+Size: 23966000
+MD5sum: 6deb4abc21cca4491866b817edd1da8c
+SHA1: 02a5fab184f327b4a4ecd317e699d823df20e2c1
+SHA256: bfd2a7a648f39b9d047b7d6a2838474705c341e8dec612f603a91c4f3219758f
+SHA512: b2276477297a5b7cd67eab594a78ce681b0cc304619497629d55d26a730efa2112c95b6a624a96e05c3f82fa6cc8579a4454107f572e6959d615258a26d584ba
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.53
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42901
+Filename: pool/main/m3tal_v1.0.53_amd64.deb
+Size: 24004500
+MD5sum: 9951a41730bc4bf8a6dde806e18c0c13
+SHA1: c1ea656eaeb9d6856f3c18c5aa3b8eb4b94e60b0
+SHA256: 7a6e6e13f2e68687af2f93e8a796caa5503d6f1ecf28a33ca531e0af2cea95e6
+SHA512: e1b30255f9ab8bdf783006e2237be01e6e08fb9e2b730b73fbbbc98d0963e99f5da6e246b9ee503769ce36db7503f123b2024a65884084ca2a8d06587ee90480
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.54
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42901
+Filename: pool/main/m3tal_v1.0.54_amd64.deb
+Size: 24004682
+MD5sum: 003baf829cce44dac6abdd4d141468b2
+SHA1: 26171cffd3f2f6469b8ddfd3be0a7030cbffd110
+SHA256: 576f0a0e1cf3a03cfea147aeecc677c8b38544b3d469c99af7acedc20f570b75
+SHA512: 2cd7a00d07519a74a80faa6fe30eae6c5b24b2332ada30a68e875be8b4dc208c75ebd6616a5da2264fd5fafb5dc487ce531f357b1584f6e8d9c12c68a9d67c75
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.55
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42902
+Filename: pool/main/m3tal_v1.0.55_amd64.deb
+Size: 24004968
+MD5sum: b7e2577bb296cbdbd547ed9b22292008
+SHA1: b71458b2c908115703a0a3094a6c526e90372287
+SHA256: 4b140a81c18c123a7721de0564fd6a15d19f3706002dd5dcb0a79aabc56546cd
+SHA512: faf99e7582d013e40e9fd6e3828345e32138f8b192d828e9b2c7b20675132017a725816b26c1e6d7ff72025f95b8d9e02a18840a282ab42994ceffc5bc972e8b
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.56
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42939
+Filename: pool/main/m3tal_v1.0.56_amd64.deb
+Size: 24022546
+MD5sum: 1204b7e5617ade21e72bd08635ab373c
+SHA1: 66019e64c6906447bc7c8773382926c814fdfc4f
+SHA256: e4acddf0d6de7729b9c83d1c9212fe53f879182a184ff85edf3a215f2bd25a4d
+SHA512: ba8b2f66070a41325ba446741f8b46c5583cb24ec1ccf9979100c5b449232c70b56a3fb33b53957c4f571819ed9c9c80764d99d63b4581c6e8a6a43e97a68ad2
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.57
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42939
+Filename: pool/main/m3tal_v1.0.57_amd64.deb
+Size: 24022582
+MD5sum: 3ac8040889e6342251d4e79638c9d989
+SHA1: a130d4cce5f94cd357d2144ab8feeac5497f60bf
+SHA256: 806dbb909750bc8ae226f534a7a6c9ae2e539c016be3b5d760c0050fc8debc25
+SHA512: 190f25c7a23c015cb10bf20336d8e7646eee294654bae60b18355a4cc679c5e9cb5bf0c818739932ef444b71d61e368a91e53f56e3900071a2f9692adcb71cc8
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.58
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42939
+Filename: pool/main/m3tal_v1.0.58_amd64.deb
+Size: 24023594
+MD5sum: 0621de4a0d32a0cc9ab08eaa31171615
+SHA1: 1cba36ac452d7d8f0f1cfe67ea463d8f1d74b81c
+SHA256: 245a7db853f1ae930971f7255852fe22d4de9ecdfe98a543509420e9d8d02e5e
+SHA512: 63958a664eaadace04ffa42830d82411954515ede38d0d552b98781f4dc68cb45926b971af0ade011e32374c9e8e6478d13ccc27d6af907fa599b34f5003a2ee
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.59
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42939
+Filename: pool/main/m3tal_v1.0.59_amd64.deb
+Size: 24023592
+MD5sum: d39efb3fc7db8e7dd435a30840aba5bd
+SHA1: 05747f0a690f3097ec9ec48f59228c423cc47de9
+SHA256: eeb7ea7d72e5b56513ca42de671761f0ed0c37a383c305b51fb91eaef400d479
+SHA512: 691a2be29e85e46d7df4e4788cf3b78af1f942b89f2a7e930f4c19d6b55afeeeaadd94d4b46d12e022eee884097dfad10ebc49fe9db8e96ead52bc004ac014e2
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.5
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40549
+Filename: pool/main/m3tal_v1.0.5_amd64.deb
+Size: 22880768
+MD5sum: e533d2530ab356e9efc9c9adee0db62c
+SHA1: f5ffd05d0eeae0c8305a65c4d0e84daf90ad4dcc
+SHA256: 3dbd4c3620b5d399fff246eeb88eb33c67ff5b19b4ad92116b59ba46f8c9d60a
+SHA512: a8d31491a51cc4dfaacb078aec94b7ffb55067d33cd5f742c5c4202a8a06fa3acabfdf393cb4a0c89528fb99bca6674b701bbc1739e803edde856f2ffc5794f3
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.60
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42940
+Filename: pool/main/m3tal_v1.0.60_amd64.deb
+Size: 24024212
+MD5sum: 5abaec7d849ec11e73fb841da2fc2238
+SHA1: 07931c98430f2a4e50d3fa8643c48ac2dd6f085c
+SHA256: e58ee848bc675e90e1a23b8a3a55fb0252b22a1476c6cb0c8495e7813212cf02
+SHA512: c0cfd65801ae2e9435b83b6dd6e8b47a6b63b1332b7e2fdaee9d6853ad2f03bc939de493c422bf41c0cab64c71946477ee80f9310b1ec00513552d87459b6dea
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.6
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40550
+Filename: pool/main/m3tal_v1.0.6_amd64.deb
+Size: 22882384
+MD5sum: 389c3393483bc544fbcfb3b039092862
+SHA1: 2a3b9163ce6f20aa482b98c8917c13d3bdd951d0
+SHA256: eeba820524299405a0c8e1d0f7bf41d54e3cd3d8f2415415d5481caa68e856a3
+SHA512: 102350d31257efe2c50f2cb515a2b2f9e2a60c7768248292bdcfe85942321ff68c0209e9281ea40c04ca390b7c98b12a345cc53b4c681e43055a3f45a4f62923
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.7
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40533
+Filename: pool/main/m3tal_v1.0.7_amd64.deb
+Size: 22877298
+MD5sum: f08d4f95d83b83250c4df8a78a999232
+SHA1: ade3ceb00e39af03cfbb2dfdf3e20b8657de3f41
+SHA256: e6260ea159accda15dc0712016ce8bceee1f7ec294f333f665725bbede2726cb
+SHA512: 7d1c4b834e68e0ccfffd41a45c8feea5d35874ce1d3eff0af6dd4763c907fa3e3a1d3c1e7b1e5efea0a3664c8832c1d3e284d9aed723b985e4f30e21455043b5
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.8
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40533
+Filename: pool/main/m3tal_v1.0.8_amd64.deb
+Size: 22877296
+MD5sum: b337a230fec2f7d298133349474827d6
+SHA1: 12a6071ef2d51456b40b77bb29eff44977024698
+SHA256: 5579666c082d64fafbd0c7850d71d0c3dc132679acb8f31d7570a6d9e3a5230c
+SHA512: a1d8e41a3f0f8cc984fede8edb49bb20c802a628954dbde3cbd708f153c19c6d0d26729d363d81ebb052b047057e5cea1aab40f7763360945f826789ced4abba
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.0.9
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 40533
+Filename: pool/main/m3tal_v1.0.9_amd64.deb
+Size: 22877298
+MD5sum: 042456f8628804efd756d6bd1bbae3e5
+SHA1: 264b6406441e092d1af2d151435a5c03dc00e265
+SHA256: 86e94ae214ae968247035aa91c94e3dc8fcb38ba5ed5dcbdffe0812002723a1d
+SHA512: 91d56cca2c9d31b5d72e5de907350c9f545ededa998ecabb46ac230f0945025ef7a5cfe3d6b221ad25b67adf4a5fd8c129f0bfc8231aa5e9e696485b553a8fc3
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.0
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42940
+Filename: pool/main/m3tal_v1.1.0_amd64.deb
+Size: 24023954
+MD5sum: c116937cdd40d1688249a97706114669
+SHA1: 607eb08f8d081d0a5a0cc8e5a586d21726431636
+SHA256: b36148827014289377285d7f8069aca127eb2402a962ac7cfcdadaf1f7f40507
+SHA512: d67d9de54d4bb92008d88a3145af84e016c5101c63f6c7db8d2192431bb054e6a2d3b023fb1f50a40c9d1d234972bfbc604f41ccaaea41eb978d3b29fb1bc18e
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.10
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43190
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.10_amd64.deb
+Size: 24198872
+MD5sum: 7b2bfe286b7882cb33bdcfe8aa8d2031
+SHA1: d9838e790417d222973a04ba5958f664d01cfce1
+SHA256: d3ccc3e45156753f8f866d9609e54f9e6d7a7f41f32eccc00bcd4a1514a3bf46
+SHA512: 7db0e9cdbc327afa498409b33a66dee195931aa8d31e918ec86ff5153878c36155fcd7fdce14ea15ec92a8e7a38e129a6107ad28356e0755d767f52f53d8dc09
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.11
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43303
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.11_amd64.deb
+Size: 24254254
+MD5sum: e7a44597fea99f6ccd86e53bd33ab5c1
+SHA1: f2a2c6b85acb5f6b1a659a9e32e9f15bb4e0a35e
+SHA256: 713e29b64a6f120ca390c34eeffe712013511373db630115f471bec202bf8571
+SHA512: 2ccec263fd5be6c8d7d4549b9e0776dfd63538b0a4ce782aab470372c0ccc4441a470e3690529b2661384041c80d54db738143f158ea7b025c7d1678e95bc9fa
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.12
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43310
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.12_amd64.deb
+Size: 24260516
+MD5sum: 6b65c6b219b45a6269d3546fb93bf3e1
+SHA1: 93ac6d16c2514fd8f0ba59f0bf9dac26cfb18c11
+SHA256: 30ff28e5e1a75ee0247c4cf947453eec1a44717e06baa9b3f87e80d9402d0df7
+SHA512: b2b1b61979e77e4584527b98d42f0b1d3a85511d26acd0d7dad35979867ea684cc284ea993f0e6f37a3a0974fb3a24c4fbb8beb9e3e2a278d23e32a24457bc43
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.13
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43850
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.13_amd64.deb
+Size: 24539644
+MD5sum: 644827bd01a5ca947219fa5e82e77482
+SHA1: 2195191e765f0a6d229be33bb4adec9777dda9d9
+SHA256: ccd9018b89be282dd670ec64042bd4c56084f4494bf38d5223aca171874e8b95
+SHA512: fdd1e28f472ad7d4a1dd3bae93f665a35f700a3b0b93d7f2710edf65912d8e76eb5f901fbcd827371df0881aaa51b78d168a8d98ebd1270ede7132668439cc28
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.14
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43875
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.14_amd64.deb
+Size: 24550654
+MD5sum: 211ceb3880e00fb0547ce4fe34ce4d81
+SHA1: 0e80cf91e2a032fafa7826d329cbd5be96d04116
+SHA256: c5244788ea4bd65d0d7677c780948f1bd6fa321e5033f672fde2ea8fe10a1398
+SHA512: a5707f8ee1f7a5336c68748f0702c33a0321999030626c24da279eb868b23c60d0e5c8fdf361a5eaa58952dbc545479b418f60e6ee50564e3a5aeefb476bc9b5
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.15
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43875
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.15_amd64.deb
+Size: 24550658
+MD5sum: 31e1d02336fb4cd42b5caf418bfed061
+SHA1: 0f5181cde1cfee9a1202ea5131ca284ae63f326a
+SHA256: a9e65f1c33feae45f0a4eaf17dde86c368b5d3b98e136cecf60ef872546385fe
+SHA512: 126f8c6a9725281a91b92783974de936b47d77e355f234ecc96b4f3dc338d41b7182dd7d93125c6df756d1166ce1c52e84e19511dd8d2f2920f47254c58a7e63
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.16
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43915
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.16_amd64.deb
+Size: 24564558
+MD5sum: 6729cb193e4b244e8ce4acbdf74bc8dd
+SHA1: 790a11904147faaa7f3382d234cc3bfdb7ce34a3
+SHA256: 202e2a9acc23fc28cf67c3d410155d15e26b9b2dd95ebaf4852d52dc2300c14e
+SHA512: f05c263533a408f9a9a486ea91d67e9e8a4fef43eff43cc914e0e273728a74d81a0ae742b6224d526ef70d5fce9bd33c8d6f132cbdff85fc99752e0d9c1302db
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.17
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43915
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.17_amd64.deb
+Size: 24564564
+MD5sum: 2b41dfa7f5b8c7c677bf8b19e6c4a24f
+SHA1: b0511a3a78d631eff919c5dffa1447070d38c2a7
+SHA256: c32643a98e733d49bb68461e3ce024fe4b768f01646bb10f43e47bf46b74c2d7
+SHA512: fad3c1a533a6f5b99de373ec3f204a8c41c82b8553d758d74d3af9566320c86020d8d4b80d0672128042b9a2dfa7f8a83d06ab834b17686364bdde957e02a5b9
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.18
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43915
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.18_amd64.deb
+Size: 24564552
+MD5sum: 77b609c3cb43ab7f426e8363dd23c922
+SHA1: 97b96d9a5557c27fb2f6ad270453f11277c87662
+SHA256: 591c69ca29df311ea3adc92b588885336631a2fdf32d030574d7604440049e34
+SHA512: ab5d062b48364c3135bf24ec27bd984732976f5d3d84f6c3d410d33e4ca37f2af7bb6eff71c13602668f7b01b9ae54498245b7a11cf57191642029a35814c39a
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.19
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43943
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.19_amd64.deb
+Size: 24574348
+MD5sum: 1f57b8324479c0e4977d3be5a710bde8
+SHA1: d9207366bc44068ec59bc2025def5b1878e1c62d
+SHA256: 91ecb97d43687bd19c10a9cfd26d0049f7c5de1a6400832807ff4baa10219634
+SHA512: 44c1f2583fefe90ed9b286e5280882ee37655a598ebca29ccce5c8854a5487479d63f52ad844d5a34187005a4e0c81b3aa2f97c64970250549c0c340d224ed50
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.1
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42970
+Filename: pool/main/m3tal_v1.1.1_amd64.deb
+Size: 24038832
+MD5sum: 5df0419c8b6f3e37868160f5232e81a9
+SHA1: 9e369bada43a3fa802a392248b07735e2e04dc0d
+SHA256: a09fd57b70ff46b629420edaf6644e74d1288e0333973944a0d218b5252029d2
+SHA512: 9d440d9f671825377dd9fd450fe18ad04bf0fe30921f33cb49a87f63b4ac85b506103b818f6de59250be55067096eed3b1ca1bd7a3c265b8ec2021732dd8976f
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.20
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 44362
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.20_amd64.deb
+Size: 24809098
+MD5sum: 031ece475cbb18cd4de2a2b3f3165a0e
+SHA1: 9a4acaf7bdcae2cc1620833c752535823a6e2d6a
+SHA256: 39254dac08f0753acc2987370346a6beaa728049c4e8a9804ba6222c7468e429
+SHA512: 2252a1af036c3be91bf0a61836f3106cb8245bf55b2e5acf43dd755858de409da257d88ff82400b26bb45f687a98d59819e9768cad3807e7a97463c10c56fdf5
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.21
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 44564
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.21_amd64.deb
+Size: 24918936
+MD5sum: f7b6248c8ac12adf5a27b800cb517185
+SHA1: 99e64889f003961c4af6704ae20c5e47bb3c786e
+SHA256: 9233f0edfbce9cdc8261ebd4a69e55a0b3c63a0b41c014999ce3000a952adfac
+SHA512: 07fd76e018a7ff70d76a161aca3b70419fc478165ac1b40893fdc8d308fbfdd43e7d25948a8bc4c033f59245518443d9a21f41ccb9e6d59ff470a9f2ed5ce4b7
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.22
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 44600
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.22_amd64.deb
+Size: 24940210
+MD5sum: bae202792d00d8048e277c41ec58f4fb
+SHA1: 4d5df45586ac9fa27637e93bb6d08a3884a3a0eb
+SHA256: 404d7af6b9cf46665d2fdee6784c293b1b2ac36a3f276a4d7bd121aad7c0db91
+SHA512: 18d3b17b9204e068a05854b3b677362853121cd222f39bf3b4cab499cfa2b1431793f40a54d8b79e34a291b45ca58c4ce900b57fe06d1c2f5054a58535a2b86e
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.23
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 44713
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.23_amd64.deb
+Size: 24993266
+MD5sum: 905d461add4ea6e5e5e24d6d0668d10f
+SHA1: 22a520909a45664a66c6680d47c5a46d28ad1be3
+SHA256: a34c6df4ed6d438850145b24b2dfd6b68656f3d8845efcd239a76d6a9233285c
+SHA512: 116aa23c6c26ae2973e65e7f441a762755fff13947396dbfdc1dc8470ad0b716a1352e23f621b4b8ecd2934519e2a18cdfc87f081bcbb977f13992d8dca9d279
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.24
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46239
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.24_amd64.deb
+Size: 25585870
+MD5sum: 59452bdb666252b9cc24c5689e24cf2f
+SHA1: 5b8a277f3060901da707aaba9ee736af78aa68a4
+SHA256: dfe92a28e03e88df5541b1bb5cefe7cef032e90e87193bbf63f0d2d6cc1ad4a9
+SHA512: a67b4eff0c1c2cc5a97ac85f04290c34b52e93154c5fc085ded5cf25559d4d2e7b2c6426ba111a87be176f7bfc9feede730b7ad40bf2dcab0c7a08249880b9f3
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.25
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46247
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.25_amd64.deb
+Size: 25586068
+MD5sum: 025368f918ff84cf16c7d34fd2d80779
+SHA1: 16a00e255ef4a5c1e1ad2074e453bb721914c82c
+SHA256: b2ffdd9d325c542b728774bb5ba3d8e2157f6b92f3c8ffc190efece802a4c4d6
+SHA512: 657651642f8bf9d3ca9904fc6e527aad4fb830a0db0cf2d560882809f039a2cb0ec10a7c1679814f5bc63e85d2c13203ef7137c2b6129fef518ffd7e7368555d
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.26
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46248
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.26_amd64.deb
+Size: 25587400
+MD5sum: b0d0744c1cd9aafe68b853aeaf40eeb5
+SHA1: 9febf9dfd8efe41d1592e8ea8af966c8a895d7b6
+SHA256: 5310950008824dc1f6e33b9296a5ae726a281122324381d3d8c2119339d1cc05
+SHA512: d71955027d1fbb625f0ca0f5e15da15037c2f4f8c7f997a842fe3019b2c7fee20ba72f524e109f4d5dc073a37a2086d613a87f9c17a730263e990a41fbd6884a
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.27
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46248
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.27_amd64.deb
+Size: 25587480
+MD5sum: 1847fcc9ac1cced5af8ce183d58a933e
+SHA1: afaeba97d8c5adae81631c1c4d37991b2ecca1c1
+SHA256: 9454192d5056fdc7b6651414c0b64c9ea58f2727e82c2608e092b1e26ce83fe1
+SHA512: 80fc06e7b980740dfbeadf215462a2ab34e8b785c1b3725b7fa778aec521021791a03788b4990c33ca6fb73c7eb929336c6827e9c4355370973512b3feafdcb8
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.2
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 42972
+Filename: pool/main/m3tal_v1.1.2_amd64.deb
+Size: 24039622
+MD5sum: bccdbec3ca831eae1ad17d2b399a72fe
+SHA1: 51e7767b673c7acc2d12eb41a2a6c725c51da0b5
+SHA256: 8c31b1ceac37957b59b61c044c7e9fd54d720ec3a5ad13e2bd8d48bea2fca55e
+SHA512: c17d689b647152c370ba4a7fcf3c6cd3fa141e5ae43a291b2f80f12ab404084f6a148256dc3c9f90beff13c73bb7315249d5c802e9b1f47c9406a5144be6ee13
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.3
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43052
+Filename: pool/main/m3tal_v1.1.3_amd64.deb
+Size: 24126240
+MD5sum: df3b1a6d81ffaa9621bf4145aa1cf3a2
+SHA1: 684d14caacbb8ed30c067c564889ee2de966c1b3
+SHA256: 09fb1f2dfdf936494e43745c4f005c4d87c4f6c2d999cf5ff07b1fc3e0fc94f5
+SHA512: 89fb8b40044778710343f78a6f439d7824cc32a1b1a953e081fa16173c92ba2fd1035638009c3ef58669e23e1b4156bf9e553a59f5f5420343be3d32592530dd
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.4
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43127
+Filename: pool/main/m3tal_v1.1.4_amd64.deb
+Size: 24164538
+MD5sum: 4fe1c73ec45b96e74de8e0fe14efdba9
+SHA1: 61b14156db7dd0613a67df2130137014a827e2f8
+SHA256: cadca5d3e9daf53705aeffb7aac79d7b2e9c4f3d3cc9964b275b5b93b89dbc1c
+SHA512: 62f8b1c0d303c6d02e4ff0393072f013367ae0bbc42a576199f387affa055a82be69779f69163790fe59c83ec80fcc7b0e769182c4a415c9bbc5f59ac9a8584f
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.5
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43127
+Filename: pool/main/m3tal_v1.1.5_amd64.deb
+Size: 24164536
+MD5sum: bf08aad9b3bd9e3c3e51c33f014976a5
+SHA1: 8c7d8ac11801191b49f936d20efe0de359e7dac6
+SHA256: 181c45bb3c3f9a495cd79c1fe26f2329cb59198fbf7792a3009edc8f627a86a5
+SHA512: 13c3d97efedcf33a2727d6bd2ecb630c54ec9f079a5a7fa49f1f71b8b592e64364f764e9612b2a4407d067f5b5918e9208ecc646fd70b984778cc773847b6237
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.6
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43128
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.6_amd64.deb
+Size: 24165726
+MD5sum: 9c433729a1cc92b819c68fe6f22d13e6
+SHA1: 37e7edf27c6c3bb15c5078b245d42bac05da58f2
+SHA256: 636d065b489557286a1373ac424e94191b4401bb0259e6f08270039a738aa580
+SHA512: f04ab64ecba72ad109bf8c18078b90461e9f1bb7429a2ca4756f912a628573e663562caec8068e7122114e07b9908053fef1fb2756aea52bd5858c76b295b1ba
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.7
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43128
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.7_amd64.deb
+Size: 24165742
+MD5sum: c65dc6e5d64de4c073a9f3d388aaa105
+SHA1: 5dde280630590ac9fa0177cb8c3fea8b70e188c2
+SHA256: 2157091e3c5ec403f009f924a7bda3a3b80d463f4824d01b08b7a5b5f609e953
+SHA512: af4e100972656dd19dcb98d4c8ed55290591e55d1c282cc89b3d20a86ec688cb7cd515be00753cfe867255ccfe87536e54640496a049656b649eb2ca907830fc
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.8
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43143
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.8_amd64.deb
+Size: 24176380
+MD5sum: 95d764732b1746b54dfee209f3245fc9
+SHA1: bcb4e3fb5f3b121cc87dda2b7e2fdeda98dfd2b5
+SHA256: 55e85c66d948edef56cb1247649c6db1f70eef29d2d4879efd8d635f3894db3d
+SHA512: b45b6077c5b8329fa11c39ffd7c1a06da4abd914c9a11922ec4a3bca46d6dd31fe3adb19b6c3603aa34d9188715a596248320ec97623a6035b0dfaf751cd99dc
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
+Version: 1.1.9
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 43143
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.9_amd64.deb
+Size: 24176406
+MD5sum: b48edb3d4d7488b80bc97835818cf571
+SHA1: a964de7bc51492d14c0d52c4b2e92cff285bbe2d
+SHA256: ff917b22e20a997a39dafea92d64a2c1b9973d3bd1928baa0010e61653929a0c
+SHA512: 3bd05ed2b194bc82a1360b058e875c945499f528dfa530d1e2b90fe0d39b56536ac7942661cd46e9b059c135f932a16b3f76512a8450598521bdec481713ef45
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
