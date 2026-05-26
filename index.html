@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M3TAL Package Setup Guide</title>
+  <meta name="description" content="Add the official APT repository and install the M3TAL system package using signed GPG keyrings.">
+  <link rel="stylesheet" href="/assets/css/m3tal.css">
+  <script src="/assets/js/m3tal.js" defer></script>
+</head>
+<body>
+
+  <!-- Global Header -->
+  <header id="m3tal-global-header"></header>
+
+  <!-- Content Container -->
+  <main class="m3tal-container" style="max-width: 900px;">
+    
+    <section class="m3tal-hero" style="padding-bottom: 2rem;">
+      <h1>Package Installation</h1>
+      <p>Configure the official package repository and install M3TAL packages securely on your Linux machine.</p>
+    </section>
+
+    <!-- Unified Command Block Card -->
+    <div class="m3tal-card" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.4rem; margin-bottom: 1rem; color: #ffffff;">🚀 Quick Automatic Setup</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Run the official setup pipeline to import keys, declare the stable repository source, sync packages, and download the system CLI tools automatically.</p>
+      
+      <!-- Styled Terminal Code block -->
+      <div style="background: rgba(0, 0, 0, 0.45); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <code style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent-cyan); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 85%;">curl -fsSL https://jakej985-rgb.github.io/m3tal-apt-key/install.sh | sudo bash</code>
+        <button id="copy-install-pipe-btn" style="background: rgba(255,255,255,0.05); border: 1px solid var(--panel-border); color: var(--text-muted); padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: var(--transition-fast);">Copy</button>
+      </div>
+
+      <div style="background: rgba(0, 242, 254, 0.05); border-left: 4px solid var(--accent-cyan); padding: 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; font-size: 0.95rem;">
+        <p style="color: var(--text-main);"><strong>What this script does:</strong></p>
+        <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.25rem;">
+          <li>Downloads and de-armors the public GPG key into <code>/usr/share/keyrings/m3tal-archive-keyring.gpg</code>.</li>
+          <li>Appends the repository line safely into <code>/etc/apt/sources.list.d/m3tal.list</code>.</li>
+          <li>Performs a package update index synchronisation and triggers <code>apt install m3tal</code>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Manual Steps Reference -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+      <article class="m3tal-card">
+        <h2 style="font-size: 1.4rem; margin-bottom: 1rem;">🛡️ GPG Key Verification</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Verify the public signature key signature manually to prevent MITM tampering or unauthorized packages:</p>
+        
+        <pre><code style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-main);"># Download public key
+curl -fsSL https://jakej985-rgb.github.io/m3tal-apt-key/public.key -o m3tal.key
+
+# Verify GPG fingerprint
+gpg --show-keys m3tal.key</code></pre>
+        
+        <div style="margin-top: 1.5rem;">
+          <a href="/m3tal-docs/#/apt/INSTALL" style="font-size: 0.95rem; font-weight: 600;">Read Manual Installation Guide &rarr;</a>
+        </div>
+      </article>
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <div id="m3tal-global-footer"></div>
+
+  <!-- Command copying helper -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyBtn = document.getElementById('copy-install-pipe-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const codeText = "curl -fsSL https://jakej985-rgb.github.io/m3tal-apt-key/install.sh | sudo bash";
+          navigator.clipboard.writeText(codeText).then(() => {
+            copyBtn.textContent = 'Copied!';
+            copyBtn.style.borderColor = 'var(--accent-emerald)';
+            copyBtn.style.color = 'var(--accent-emerald)';
+            setTimeout(() => {
+              copyBtn.textContent = 'Copy';
+              copyBtn.style.borderColor = '';
+              copyBtn.style.color = '';
+            }, 2000);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
