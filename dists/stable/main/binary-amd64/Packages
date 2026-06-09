@@ -1578,14 +1578,14 @@ Version: 1.1.37
 Priority: optional
 Section: utils
 Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 47543
+Installed-Size: 47535
 Recommends: xdotool
 Filename: pool/main/m3tal_v1.1.37_amd64.deb
-Size: 26118734
-MD5sum: 26cfc5cf8e878e6ba9253d13c9f8e000
-SHA1: 9f6c411674267293ead2a56060f914e5605ddd86
-SHA256: 17aaad39f2d6628a4339611e0ef82631dc8b73e82be55fe8da13f9e27d17b30c
-SHA512: c65fa831b7f6df50f24f40279e89971bd7a74b9b2a470cf826b09be565609ded6da5d0f0b1811b58a8fe7561f1f708ffccd764e0fc9f0b995c5203e4245a0f78
+Size: 26118530
+MD5sum: 2eac3d491f3e608f20e17ccdb8214468
+SHA1: 8fbf6cb0d3b4503c6bd70911a61447cfa4c6cec4
+SHA256: 6ca07e256dfb429fcc6e302ffb3cc5fc5fdbd0e4171d163eabde4295b3aa9677
+SHA512: 5385b19782b11d5873394e78a29ab8b5e9da5d47cfa2d714a3927297fd8ddca1ccf9f24c442dfc4b8a1941552fc162d681c3da09f4cefa6d41c9de6975459f62
 Description: M3TAL Core — DEB-first infrastructure orchestration platform.
  Includes the m3tal CLI and control-plane API.
  Optimized for Traefik ecosystems and home lab automation.
