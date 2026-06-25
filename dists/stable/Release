@@ -1,24 +1,24 @@
 Architectures: amd64
 Codename: stable
 Components: main
-Date: Thu, 25 Jun 2026 22:07:50 +0000
+Date: Thu, 25 Jun 2026 22:43:00 +0000
 Description: M3TAL Core Repository
 Label: M3TAL
 Origin: M3TAL
 Suite: stable
 MD5Sum:
- c4124e75e23705d8774da1319bf0cd6e              169 Release
- 4283a6fc8eb12c4c5bd033d0175a1a4a            80155 main/binary-amd64/Packages
- dafccacb67b28aa1ef625bb5ef98cad0            21573 main/binary-amd64/Packages.gz
+ 60637e2ff444c322968dc46c37f4e819              169 Release
+ b0af4f5956cf2ca946117e8d41621f62            80864 main/binary-amd64/Packages
+ ccd014c20a7c03c633ded78f0d812318            21759 main/binary-amd64/Packages.gz
 SHA1:
- 795c6c27dc551a0042891d6c3cf94bf480425177              169 Release
- 2c8f9208a7f82c015200b540cf9fb39ea2456187            80155 main/binary-amd64/Packages
- f3d2d3429db0810673143ca60850e64b84dfccfc            21573 main/binary-amd64/Packages.gz
+ 13ff96eed4d730ecdf1f94f2f483fbd03ac3ad79              169 Release
+ bfec941a042078466d60c66ad3db6def84c438d6            80864 main/binary-amd64/Packages
+ 329a9ae3afe899964356823754aed1be55b855d3            21759 main/binary-amd64/Packages.gz
 SHA256:
- a39952ba419f16790440a76fa16bc094b90b32c9b633aedbcd66ab4bb0a3a5da              169 Release
- 5735e641cb31c430480df0379531d43a2a1e47796d775fe1d01b93cd8e919b00            80155 main/binary-amd64/Packages
- 6ee917ae7d1a0a3b6beec56c858492baf7d15ab111c98b5a41551597c7cbd9c9            21573 main/binary-amd64/Packages.gz
+ f12201e22b86f25d72bd74380b6d976ced27dd613f7d25cd0561d3a5fc641504              169 Release
+ 1aa829a8e6cd6bf61f726f48af088b558648ade1a2fca5654621a81b8b6acfa5            80864 main/binary-amd64/Packages
+ 39632db73a79c4e30a40877febafd630930919e6019a314b79b0cbc15e0a221a            21759 main/binary-amd64/Packages.gz
 SHA512:
- f2598310875c549a902863d912f9620a86aa6cc6d18e721a1461a48c8025f63db84a7a0517a235d92c4f4c6a4ad0886219936447e8cac30c76e1f3411008bcef              169 Release
- cbdc151ce1611df28cc374551300acd708f3f8f5df09f9ea44aca9c368a772da539249cd39d35e9f4afb9810112b7deab7fbb3982c8397e29619fb2640d9e9fe            80155 main/binary-amd64/Packages
- 2a5ba0ab702f7c52d77af61cc5ea23465d09663f16b6f8b923b2bca999d2578c42402d441f94158e76e5ce64c970c01c8ec15b450a1e7de8cc3d517a9ad3a6d3            21573 main/binary-amd64/Packages.gz
+ a469db6613722863f1304bb604be02e8e4c482599a7c120328776965218cf15998bec671c7eb86fd10dec62c9cf22201a7be7a819561723d6c76a1ea8bd55ffb              169 Release
+ ede17f87575142d9c59ee88a208cc5de9bda8e31584b955a612323f886e4faf142e9a7bb8884fd6b30ef8bd76db755f0016b745279342e36f31c8a2bb5658ab1            80864 main/binary-amd64/Packages
+ c5d1d9f558566bb0cb888a4be313426cdbdf81199842c3fd52d0198117d877418393252c33f249c4b453ee96903471004659461584360d93890d9c732f1dbad1            21759 main/binary-amd64/Packages.gz
