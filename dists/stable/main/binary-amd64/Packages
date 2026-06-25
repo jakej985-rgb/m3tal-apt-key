@@ -1878,6 +1878,24 @@ Description: M3TAL Core — DEB-first infrastructure orchestration platform.
 
 Package: m3tal
 Architecture: amd64
+Version: 1.1.52
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 47960
+Recommends: xdotool
+Filename: pool/main/m3tal_v1.1.52_amd64.deb
+Size: 26315294
+MD5sum: 6a1bf41926859593bbe9bb2a23e39d1f
+SHA1: 16f1e95e40ce61bcb9cafb41961e8b7ba685d58f
+SHA256: 03ba4e887a2e69ce9846ba47df2ff281c1f0e41928d05e1cab3dee9247a29b9c
+SHA512: 79b1900417748d3f43a8c1f5e2eedbefa0263e9f18e1614276f13a646a552cd2c9d93a32ff733843561693a63a3cb3ac4772ce39081e3743c6ff7451eaf4f9fc
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+
+Package: m3tal
+Architecture: amd64
 Version: 1.1.5
 Priority: optional
 Section: utils
