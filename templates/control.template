@@ -1,0 +1,13 @@
+Package: {{ package_name }}
+Version: {{ version }}
+Section: {{ section | default("utils") }}
+Priority: {{ priority | default("optional") }}
+Architecture: {{ architecture | default("amd64") }}
+Maintainer: {{ maintainer_name }} <{{ maintainer_email }}>
+{% if depends %}Depends: {{ depends }}
+{% endif %}{% if recommends %}Recommends: {{ recommends }}
+{% endif %}{% if suggests %}Suggests: {{ suggests }}
+{% endif %}{% if homepage %}Homepage: {{ homepage }}
+{% endif %}Description: {{ short_description }}
+{% if extended_description %}{{ extended_description }}
+{% endif %}

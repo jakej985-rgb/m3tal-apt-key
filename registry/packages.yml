@@ -1,0 +1,330 @@
+# ==============================================================================
+# M3tal Official Package Registry Manifest
+# Schema Version: 1.0.0
+# Authoritative registry connecting M3tal ecosystem projects to Debian packages.
+# ==============================================================================
+
+version: "1.0.0"
+repository:
+  url: "https://jakej985-rgb.github.io/m3tal-apt-key"
+  suite: "stable"
+  codename: "stable"
+  origin: "M3TAL"
+  label: "M3TAL"
+  components:
+    - "main"
+  architectures:
+    - "amd64"
+    - "arm64"
+  keyring:
+    fingerprint: "B95A45C647577DEBCC877C49AF6190B0C01346DD"
+    path: "/etc/apt/keyrings/m3tal-archive-keyring.gpg"
+
+packages:
+  # ----------------------------------------------------------------------------
+  # 1. M3tal Platform Core Agent (Currently Published)
+  # ----------------------------------------------------------------------------
+  - id: "m3tal"
+    name: "m3tal"
+    source_repo: "jakej985-rgb/m3tal-apt-key"
+    type: "cli"
+    status: "published"
+    supported_architectures:
+      - "amd64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main"
+      retention_count: 10
+      auto_publish: true
+    metadata:
+      latest_version: "1.1.62"
+      section: "admin"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/m3tal-apt-key/"
+      description: |
+        M3tal Agent - Autonomous terminal & workflow management daemon
+        M3tal is the central Linux CLI runtime and background process orchestrator
+        for the M3tal developer ecosystem.
+    dependencies:
+      runtime:
+        - "libc6 (>= 2.31)"
+        - "ca-certificates"
+        - "curl"
+      recommends:
+        - "git"
+        - "tmux"
+      build:
+        - "bash"
+
+  # ----------------------------------------------------------------------------
+  # 2. M3tal Core Ecosystem Foundation
+  # ----------------------------------------------------------------------------
+  - id: "m3tal-core"
+    name: "m3tal-core"
+    source_repo: "jakej985-rgb/m3tal-core"
+    type: "core-system"
+    status: "active"
+    supported_architectures:
+      - "amd64"
+      - "arm64"
+      - "all"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/m3tal-core"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "1.0.0"
+      section: "admin"
+      priority: "standard"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/m3tal-core.html"
+      description: |
+        M3tal Core ecosystem runtime and shared platform libraries
+        Provides core filesystem hierarchies (/opt/m3tal, /etc/m3tal, /var/log/m3tal),
+        shared configuration schemas, environment bootstrap utilities, and daemon hooks.
+    dependencies:
+      runtime:
+        - "ca-certificates"
+        - "curl"
+        - "gnupg"
+      recommends:
+        - "systemd"
+
+  # ----------------------------------------------------------------------------
+  # 3. M3tal API Daemon
+  # ----------------------------------------------------------------------------
+  - id: "m3tal-api"
+    name: "m3tal-api"
+    source_repo: "jakej985-rgb/m3tal-api"
+    type: "service"
+    status: "planned"
+    supported_architectures:
+      - "amd64"
+      - "arm64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/m3tal-api"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.1.0"
+      section: "net"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/m3tal-api.html"
+      description: |
+        Local API daemon and service layer for M3tal application integrations
+        Exposes REST and WebSocket endpoints for IPC between local agents and desktop UIs.
+    dependencies:
+      runtime:
+        - "m3tal-core"
+
+  # ----------------------------------------------------------------------------
+  # 4. M3tal GoDash Service
+  # ----------------------------------------------------------------------------
+  - id: "m3tal-godash"
+    name: "m3tal-godash"
+    source_repo: "jakej985-rgb/m3tal-godash"
+    type: "service"
+    status: "planned"
+    supported_architectures:
+      - "amd64"
+      - "arm64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/m3tal-godash"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.1.0"
+      section: "utils"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/m3tal-godash.html"
+      description: |
+        High-performance Go dashboard service for system telemetry and node monitoring
+        Delivers lightweight system metrics, status probes, and process management.
+    dependencies:
+      runtime:
+        - "libc6 (>= 2.31)"
+
+  # ----------------------------------------------------------------------------
+  # 5. M3tal Stack Orchestrator
+  # ----------------------------------------------------------------------------
+  - id: "m3tal-stack"
+    name: "m3tal-stack"
+    source_repo: "jakej985-rgb/m3tal-stack"
+    type: "cli"
+    status: "planned"
+    supported_architectures:
+      - "amd64"
+      - "arm64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/m3tal-stack"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.1.0"
+      section: "admin"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/m3tal-stack.html"
+      description: |
+        Stack orchestrator and lifecycle management CLI for M3tal services
+        Manages Docker Compose services, native daemons, and environment variable trees.
+    dependencies:
+      runtime:
+        - "m3tal-core"
+
+  # ----------------------------------------------------------------------------
+  # 6. Monster Lab Suite
+  # ----------------------------------------------------------------------------
+  - id: "monster-lab"
+    name: "monster-lab"
+    source_repo: "jakej985-rgb/Monster-Lab"
+    type: "desktop"
+    status: "active"
+    supported_architectures:
+      - "amd64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/monster-lab"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.0.1"
+      section: "science"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/Monster-Lab/"
+      description: |
+        Robotics learning application with multi-platform simulation suite
+        Provides hands-on robotics, circuit simulation, and Arduino serial telemetry.
+    dependencies:
+      runtime:
+        - "libgtk-3-0"
+        - "libserialport0"
+
+  # ----------------------------------------------------------------------------
+  # 7. Red Music Locker Server
+  # ----------------------------------------------------------------------------
+  - id: "red-music-locker"
+    name: "red-music-locker"
+    source_repo: "jakej985-rgb/red-music-locker"
+    type: "service"
+    status: "active"
+    supported_architectures:
+      - "amd64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/red-music-locker"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "1.0.0"
+      section: "sound"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/red-music-locker.html"
+      description: |
+        Personal cloud audio locker and YouTube Music sync daemon
+        Allows self-hosted audio streaming, playlist caching, and library synchronisation.
+    dependencies:
+      runtime:
+        - "python3 (>= 3.10)"
+        - "ffmpeg"
+
+  # ----------------------------------------------------------------------------
+  # 8. Shop Manager Application
+  # ----------------------------------------------------------------------------
+  - id: "shop-manager"
+    name: "shop-manager"
+    source_repo: "jakej985-rgb/shop-manager"
+    type: "desktop"
+    status: "active"
+    supported_architectures:
+      - "amd64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/shop-manager"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.0.1"
+      section: "utils"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/shop-manager.html"
+      description: |
+        Retail shop inventory, POS tracking, and barcode asset management client.
+    dependencies:
+      runtime:
+        - "libgtk-3-0"
+
+  # ----------------------------------------------------------------------------
+  # 9. Specs-n-Parts Cataloger
+  # ----------------------------------------------------------------------------
+  - id: "specs-n-parts"
+    name: "specs-n-parts"
+    source_repo: "jakej985-rgb/specs-n-parts"
+    type: "desktop"
+    status: "active"
+    supported_architectures:
+      - "amd64"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/specs-n-parts"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.0.1"
+      section: "utils"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/specs-n-parts.html"
+      description: |
+        Automotive part compatibility database, spec tracker, and maintenance ledger.
+    dependencies:
+      runtime:
+        - "libgtk-3-0"
+
+  # ----------------------------------------------------------------------------
+  # 10. ComicInfo Generator
+  # ----------------------------------------------------------------------------
+  - id: "comicinfo-generator"
+    name: "comicinfo-generator"
+    source_repo: "jakej985-rgb/comicinfo-generator"
+    type: "cli"
+    status: "active"
+    supported_architectures:
+      - "amd64"
+      - "all"
+    publication:
+      component: "main"
+      distribution: "stable"
+      pool_path: "pool/main/comicinfo-generator"
+      retention_count: 5
+      auto_publish: true
+    metadata:
+      latest_version: "0.0.1"
+      section: "utils"
+      priority: "optional"
+      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      homepage: "https://jakej985-rgb.github.io/M3tal-Hub/apps/comicinfo-generator.html"
+      description: |
+        Metadata parser and XML generator for digital comic archives (CBZ/CBR/ComicRack).
+    dependencies:
+      runtime:
+        - "python3 (>= 3.10)"

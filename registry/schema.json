@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "M3talPackageRegistry",
+  "type": "object",
+  "required": ["version", "repository", "packages"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "repository": {
+      "type": "object",
+      "required": ["url", "suite", "origin", "label", "components", "architectures", "keyring"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "suite": { "type": "string" },
+        "codename": { "type": "string" },
+        "origin": { "type": "string" },
+        "label": { "type": "string" },
+        "components": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "architectures": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "keyring": {
+          "type": "object",
+          "required": ["fingerprint", "path"],
+          "properties": {
+            "fingerprint": { "type": "string", "pattern": "^[A-F0-9]{40}$" },
+            "path": { "type": "string" }
+          }
+        }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "source_repo", "type", "status", "supported_architectures", "publication", "metadata"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9+-.]+$",
+            "description": "Debian package name per Debian Policy Manual section 5.6.1"
+          },
+          "source_repo": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["cli", "service", "desktop", "core-system", "library", "metapackage"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["published", "active", "planned", "deprecated"]
+          },
+          "supported_architectures": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["amd64", "arm64", "armhf", "i386", "all"]
+            },
+            "minItems": 1
+          },
+          "publication": {
+            "type": "object",
+            "required": ["component", "distribution", "pool_path"],
+            "properties": {
+              "component": { "type": "string" },
+              "distribution": { "type": "string" },
+              "pool_path": { "type": "string" },
+              "retention_count": { "type": "integer", "minimum": 1 },
+              "auto_publish": { "type": "boolean" }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "required": ["latest_version", "section", "priority", "maintainer", "description"],
+            "properties": {
+              "latest_version": { "type": "string" },
+              "section": { "type": "string" },
+              "priority": { "type": "string" },
+              "maintainer": { "type": "string" },
+              "homepage": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          },
+          "dependencies": {
+            "type": "object",
+            "properties": {
+              "runtime": { "type": "array", "items": { "type": "string" } },
+              "recommends": { "type": "array", "items": { "type": "string" } },
+              "suggests": { "type": "array", "items": { "type": "string" } },
+              "build": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

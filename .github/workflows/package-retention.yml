@@ -1,0 +1,86 @@
+name: Package Retention & Pruning (Phase 10)
+
+on:
+  schedule:
+    # Run audit weekly at 03:00 UTC on Sunday
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Retention Action to Execute"
+        required: true
+        default: "dry-run"
+        type: choice
+        options:
+          - "inventory"
+          - "dry-run"
+          - "execute"
+      create_snapshot:
+        description: "Create state snapshot manifest"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  retention-audit-and-prune:
+    name: Package Retention Engine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y gnupg
+
+      - name: Run Retention Unit & Integration Tests
+        run: |
+          python3 scripts/test_retention.py
+
+      - name: Audit Repository Package Inventory
+        run: |
+          python3 scripts/manage_retention.py inventory --json inventory-report.json
+
+      - name: Upload Inventory Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-inventory-report
+          path: inventory-report.json
+
+      - name: Evaluate Prune Candidates (Dry-Run)
+        if: github.event.inputs.action != 'execute'
+        run: |
+          python3 scripts/manage_retention.py prune --dry-run
+
+      - name: Execute Package Pruning & Index Regeneration
+        if: github.event.inputs.action == 'execute'
+        run: |
+          echo "Executing package pruning and metadata index regeneration..."
+          python3 scripts/manage_retention.py prune --execute
+          
+          echo "Validating regenerated repository integrity..."
+          python3 scripts/validate_repository.py --strict --skip-container-test
+
+      - name: Commit and Push Pruned Repository State
+        if: github.event.inputs.action == 'execute'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pool/ dists/ snapshots/ config/
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(retention): prune obsolete package builds and regenerate indexes [skip ci]"
+            git push origin main
+          fi

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "description": "M3tal APT Repository Package Retention & Pruning Policy",
+  "policy": {
+    "keep_recent_per_series": 5,
+    "keep_recent_overall": 10,
+    "min_retained_packages": 10,
+    "protected_series": [
+      "1.1",
+      "1.0"
+    ],
+    "pinned_versions": [
+      "1.0.0",
+      "1.0.60",
+      "1.1.0",
+      "1.1.62"
+    ],
+    "snapshot": {
+      "enabled": true,
+      "directory": "snapshots",
+      "max_snapshots_retained": 50
+    },
+    "deprecation": {
+      "grace_period_days": 90,
+      "archive_obsolete": true,
+      "archive_directory": "archive/pool/main"
+    }
+  }
+}

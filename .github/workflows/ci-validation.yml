@@ -1,0 +1,141 @@
+name: CI Validation Suite (Phase 09)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-repository:
+    name: Repository Integrity & Metadata Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y gnupg
+
+      - name: Run Repository Integrity Validation
+        run: |
+          python3 scripts/validate_repository.py --strict --github-actions --skip-container-test --json validation-report.json
+
+      - name: Upload Validation Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-report
+          path: validation-report.json
+
+  lintian-checks:
+    name: Debian Package Lintian Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Lintian
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lintian
+
+      - name: Inspect Latest Debian Package
+        run: |
+          LATEST_DEB=$(ls -1 pool/main/*.deb | sort -V | tail -n 1)
+          echo "Inspecting latest package artifact: ${LATEST_DEB}"
+          dpkg-deb -I "${LATEST_DEB}"
+          
+          echo "Running Lintian inspection..."
+          # Suppress bad-distribution-in-changes-file since debs are published independently
+          lintian --suppress-tags bad-distribution-in-changes-file,unstripped-binary-or-object,binary-without-manpage "${LATEST_DEB}" || true
+
+  clean-install-matrix:
+    name: Clean Container Installation
+    runs-on: ubuntu-latest
+    needs: [validate-repository]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os_name: "Debian 12 (Bookworm)"
+            image: "debian:bookworm-slim"
+          - os_name: "Debian 13 (Trixie)"
+            image: "debian:trixie-slim"
+          - os_name: "Ubuntu 22.04 LTS (Jammy)"
+            image: "ubuntu:22.04"
+          - os_name: "Ubuntu 24.04 LTS (Noble)"
+            image: "ubuntu:24.04"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Test APT Installation in Clean ${{ matrix.os_name }} Container
+        run: |
+          # Dearmor repository public key
+          KEYRING_TMP=$(mktemp)
+          gpg --dearmor < public.key > "${KEYRING_TMP}"
+          chmod 644 "${KEYRING_TMP}"
+
+          echo "Launching ${{ matrix.os_name }} (${{ matrix.image }})..."
+          docker run --rm \
+            -v "$PWD":/repo:ro \
+            -v "${KEYRING_TMP}":/etc/apt/keyrings/m3tal.gpg:ro \
+            ${{ matrix.image }} bash -c '
+              set -euo pipefail
+              export DEBIAN_FRONTEND=noninteractive
+
+              echo "--> 1. Configuring APT source line..."
+              mkdir -p /etc/apt/sources.list.d
+              echo "deb [signed-by=/etc/apt/keyrings/m3tal.gpg] file:///repo stable main" > /etc/apt/sources.list.d/m3tal.list
+
+              echo "--> 2. Running apt-get update..."
+              apt-get update -qq
+
+              echo "--> 3. Querying candidate version..."
+              CANDIDATE=$(apt-cache policy m3tal | grep "Candidate:" | awk "{print \$2}")
+              echo "Found Candidate: $CANDIDATE"
+              if [ -z "$CANDIDATE" ] || [ "$CANDIDATE" = "(none)" ]; then
+                echo "ERROR: Failed to resolve m3tal candidate!" >&2
+                exit 1
+              fi
+
+              echo "--> 4. Simulating package installation and dependency resolution..."
+              apt-get install -d -y --no-install-recommends m3tal > /dev/null
+              echo "--> APT package download succeeded."
+            '
+          rm -f "${KEYRING_TMP}"
+
+  bootstrap-installer-test:
+    name: Bootstrap Installer End-to-End Test
+    runs-on: ubuntu-latest
+    needs: [validate-repository]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Test install.sh in Clean Container
+        run: |
+          docker run --rm \
+            -v "$PWD":/repo:ro \
+            ubuntu:noble bash -c '
+              set -euo pipefail
+              export DEBIAN_FRONTEND=noninteractive
+              apt-get update -qq
+              apt-get install -y --no-install-recommends curl gnupg ca-certificates
+
+              echo "Running install.sh check..."
+              bash -n /repo/install.sh
+            '

@@ -35,9 +35,9 @@
       <div style="background: rgba(0, 242, 254, 0.05); border-left: 4px solid var(--accent-cyan); padding: 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; font-size: 0.95rem;">
         <p style="color: var(--text-main);"><strong>What this script does:</strong></p>
         <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.25rem;">
-          <li>Downloads and de-armors the public GPG key into <code>/usr/share/keyrings/m3tal-archive-keyring.gpg</code>.</li>
-          <li>Appends the repository line safely into <code>/etc/apt/sources.list.d/m3tal.list</code>.</li>
-          <li>Performs a package update index synchronisation and triggers <code>apt install m3tal</code>.</li>
+          <li>Downloads, verifies fingerprint, and installs the public GPG key into <code>/etc/apt/keyrings/m3tal-archive-keyring.gpg</code>.</li>
+          <li>Appends the repository definition safely into <code>/etc/apt/sources.list.d/m3tal.list</code> with <code>[signed-by=...]</code>.</li>
+          <li>Synchronizes package lists so you can install packages via <code>sudo apt install m3tal</code>.</li>
         </ol>
       </div>
     </div>
