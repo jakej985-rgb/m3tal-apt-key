@@ -269,7 +269,6 @@ def validate_repository_structure(reporter: DiagnosticReporter):
         (".nojekyll", True),
         ("install.sh", True),
         ("index.html", True),
-        ("projects/m3tal-core/index.html", False),
     ]
 
     missing = 0
