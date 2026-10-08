@@ -1,24 +1,58 @@
-# M3tal APT Repository Workspace (`m3tal-apt-key`)
+# M3tal Central Debian Package Repository & Keyring (`m3tal-apt-key`)
 
-This workspace coordinates execution tracks for the unified M3tal Debian/Ubuntu APT package repository.
+Official URL: [https://jakej985-rgb.github.io/m3tal-apt-key](https://jakej985-rgb.github.io/m3tal-apt-key)  
+Keyring Fingerprint: `B95A45C647577DEBCC877C49AF6190B0C01346DD`
+
+This repository serves as the **authoritative, central Debian package keyring and repository** for the entire M3tal developer ecosystem. All applications built with Debian packages (such as Monster Lab, M3tal Core, GoDash, Specs-n-Parts, and Shop Manager) publish and distribute their `.deb` packages here.
 
 ---
 
-## Tracks & Deliverables Index
+## 🚀 Quick Start for End Users
 
-### Track 3: Package Publishing, Metadata & Versioning (Phases 06, 07, 08)
-- `scripts/deb_version.py`: Debian version parsing, comparison, and semantic version validation.
-- `scripts/validate_package.py`: Automated Debian package metadata and dependency validation.
-- `templates/control.template`: Canonical `DEBIAN/control` metadata template.
+### Universal One-Line Bootstrap
+```bash
+curl -fsSL https://jakej985-rgb.github.io/m3tal-apt-key/install.sh | sudo bash
+```
 
-### Track 6: Documentation, Security & End-to-End Validation (Phases 14, 15, 16)
-- **Phase 14 (Documentation)**:
-  - [`docs/README-repository.md`](docs/README-repository.md): Complete repository README and user introduction.
-  - [`docs/user-setup-guide.md`](docs/user-setup-guide.md): In-depth workstation, server, and IaC installation guide.
-  - [`docs/maintenance-guide.md`](docs/maintenance-guide.md): Repository operations, package ingestion, and signing workflows.
-  - [`docs/developer-guide.md`](docs/developer-guide.md): Packaging standards for M3tal application developers.
-- **Phase 15 (Security & Key Rotation)**:
-  - [`docs/security-and-key-rotation.md`](docs/security-and-key-rotation.md): Security architecture, private key protection, routine rotation schedules, and emergency revocation procedures.
-- **Phase 16 (End-to-End Validation)**:
-  - [`scripts/test_e2e_validation.py`](scripts/test_e2e_validation.py): Automated 13-step lifecycle test suite (bootstrap, GPG verification, apt update, install, upgrade, remove, idempotency).
-  - [`docs/e2e-validation-report.md`](docs/e2e-validation-report.md): Execution records and multi-distribution audit report.
+### Install Ecosystem Applications
+```bash
+# Install core platform daemon
+sudo apt install m3tal
+
+# Install Monster Lab learning studio
+sudo apt install monster-lab
+```
+
+---
+
+## 📦 For Application Developers: Pushing Packages
+
+All M3tal ecosystem apps push their Debian packages directly into this repository:
+
+### 1. Automated CI/CD Push (GitHub Actions)
+Add `.github/workflows/dispatch-apt.yml` (from [`templates/dispatch-apt.yml`](templates/dispatch-apt.yml)) to your app repo. On each release, it dispatches an authenticated `publish-deb` event to this repository.
+
+### 2. Local Workstation Ingestion CLI
+Developers can also publish packages directly from their workstation:
+```bash
+# Ingest deb package file
+python3 scripts/ingest_deb.py /path/to/app.deb
+
+# Ingest directly from local application repository
+python3 scripts/ingest_deb.py --from-repo /home/m3tal/apps/Monster-Lab
+
+# Ingest from remote URL
+python3 scripts/ingest_deb.py --url https://github.com/jakej985-rgb/Monster-Lab/releases/download/v0.1.4/monster-lab-linux.deb
+```
+
+---
+
+## 📚 Architecture & Documentation Index
+
+- **Central Keyring Architecture**: [`docs/central-keyring-architecture.md`](docs/central-keyring-architecture.md)
+- **App Deb Publishing Guide**: [`docs/app-deb-publishing-guide.md`](docs/app-deb-publishing-guide.md)
+- **Application Installation Standard**: [`docs/12-app-installation-standard.md`](docs/12-app-installation-standard.md)
+- **Package Registry Manifest**: [`registry/packages.yml`](registry/packages.yml)
+- **Repository Operations & Maintenance Guide**: [`docs/maintenance-guide.md`](docs/maintenance-guide.md)
+- **Security & Key Rotation Protocols**: [`docs/security-and-key-rotation.md`](docs/security-and-key-rotation.md)
+- **End-to-End Validation Report**: [`docs/e2e-validation-report.md`](docs/e2e-validation-report.md)

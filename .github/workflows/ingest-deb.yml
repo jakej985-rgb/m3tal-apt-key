@@ -1,0 +1,119 @@
+name: Ingest App Debian Package (Central Keyring)
+
+on:
+  repository_dispatch:
+    types: [publish-deb, app-deb-release, app-release]
+  workflow_dispatch:
+    inputs:
+      package_id:
+        description: "Package identifier (e.g. monster-lab, m3tal-godash)"
+        required: true
+        type: string
+      version:
+        description: "Package version (e.g. 0.1.4)"
+        required: false
+        type: string
+      deb_url:
+        description: "Direct download URL to .deb package asset"
+        required: true
+        type: string
+      allow_replace:
+        description: "Allow overwriting identical existing package version"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  ingest-and-publish:
+    name: Ingest and Sign Debian Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Central Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install System Utilities
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gnupg curl dpkg-dev
+
+      - name: Configure GPG Signing Key
+        id: gpg-setup
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY || secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE }}
+        run: |
+          if [ -n "$GPG_PRIVATE_KEY" ]; then
+            echo "Importing GPG private key for release signing..."
+            echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+            echo "has_key=true" >> $GITHUB_OUTPUT
+          else
+            echo "::warning ::No GPG_PRIVATE_KEY secret configured. Indexes will be generated without GPG signature."
+            echo "has_key=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Resolve Ingestion Parameters
+        id: params
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            PKG_ID="${{ github.event.client_payload.package_id || github.event.client_payload.app_id }}"
+            VER="${{ github.event.client_payload.version }}"
+            DEB_URL="${{ github.event.client_payload.deb_url || github.event.client_payload.download_url }}"
+            ALLOW_REPLACE="${{ github.event.client_payload.allow_replace || 'false' }}"
+          else
+            PKG_ID="${{ github.event.inputs.package_id }}"
+            VER="${{ github.event.inputs.version }}"
+            DEB_URL="${{ github.event.inputs.deb_url }}"
+            ALLOW_REPLACE="${{ github.event.inputs.allow_replace }}"
+          fi
+
+          if [ -z "$DEB_URL" ]; then
+            echo "::error ::Missing deb_url or download_url in dispatch payload!"
+            exit 1
+          fi
+
+          echo "pkg_id=${PKG_ID}" >> $GITHUB_OUTPUT
+          echo "version=${VER}" >> $GITHUB_OUTPUT
+          echo "deb_url=${DEB_URL}" >> $GITHUB_OUTPUT
+          echo "allow_replace=${ALLOW_REPLACE}" >> $GITHUB_OUTPUT
+          echo "Ingesting package ${PKG_ID} version ${VER} from ${DEB_URL}"
+
+      - name: Ingest Package into Repository Pool & Update Indices
+        run: |
+          EXTRA_FLAGS=""
+          if [ "${{ steps.params.outputs.allow_replace }}" = "true" ]; then
+            EXTRA_FLAGS="--allow-replace"
+          fi
+          if [ "${{ steps.gpg-setup.outputs.has_key }}" = "false" ]; then
+            EXTRA_FLAGS="${EXTRA_FLAGS} --no-sign"
+          fi
+
+          python3 scripts/ingest_deb.py --url "${{ steps.params.outputs.deb_url }}" ${EXTRA_FLAGS}
+
+      - name: Validate Repository Integrity
+        run: |
+          python3 scripts/validate_repository.py --strict --skip-container-test
+
+      - name: Commit and Push Repository Updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pool/ dists/ registry/packages.yml
+          if git diff --staged --quiet; then
+            echo "No repository changes to commit."
+          else
+            PKG_NAME="${{ steps.params.outputs.pkg_id }}"
+            PKG_VER="${{ steps.params.outputs.version }}"
+            git commit -m "feat(repo): publish ${PKG_NAME} ${PKG_VER} to central repository [skip ci]"
+            git push origin main
+          fi

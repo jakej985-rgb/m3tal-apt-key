@@ -201,17 +201,20 @@ packages:
       retention_count: 5
       auto_publish: true
     metadata:
-      latest_version: "0.0.1"
-      section: "science"
+      latest_version: "0.1.4"
+      section: "education"
       priority: "optional"
-      maintainer: "M3tal-Creates <jakej985@gmail.com>"
+      maintainer: "Monster Lab Team <support@monsterlab.org>"
       homepage: "https://jakej985-rgb.github.io/M3tal-Hub/Monster-Lab/"
       description: |
-        Robotics learning application with multi-platform simulation suite
-        Provides hands-on robotics, circuit simulation, and Arduino serial telemetry.
+        Hands-on offline STEM robotics learning studio for kids.
+        Features 12 guided lessons, 38 sensor components, 20 build projects,
+        and physical serial hardware companion.
     dependencies:
       runtime:
+        - "libc6 (>= 2.31)"
         - "libgtk-3-0"
+        - "libglib2.0-0"
         - "libserialport0"
 
   # ----------------------------------------------------------------------------

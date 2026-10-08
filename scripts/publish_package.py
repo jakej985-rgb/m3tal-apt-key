@@ -410,15 +410,21 @@ class AptPublisher:
 
         # 1. Inline clearsign (InRelease)
         inrel_cmd = base_cmd + ["--clearsign", "--output", output_inrelease, release_file]
-        res = subprocess.run(inrel_cmd, capture_output=True, text=True)
-        if res.returncode != 0:
-            raise RuntimeError(f"GPG clearsign failed: {res.stderr}")
+        try:
+            res = subprocess.run(inrel_cmd, capture_output=True, text=True, timeout=5)
+            if res.returncode != 0:
+                raise RuntimeError(f"GPG clearsign failed: {res.stderr}")
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("GPG clearsign timed out waiting for pinentry/passphrase.")
 
         # 2. Detached signature (Release.gpg)
         relgpg_cmd = base_cmd + ["--detach-sign", "--armor", "--output", output_release_gpg, release_file]
-        res = subprocess.run(relgpg_cmd, capture_output=True, text=True)
-        if res.returncode != 0:
-            raise RuntimeError(f"GPG detached signature failed: {res.stderr}")
+        try:
+            res = subprocess.run(relgpg_cmd, capture_output=True, text=True, timeout=5)
+            if res.returncode != 0:
+                raise RuntimeError(f"GPG detached signature failed: {res.stderr}")
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("GPG detached signature timed out waiting for pinentry/passphrase.")
 
 
 def main():

@@ -1,0 +1,94 @@
+# ==============================================================================
+# M3tal Ecosystem Application - Central APT Repository Dispatch Workflow
+#
+# Place this file at: .github/workflows/dispatch-apt.yml in your application repository.
+# Requires GitHub Repository Secret: M3TAL_APT_DISPATCH_TOKEN
+# (A Personal Access Token with repository write / workflow dispatch access to jakej985-rgb/m3tal-apt-key)
+# ==============================================================================
+
+name: Dispatch to Central APT Repository
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version tag (e.g. v1.0.0)"
+        required: true
+        type: string
+      deb_asset_name:
+        description: "Exact filename of the release deb asset (optional)"
+        required: false
+        type: string
+
+jobs:
+  dispatch-to-apt:
+    name: Notify m3tal-apt-key
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Dispatch Token
+        id: check-token
+        run: |
+          if [ -z "${{ secrets.M3TAL_APT_DISPATCH_TOKEN }}" ]; then
+            echo "::warning ::M3TAL_APT_DISPATCH_TOKEN secret is not set. Skipping central APT repository push."
+            echo "configured=false" >> $GITHUB_OUTPUT
+          else
+            echo "configured=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine Target Release Version
+        id: target
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${{ github.event.release.tag_name }}"
+          else
+            TAG="${{ github.event.inputs.version }}"
+          fi
+          # Strip leading v if needed
+          CLEAN_VER="${TAG#v}"
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          echo "clean_version=${CLEAN_VER}" >> $GITHUB_OUTPUT
+
+      - name: Locate Release Deb Asset URL
+        id: locate-asset
+        if: steps.check-token.outputs.configured == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.target.outputs.tag }}"
+          REPO="${{ github.repository }}"
+
+          echo "Searching for .deb assets in release ${TAG} of ${REPO}..."
+          DEB_URL=$(gh release view "${TAG}" --repo "${REPO}" --json assets --jq '.assets[] | select(.name | endswith(".deb")) | .url' | head -n 1)
+
+          if [ -z "$DEB_URL" ]; then
+            # Construct standard asset download URL fallback
+            APP_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+            DEB_URL="https://github.com/${REPO}/releases/download/${TAG}/${APP_NAME}-${TAG}-linux.deb"
+            echo "Falling back to conventional asset URL: ${DEB_URL}"
+          else
+            echo "Found asset URL: ${DEB_URL}"
+          fi
+          echo "deb_url=${DEB_URL}" >> $GITHUB_OUTPUT
+
+      - name: Dispatch Release Event to Central APT Keyring
+        if: steps.check-token.outputs.configured == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.M3TAL_APT_DISPATCH_TOKEN }}
+          repository: jakej985-rgb/m3tal-apt-key
+          event-type: publish-deb
+          client-payload: >-
+            {
+              "package_id": "${{ github.event.repository.name }}",
+              "repo": "${{ github.repository }}",
+              "version": "${{ steps.target.outputs.clean_version }}",
+              "tag": "${{ steps.target.outputs.tag }}",
+              "deb_url": "${{ steps.locate-asset.outputs.deb_url }}"
+            }
+
+      - name: Confirm Dispatch
+        if: steps.check-token.outputs.configured == 'true'
+        run: |
+          echo "Successfully notified jakej985-rgb/m3tal-apt-key of release ${{ steps.target.outputs.clean_version }}!"
