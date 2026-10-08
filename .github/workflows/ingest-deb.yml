@@ -51,7 +51,7 @@ jobs:
         id: gpg-setup
         env:
           GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY || secrets.GPG_PRIVATE_KEY }}
-          GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE }}
+          GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE || secrets.GPG_PASSPHRASE }}
         run: |
           if [ -n "$GPG_PRIVATE_KEY" ]; then
             echo "Importing GPG private key for release signing..."
