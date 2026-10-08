@@ -50,12 +50,12 @@ The integrity and authenticity of all Debian packages distributed through the M3
 - **Subkey**: RSA 4096-bit (encryption `[E]`, Key ID `E07849D2B52D9739`)
 - **Creation Date**: `2026-05-15`
 - **Expiration Date**: None (`never`) — *recommended for routine rotation in 2028*
-- **Key ID (Short/Long)**: `ED1DAE1980AD1550`
+- **Key ID (Short/Long)**: `775AD1473BF25102`
 - **Primary Fingerprint**:
   ```text
-  9DFE D0A1 9DF5 3512 98FE  812A ED1D AE19 80AD 1550
+  5F84 FE50 A401 11C9 8141  0E11 775A D147 3BF2 5102
   ```
-- **Normalized Fingerprint**: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`
+- **Normalized Fingerprint**: `5F84FE50A40111C981410E11775AD1473BF25102`
 - **User ID**: `M3tal-Creates <jakej985@gmail.com>`
 
 ### Public Key Distribution Points
@@ -107,10 +107,10 @@ gpg --quick-generate-key "M3tal-Creates (2028-2030) <jakej985@gmail.com>" rsa409
 Combine the existing active public key and the new public key into an amalgamated keyring:
 ```bash
 # Export both keys into one binary keyring
-gpg --export ED1DAE1980AD1550 <NEW_KEY_ID> > m3tal-archive-keyring.gpg
+gpg --export 775AD1473BF25102 <NEW_KEY_ID> > m3tal-archive-keyring.gpg
 
 # Export ASCII armored bundle
-gpg --armor --export ED1DAE1980AD1550 <NEW_KEY_ID> > public.key
+gpg --armor --export 775AD1473BF25102 <NEW_KEY_ID> > public.key
 cp public.key KEY.gpg
 ```
 
@@ -154,12 +154,12 @@ If the private key is suspected of being compromised or inadvertently exposed:
 1. **Revoke CI Secrets**: Instantly revoke `GPG_SIGNING_KEY` and `GPG_PASSPHRASE` from GitHub Actions Secrets to prevent further signatures.
 2. **Generate Revocation Certificate**:
    ```bash
-   gpg --output revocation-ED1DAE1980AD1550.crt --gen-revoke ED1DAE1980AD1550
+   gpg --output revocation-775AD1473BF25102.crt --gen-revoke 775AD1473BF25102
    ```
 3. **Apply Revocation to Public Key**:
    ```bash
-   gpg --import revocation-ED1DAE1980AD1550.crt
-   gpg --armor --export ED1DAE1980AD1550 > public.key
+   gpg --import revocation-775AD1473BF25102.crt
+   gpg --armor --export 775AD1473BF25102 > public.key
    cp public.key KEY.gpg
    ```
 4. **Publish Revocation Notice**: Commit and push the revoked public key to the repository immediately.
@@ -196,7 +196,7 @@ To prevent unsigned or malformed repository metadata from reaching production, C
 1. `Release` checksum verification against all files in `dists/`.
 2. Valid detached GPG signature (`Release.gpg`).
 3. Valid inline cleartext signature (`InRelease`).
-4. Strict key fingerprint matching (`9DFED0A19DF5351298FE812AED1DAE1980AD1550`).
+4. Strict key fingerprint matching (`5F84FE50A40111C981410E11775AD1473BF25102`).
 
 ---
 

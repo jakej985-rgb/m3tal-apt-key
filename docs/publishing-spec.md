@@ -191,14 +191,14 @@ APT security requires clients to cryptographically verify repository indices. Th
 In CI/CD environments (GitHub Actions), the private signing key is provisioned securely via repository secrets:
 - `M3TAL_GPG_PRIVATE_KEY`: ASCII-armored private key.
 - `M3TAL_GPG_PASSPHRASE`: Passphrase protecting the key (if encrypted).
-- `M3TAL_GPG_KEY_ID`: Official key ID (`ED1DAE1980AD1550`).
+- `M3TAL_GPG_KEY_ID`: Official key ID (`775AD1473BF25102`).
 
 The publisher invocation:
 ```bash
 python3 scripts/publish_package.py \
   --repo-dir . \
   --sign \
-  --key-id ED1DAE1980AD1550 \
+  --key-id 775AD1473BF25102 \
   --passphrase "$GPG_PASSPHRASE" \
   package.deb
 ```

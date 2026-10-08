@@ -188,7 +188,7 @@ All 124 historical packages, metadata indices, checksums, and signatures were va
 
 - **Discovery**: When configuring APT with `deb [signed-by=/path/to/KEY.gpg]`, APT fails on Debian 12 (Bookworm) and Ubuntu 24.04 (Noble) with:
   ```text
-  W: GPG error: ... The following signatures couldn't be verified because the public key is not available: NO_PUBKEY ED1DAE1980AD1550
+  W: GPG error: ... The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 775AD1473BF25102
   E: The repository '...' is not signed.
   ```
 - **Root Cause**: `KEY.gpg` is named with the `.gpg` extension, but its content is ASCII-armored text (`-----BEGIN PGP PUBLIC KEY BLOCK-----`), byte-for-byte identical to `public.key`. Debian/Ubuntu's APT verification engine (`gpgv`) distinguishes file format by extension: files ending in `.gpg` MUST be binary OpenPGP keyrings. Because `KEY.gpg` contains ASCII text, `gpgv` fails to parse keys from it. Conversely, `public.key` (or files ending in `.asc`) are correctly identified and parsed as ASCII-armored keys.
@@ -221,11 +221,11 @@ All 124 historical packages, metadata indices, checksums, and signatures were va
 - **Subkey**: RSA 4096-bit (encryption `[E]`, ID `E07849D2B52D9739`)
 - **Creation Date**: `2026-05-15`
 - **Expiration**: None (`never`)
-- **Key ID (Short/Long)**: `ED1DAE1980AD1550`
+- **Key ID (Short/Long)**: `775AD1473BF25102`
 - **Full Fingerprint**:
   ```text
-  9DFE D0A1 9DF5 3512 98FE  812A ED1D AE19 80AD 1550
-  (Normalized: 9DFED0A19DF5351298FE812AED1DAE1980AD1550)
+  5F84 FE50 A401 11C9 8141  0E11 775A D147 3BF2 5102
+  (Normalized: 5F84FE50A40111C981410E11775AD1473BF25102)
   ```
 - **User ID**: `M3tal-Creates <jakej985@gmail.com>`
 
@@ -234,8 +234,8 @@ All 124 historical packages, metadata indices, checksums, and signatures were va
 - `public.key`: ASCII-armored OpenPGP public key block.
 - `KEY.gpg`: Legacy ASCII-armored OpenPGP key block (identical to `public.key`).
 - `m3tal-archive-keyring.gpg`: Canonical binary OpenPGP keyring artifact (dearmored, mode 0644).
-- `InRelease`: Inline signed with key `9DFED0A19DF5351298FE812AED1DAE1980AD1550` using SHA-512 digest.
-- `Release.gpg`: Detached signature of `Release` signed with key `9DFED0A19DF5351298FE812AED1DAE1980AD1550`.
+- `InRelease`: Inline signed with key `5F84FE50A40111C981410E11775AD1473BF25102` using SHA-512 digest.
+- `Release.gpg`: Detached signature of `Release` signed with key `5F84FE50A40111C981410E11775AD1473BF25102`.
 
 **Cryptographic Audit Result**: Both `InRelease` and `Release.gpg` produce `Good signature from "M3tal-Creates <jakej985@gmail.com>"` when verified against the master key.
 

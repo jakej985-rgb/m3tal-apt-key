@@ -1,7 +1,7 @@
 # M3tal Central Debian Package Repository & Keyring (`m3tal-apt-key`)
 
 Official URL: [https://jakej985-rgb.github.io/m3tal-apt-key](https://jakej985-rgb.github.io/m3tal-apt-key)  
-Keyring Fingerprint: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`
+Keyring Fingerprint: `5F84FE50A40111C981410E11775AD1473BF25102`
 
 This repository serves as the **authoritative, central Debian package keyring and repository** for the entire M3tal developer ecosystem. All applications built with Debian packages (such as Monster Lab, M3tal Core, GoDash, Specs-n-Parts, and Shop Manager) publish and distribute their `.deb` packages here.
 

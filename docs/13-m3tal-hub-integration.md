@@ -68,7 +68,7 @@ The M3tal software distribution architecture maintains a strict separation betwe
     sudo apt update
     ```
   - **Cryptographic Trust Verification**:
-    Documents public key fingerprint `9DFE D0A1 9DF5 3512 98FE  812A ED1D AE19 80AD 1550` and verification commands via `gpg --show-keys` and `apt-cache policy`.
+    Documents public key fingerprint `5F84 FE50 A401 11C9 8141  0E11 775A D147 3BF2 5102` and verification commands via `gpg --show-keys` and `apt-cache policy`.
 
 ### 2.2 M3tal Core Page (`apps/m3tal-core.html`)
 - **Location**: `/apps/m3tal-core.html`

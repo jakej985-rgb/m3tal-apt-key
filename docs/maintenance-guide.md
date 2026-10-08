@@ -101,15 +101,15 @@ SHA512:
 ```
 
 ### Step 4: Cryptographically Sign the Release
-Using the official M3tal GPG signing key (`ED1DAE1980AD1550`):
+Using the official M3tal GPG signing key (`775AD1473BF25102`):
 
 1. Generate detached signature:
    ```bash
-   gpg --default-key ED1DAE1980AD1550 --armor --detach-sign --output dists/stable/Release.gpg dists/stable/Release
+   gpg --default-key 775AD1473BF25102 --armor --detach-sign --output dists/stable/Release.gpg dists/stable/Release
    ```
 2. Generate inline clearsigned signature (`InRelease`):
    ```bash
-   gpg --default-key ED1DAE1980AD1550 --clearsign --output dists/stable/InRelease dists/stable/Release
+   gpg --default-key 775AD1473BF25102 --clearsign --output dists/stable/InRelease dists/stable/Release
    ```
 
 ---

@@ -32,7 +32,7 @@ from publish_package import AptPublisher
 from validate_package import validate_debian_package, extract_control_from_deb
 from deb_version import compare_debian_versions
 
-DEFAULT_KEY_FINGERPRINT = "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
+DEFAULT_KEY_FINGERPRINT = "5F84FE50A40111C981410E11775AD1473BF25102"
 REGISTRY_PATH = os.path.join(REPO_ROOT, "registry", "packages.yml")
 
 

@@ -39,7 +39,7 @@ if not os.path.isdir(M3TAL_APT_KEY_ROOT):
     # Fallback to relative path if cloned elsewhere
     M3TAL_APT_KEY_ROOT = os.path.abspath(os.path.join(CWD, ".."))
 
-EXPECTED_FINGERPRINT = "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
+EXPECTED_FINGERPRINT = "5F84FE50A40111C981410E11775AD1473BF25102"
 EXPECTED_CANDIDATE = "1.1.62"
 TEST_CONTAINER_IMAGE = "dart:stable"  # Clean Debian 13 (trixie) amd64 image
 

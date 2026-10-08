@@ -456,7 +456,7 @@ def main():
             pass
 
     parser.add_argument("--sign", action="store_true", help="GPG sign Release (InRelease and Release.gpg)")
-    parser.add_argument("--key-id", default=os.environ.get("APT_GPG_KEY_ID") or os.environ.get("GPG_KEY_ID") or "9DFED0A19DF5351298FE812AED1DAE1980AD1550", help="GPG key ID or fingerprint to sign with")
+    parser.add_argument("--key-id", default=os.environ.get("APT_GPG_KEY_ID") or os.environ.get("GPG_KEY_ID") or "5F84FE50A40111C981410E11775AD1473BF25102", help="GPG key ID or fingerprint to sign with")
     parser.add_argument("--passphrase", default=default_pass, help="GPG key passphrase")
     parser.add_argument("--gnupghome", help="Custom GPG home directory")
 

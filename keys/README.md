@@ -4,7 +4,7 @@ This directory contains the public cryptographic signing key material for the of
 
 ## Canonical Key Information
 
-- **Key ID / Fingerprint**: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`
+- **Key ID / Fingerprint**: `5F84FE50A40111C981410E11775AD1473BF25102`
 - **Key Algorithm**: RSA 4096-bit (`[SC]` signing and cert, `[E]` encrypt subkey)
 - **User ID**: `M3tal-Creates <jakej985@gmail.com>`
 - **Creation Date**: 2026-05-15

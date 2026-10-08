@@ -27,9 +27,9 @@ The repository is certified and signed with the official M3tal master repository
 | Parameter | Specification Value |
 | :--- | :--- |
 | **User ID (UID)** | `M3tal-Creates <jakej985@gmail.com>` |
-| **Primary Key ID** | `ED1DAE1980AD1550` |
-| **Full Primary Fingerprint** | `9DFE D0A1 9DF5 3512 98FE  812A ED1D AE19 80AD 1550` |
-| **Normalized Fingerprint** | `9DFED0A19DF5351298FE812AED1DAE1980AD1550` |
+| **Primary Key ID** | `775AD1473BF25102` |
+| **Full Primary Fingerprint** | `5F84 FE50 A401 11C9 8141  0E11 775A D147 3BF2 5102` |
+| **Normalized Fingerprint** | `5F84FE50A40111C981410E11775AD1473BF25102` |
 | **Key Type & Size** | RSA 4096-bit |
 | **Usage Capabilities** | `[SC]` (Sign, Certify) |
 | **Creation Date** | `2026-05-15` |
@@ -47,7 +47,7 @@ gpg --show-keys --with-colons /etc/apt/keyrings/m3tal-archive-keyring.gpg | grep
 ```
 Expected output:
 ```text
-9DFED0A19DF5351298FE812AED1DAE1980AD1550
+5F84FE50A40111C981410E11775AD1473BF25102
 ```
 
 ---
@@ -96,7 +96,7 @@ set -e
 
 KEYRING_DIR="/etc/apt/keyrings"
 KEYRING_FILE="${KEYRING_DIR}/m3tal-archive-keyring.gpg"
-EXPECTED_FPR="9DFED0A19DF5351298FE812AED1DAE1980AD1550"
+EXPECTED_FPR="5F84FE50A40111C981410E11775AD1473BF25102"
 
 # 1. Ensure prerequisites and keyrings directory exist
 sudo mkdir -p -m 0755 "$KEYRING_DIR"
@@ -151,7 +151,7 @@ The security of the repository relies on strictly maintaining the secret boundar
 
 A repository deployment satisfies Phase 2 trust criteria when:
 - [x] Canonical binary keyring `m3tal-archive-keyring.gpg` is deployed and readable at root.
-- [x] Keyring contains exactly the public key with fingerprint `9DFED0A19DF5351298FE812AED1DAE1980AD1550`.
+- [x] Keyring contains exactly the public key with fingerprint `5F84FE50A40111C981410E11775AD1473BF25102`.
 - [x] Both `dists/stable/InRelease` and `dists/stable/Release.gpg` verify cleanly against the keyring.
 - [x] Clean systems installing via `/etc/apt/keyrings/m3tal-archive-keyring.gpg` experience zero APT warnings or errors.
 - [x] Zero private key material exists in the repository.

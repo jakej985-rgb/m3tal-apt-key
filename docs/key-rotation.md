@@ -22,8 +22,8 @@ Cryptographic keys must have a defined lifecycle to maintain long-term repositor
 
 - **Trust Owner**: Jake Johnson (`jake@m3tal.io`)
 - **Key Identity**: `M3tal-Creates <jakej985@gmail.com>`
-- **Current Primary Key ID**: `ED1DAE1980AD1550`
-- **Current Primary Fingerprint**: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`
+- **Current Primary Key ID**: `775AD1473BF25102`
+- **Current Primary Fingerprint**: `5F84FE50A40111C981410E11775AD1473BF25102`
 - **Creation Date**: May 15, 2026
 - **Scheduled Expiration Review**: May 2028 (2-year rotation review cycle)
 
@@ -108,10 +108,10 @@ If the private signing key is compromised or suspected compromised, immediate ac
 
 ### Phase B: Publish Revocation Certificate (Hour 1 - 2)
 
-Import and publish the pre-generated revocation certificate for key `9DFED0A19DF5351298FE812AED1DAE1980AD1550`:
+Import and publish the pre-generated revocation certificate for key `5F84FE50A40111C981410E11775AD1473BF25102`:
 
 ```bash
-gpg --homedir /tmp/secure_gpg --import revocation-9DFED0A19DF5351298FE812AED1DAE1980AD1550.asc
+gpg --homedir /tmp/secure_gpg --import revocation-5F84FE50A40111C981410E11775AD1473BF25102.asc
 gpg --homedir /tmp/secure_gpg --armor --export-clean > revoked-key.asc
 ```
 
