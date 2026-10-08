@@ -6,7 +6,7 @@
 > **Target Architecture**: `amd64` (`x86_64`)  
 > **Keyring Location**: `/etc/apt/keyrings/m3tal-archive-keyring.gpg`  
 > **Source Definition**: `/etc/apt/sources.list.d/m3tal.list`  
-> **Official Key Fingerprint**: `B95A45C647577DEBCC877C49AF6190B0C01346DD`
+> **Official Key Fingerprint**: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`
 
 ---
 
@@ -47,7 +47,7 @@ The bootstrap installer script (`install.sh`) implements a hardened, idempotent 
  4. Secure Key Fetch    ──► Retrieves ASCII armored public key to private temporary directory
        │
        ▼
- 5. Cryptographic Check ──► Verifies key fingerprint against B95A45C647577DEBCC877C49AF6190B0C01346DD
+ 5. Cryptographic Check ──► Verifies key fingerprint against 9DFED0A19DF5351298FE812AED1DAE1980AD1550
        │                    (Aborts immediately on any mismatch)
        ▼
  6. Dearmor & Keyring   ──► Dearmors OpenPGP key and installs to /etc/apt/keyrings/m3tal-archive-keyring.gpg
@@ -98,7 +98,7 @@ sudo ./install.sh --uninstall
 
 ```text
 pub   rsa4096 2026-05-15 [SC]
-      B95A45C647577DEBCC877C49AF6190B0C01346DD
+      9DFED0A19DF5351298FE812AED1DAE1980AD1550
 uid   M3tal-Creates <jakej985@gmail.com>
 sub   rsa4096 2026-05-15 [E]
 ```
@@ -131,7 +131,7 @@ sudo install -d -m 0755 /etc/apt/keyrings
 curl -fsSL https://jakej985-rgb.github.io/m3tal-apt-key/public.key -o /tmp/m3tal.key
 
 # Verify fingerprint
-gpg --show-keys /tmp/m3tal.key | grep -q "B95A45C647577DEBCC877C49AF6190B0C01346DD" || {
+gpg --show-keys /tmp/m3tal.key | grep -q "9DFED0A19DF5351298FE812AED1DAE1980AD1550" || {
     echo "ERROR: Untrusted key fingerprint!" >&2
     exit 1
 }

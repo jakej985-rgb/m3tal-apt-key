@@ -95,7 +95,7 @@ The M3tal APT repository implements a clean physical filesystem layout adhering 
 - Public keys are organized cleanly in `keys/`.
 - `keys/m3tal-archive-keyring.gpg`: Standard binary de-armored format suitable for direct installation into `/etc/apt/keyrings/m3tal-archive-keyring.gpg`.
 - `keys/m3tal-archive-keyring.asc`: Human-readable ASCII-armored format.
-- Fingerprint: `B95A45C647577DEBCC877C49AF6190B0C01346DD`.
+- Fingerprint: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`.
 - Root `public.key` and `KEY.gpg` are kept for backward compatibility with existing external deployment scripts.
 
 ### 2.4 Ecosystem Registry (`registry/`)

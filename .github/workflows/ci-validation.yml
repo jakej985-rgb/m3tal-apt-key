@@ -53,7 +53,7 @@ jobs:
 
       - name: Inspect Latest Debian Package
         run: |
-          LATEST_DEB=$(ls -1 pool/main/*.deb | sort -V | tail -n 1)
+          LATEST_DEB=$(find pool/main -name "*.deb" | sort -V | tail -n 1)
           echo "Inspecting latest package artifact: ${LATEST_DEB}"
           dpkg-deb -I "${LATEST_DEB}"
           

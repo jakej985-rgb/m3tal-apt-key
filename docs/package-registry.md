@@ -40,7 +40,7 @@ repository:
     - "amd64"
     - "arm64"
   keyring:
-    fingerprint: "B95A45C647577DEBCC877C49AF6190B0C01346DD"
+    fingerprint: "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
     path: "/etc/apt/keyrings/m3tal-archive-keyring.gpg"
 ```
 

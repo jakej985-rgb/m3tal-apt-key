@@ -24,7 +24,7 @@ MAIN_BIN_DIR = os.path.join(DIST_DIR, "main", "binary-amd64")
 POOL_DIR = os.path.join(REPO_ROOT, "pool", "main")
 LATEST_DEB = os.path.join(POOL_DIR, "m3tal_v1.1.62_amd64.deb")
 
-EXPECTED_FINGERPRINT = "B95A45C647577DEBCC877C49AF6190B0C01346DD"
+EXPECTED_FINGERPRINT = "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
 EXPECTED_PACKAGE_COUNT = 124
 EXPECTED_PACKAGE_NAME = "m3tal"
 
@@ -279,7 +279,7 @@ def verify_multi_distro_apt():
             f"'"
         )
         res = subprocess.run(cmd_key_gpg_fail, shell=True, capture_output=True, text=True)
-        assert res.returncode != 0 and "NO_PUBKEY AF6190B0C01346DD" in res.stderr, (
+        assert res.returncode != 0 and "NO_PUBKEY ED1DAE1980AD1550" in res.stderr, (
             "Expected KEY.gpg to fail with NO_PUBKEY due to ASCII armor in .gpg file format"
         )
         print("    [OK] Confirmed KEY.gpg defect: ASCII armored key with .gpg extension fails APT verification on Debian 12 & Ubuntu 24.04.")

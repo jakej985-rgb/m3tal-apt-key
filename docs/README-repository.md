@@ -2,7 +2,7 @@
 
 [![Platform: Debian / Ubuntu](https://img.shields.io/badge/platform-Debian%20%7C%20Ubuntu%20%7C%20Mint-blue.svg)](https://jakej985-rgb.github.io/m3tal-apt-key)
 [![Architecture: amd64](https://img.shields.io/badge/arch-amd64-green.svg)](https://jakej985-rgb.github.io/m3tal-apt-key)
-[![GPG Key: AF6190B0C01346DD](https://img.shields.io/badge/GPG-AF6190B0C01346DD-orange.svg)](https://jakej985-rgb.github.io/m3tal-apt-key/public.key)
+[![GPG Key: ED1DAE1980AD1550](https://img.shields.io/badge/GPG-ED1DAE1980AD1550-orange.svg)](https://jakej985-rgb.github.io/m3tal-apt-key/public.key)
 [![Status: Production Stable](https://img.shields.io/badge/status-production%20stable-brightgreen.svg)](https://jakej985-rgb.github.io/m3tal-apt-key)
 
 The official Debian and Ubuntu APT package repository for the **M3tal** platform and applications. This repository provides signed, cryptographically verified Debian packages (`.deb`) distributed via GitHub Pages and consumed by standard APT package managers (`apt`, `apt-get`, `nala`, `aptitude`).
@@ -18,7 +18,7 @@ The official Debian and Ubuntu APT package repository for the **M3tal** platform
 | **Component** | `main` | Primary package distribution component |
 | **Target Architecture** | `amd64` | 64-bit x86 architecture exclusively |
 | **Distribution Endpoint** | `https://jakej985-rgb.github.io/m3tal-apt-key` | Static HTTPS CDN via GitHub Pages |
-| **GPG Fingerprint** | `B95A 45C6 4757 7DEB CC87 7C49 AF61 90B0 C013 46DD` | RSA 4096-bit repository signing key |
+| **GPG Fingerprint** | `9DFE D0A1 9DF5 3512 98FE 812A ED1D AE19 80AD 1550` | RSA 4096-bit repository signing key |
 | **Target Platforms** | Debian 11+, Ubuntu 20.04+, Linux Mint 20+ | Fully compatible with modern `keyrings` standards |
 
 ---
@@ -69,7 +69,7 @@ gpg --dry-run --show-keys /etc/apt/keyrings/m3tal-archive-keyring.gpg
 Expected output:
 ```text
 pub   rsa4096 2026-05-15 [SC]
-      B95A 45C6 4757 7DEB CC87  7C49 AF61 90B0 C013 46DD
+      9DFE D0A1 9DF5 3512 98FE  812A ED1D AE19 80AD 1550
 uid           M3tal-Creates <jakej985@gmail.com>
 sub   rsa4096 2026-05-15 [E]
 ```
@@ -178,7 +178,7 @@ Detailed engineering and operational manuals are available in the [`docs/`](docs
 
 ## 🔧 Troubleshooting
 
-### 1. `GPG error: ... The following signatures couldn't be verified because the public key is not available: NO_PUBKEY AF6190B0C01346DD`
+### 1. `GPG error: ... The following signatures couldn't be verified because the public key is not available: NO_PUBKEY ED1DAE1980AD1550`
 **Cause**: The public key was not imported into the keyring referenced by `signed-by=`, or the path in `/etc/apt/sources.list.d/m3tal.list` does not match the file on disk.  
 **Fix**:
 ```bash

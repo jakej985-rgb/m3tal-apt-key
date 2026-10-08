@@ -2,10 +2,10 @@ Origin: M3TAL
 Label: M3TAL
 Suite: stable
 Codename: stable
-Date: Thu, 08 Oct 2026 05:24:57 +0000
+Date: Thu, 08 Oct 2026 05:53:58 +0000
 Architectures: amd64
 Components: main
-Description: M3TAL Central Ecosystem APT Repository
+Description: M3TAL Core Repository
 MD5Sum:
  6646cc759fff91662b02e7affcc3b15b            87280 main/binary-amd64/Packages
  42526dd897adeb69c5c5fa1983b7c286            22973 main/binary-amd64/Packages.gz

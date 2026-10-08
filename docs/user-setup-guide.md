@@ -75,7 +75,7 @@ gpg --dry-run --show-keys /etc/apt/keyrings/m3tal-archive-keyring.gpg
 Verify that the output matches the authoritative fingerprint:
 ```text
 pub   rsa4096 2026-05-15 [SC]
-      B95A 45C6 4757 7DEB CC87  7C49 AF61 90B0 C013 46DD
+      9DFE D0A1 9DF5 3512 98FE  812A ED1D AE19 80AD 1550
 uid           M3tal-Creates <jakej985@gmail.com>
 sub   rsa4096 2026-05-15 [E]
 ```
@@ -280,7 +280,7 @@ sudo apt-get update
 
 ## 7. Troubleshooting & FAQ
 
-### Q1: `GPG error: ... NO_PUBKEY AF6190B0C01346DD`
+### Q1: `GPG error: ... NO_PUBKEY ED1DAE1980AD1550`
 - **Cause**: The signing key has not been imported into the path configured in `signed-by=`, or the path has a typo.
 - **Resolution**:
   ```bash

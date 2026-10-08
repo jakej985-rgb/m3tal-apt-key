@@ -32,7 +32,7 @@ from publish_package import AptPublisher
 from validate_package import validate_debian_package, extract_control_from_deb
 from deb_version import compare_debian_versions
 
-DEFAULT_KEY_FINGERPRINT = "B95A45C647577DEBCC877C49AF6190B0C01346DD"
+DEFAULT_KEY_FINGERPRINT = "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
 REGISTRY_PATH = os.path.join(REPO_ROOT, "registry", "packages.yml")
 
 
@@ -262,6 +262,12 @@ def main():
     update_reg = not args.no_registry_update
 
     passphrase = args.passphrase or os.environ.get("APT_GPG_PASSPHRASE") or os.environ.get("GPG_PASSPHRASE")
+    if not passphrase and os.path.exists(os.path.expanduser("~/.config/m3tal/apt_gpg_passphrase")):
+        try:
+            with open(os.path.expanduser("~/.config/m3tal/apt_gpg_passphrase"), "r") as pf:
+                passphrase = pf.read().strip()
+        except Exception:
+            pass
 
     common_kwargs = {
         "repo_dir": args.repo_dir,

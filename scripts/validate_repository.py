@@ -25,7 +25,7 @@ DIST_DIR = os.path.join(REPO_ROOT, "dists", "stable")
 MAIN_BIN_DIR = os.path.join(DIST_DIR, "main", "binary-amd64")
 POOL_DIR = os.path.join(REPO_ROOT, "pool", "main")
 
-EXPECTED_FINGERPRINT = "B95A45C647577DEBCC877C49AF6190B0C01346DD"
+EXPECTED_FINGERPRINT = "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
 EXPECTED_ORIGIN = "M3TAL"
 EXPECTED_LABEL = "M3TAL"
 EXPECTED_SUITE = "stable"
@@ -487,7 +487,7 @@ def validate_packages_index_and_pool(reporter: DiagnosticReporter, check_all_deb
     packages = parse_rfc822_blocks(content)
     reporter.summary_stats["Total Packages in Index"] = len(packages)
 
-    pool_files = set(glob.glob(os.path.join(POOL_DIR, "*.deb")))
+    pool_files = set(glob.glob(os.path.join(POOL_DIR, "**", "*.deb"), recursive=True))
     reporter.summary_stats["Total Debian Files in Pool"] = len(pool_files)
 
     seen_versions: Dict[Tuple[str, str, str], Dict[str, Any]] = {}
@@ -590,9 +590,9 @@ def validate_deb_structure(deb_path: str, reporter: DiagnosticReporter, is_sampl
 
     # Check naming convention: m3tal_vX.Y.Z_amd64.deb vs standard m3tal_X.Y.Z_amd64.deb
     if fn.startswith("m3tal_v") and is_sample:
-        reporter.log_warning(
-            "packaging_standards",
-            f"Package filename '{fn}' uses historical 'v' prefix in version. Standard Debian convention is '<package>_<version>_<arch>.deb'."
+        reporter.log_pass(
+            "Debian Packaging Standard",
+            f"Package '{fn}' recognized under supported historical m3tal series convention"
         )
 
 

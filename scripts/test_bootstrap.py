@@ -19,7 +19,7 @@ import subprocess
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INSTALL_SCRIPT = os.path.join(REPO_ROOT, "install.sh")
 PUBLIC_KEY = os.path.join(REPO_ROOT, "public.key")
-EXPECTED_FINGERPRINT = "B95A45C647577DEBCC877C49AF6190B0C01346DD"
+EXPECTED_FINGERPRINT = "9DFED0A19DF5351298FE812AED1DAE1980AD1550"
 
 def run(cmd, check=True, capture=True):
     return subprocess.run(

@@ -3,7 +3,7 @@
 > **Architecture Role**: Authoritative Central Debian Repository & Package Keyring for the M3tal Ecosystem  
 > **Repository Base URL**: `https://jakej985-rgb.github.io/m3tal-apt-key`  
 > **Keyring Identifier**: `m3tal-archive-keyring.gpg`  
-> **GPG Key ID / Fingerprint**: `B95A45C647577DEBCC877C49AF6190B0C01346DD`  
+> **GPG Key ID / Fingerprint**: `9DFED0A19DF5351298FE812AED1DAE1980AD1550`  
 > **UID**: `M3tal-Creates <jakej985@gmail.com>`  
 
 ---
@@ -69,7 +69,7 @@ All ecosystem applications must adhere to the central keyring specification:
 | **Keyring Name** | `m3tal-archive-keyring.gpg` | `/etc/apt/keyrings/m3tal-archive-keyring.gpg` |
 | **Legacy Fallback**| `m3tal-archive-keyring.gpg` | `/usr/share/keyrings/m3tal-archive-keyring.gpg` |
 | **Armored Key** | `public.key`, `KEY.gpg` | `https://jakej985-rgb.github.io/m3tal-apt-key/public.key` |
-| **Primary Fingerprint** | `B95A45C647577DEBCC877C49AF6190B0C01346DD` | RSA 4096-bit |
+| **Primary Fingerprint** | `9DFED0A19DF5351298FE812AED1DAE1980AD1550` | RSA 4096-bit |
 | **APT Source Entry** | `m3tal.list` | `/etc/apt/sources.list.d/m3tal.list` |
 | **APT Line Syntax** | `deb [signed-by=/etc/apt/keyrings/m3tal-archive-keyring.gpg] https://jakej985-rgb.github.io/m3tal-apt-key stable main` | Modern Deb822 / signed-by standard |
 

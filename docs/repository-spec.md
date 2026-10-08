@@ -313,5 +313,5 @@ When a new M3tal project (e.g. `m3tal-godash`, `m3tal-plugin-page`) prepares to 
 - [ ] **Conffiles**: Any user-editable files under `/etc/` are declared in `debian/conffiles`.
 - [ ] **System Services**: Any systemd units follow idempotent reload/enable rules.
 - [ ] **GLIBC Baseline**: Binaries compiled against GLIBC $\le$ 2.31 for universal compatibility.
-- [ ] **Release Signing**: Release metadata signed using the canonical M3tal GPG key (`B95A45C647577DEBCC877C49AF6190B0C01346DD`).
+- [ ] **Release Signing**: Release metadata signed using the canonical M3tal GPG key (`9DFED0A19DF5351298FE812AED1DAE1980AD1550`).
 - [ ] **Automated CI**: Build and publishing integrated into repository automation.

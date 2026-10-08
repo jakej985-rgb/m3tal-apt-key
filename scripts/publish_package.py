@@ -447,9 +447,17 @@ def main():
     parser.add_argument("--valid-until-days", type=int, default=None, help="Optional Valid-Until duration in days for Release metadata")
 
     # GPG Signing flags
+    default_pass = os.environ.get("APT_GPG_PASSPHRASE") or os.environ.get("GPG_PASSPHRASE")
+    if not default_pass and os.path.exists(os.path.expanduser("~/.config/m3tal/apt_gpg_passphrase")):
+        try:
+            with open(os.path.expanduser("~/.config/m3tal/apt_gpg_passphrase"), "r") as pf:
+                default_pass = pf.read().strip()
+        except Exception:
+            pass
+
     parser.add_argument("--sign", action="store_true", help="GPG sign Release (InRelease and Release.gpg)")
-    parser.add_argument("--key-id", help="GPG key ID or fingerprint to sign with")
-    parser.add_argument("--passphrase", help="GPG key passphrase")
+    parser.add_argument("--key-id", default=os.environ.get("APT_GPG_KEY_ID") or os.environ.get("GPG_KEY_ID") or "9DFED0A19DF5351298FE812AED1DAE1980AD1550", help="GPG key ID or fingerprint to sign with")
+    parser.add_argument("--passphrase", default=default_pass, help="GPG key passphrase")
     parser.add_argument("--gnupghome", help="Custom GPG home directory")
 
     args = parser.parse_args()

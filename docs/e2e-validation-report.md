@@ -24,7 +24,7 @@ All 13 steps passed successfully. Cryptographic integrity, package resolution, v
 | **Architecture** | `amd64` (x86_64) |
 | **Host System** | Linux Mint 22.3 (Ubuntu Noble 24.04 kernel 6.8.0) |
 | **Transport Layer** | HTTP Server (`127.0.0.1:9678`) serving local repository root |
-| **Master Key Fingerprint** | `B95A 45C6 4757 7DEB CC87 7C49 AF61 90B0 C013 46DD` |
+| **Master Key Fingerprint** | `9DFE D0A1 9DF5 3512 98FE 812A ED1D AE19 80AD 1550` |
 | **Tested Package Candidate** | `m3tal` version `1.1.62` |
 | **Tested Historical Release** | `m3tal` version `1.1.0` |
 
@@ -45,7 +45,7 @@ All 13 steps passed successfully. Cryptographic integrity, package resolution, v
 
 ### Step 3: M3tal Keyring Cryptographic Audit
 - Audited keyring with `gpg --show-keys --with-colons`.
-- Verified primary key fingerprint matches `B95A45C647577DEBCC877C49AF6190B0C01346DD` exactly.
+- Verified primary key fingerprint matches `9DFED0A19DF5351298FE812AED1DAE1980AD1550` exactly.
 - Status: **PASSED**
 
 ### Step 4: APT Index Synchronization
@@ -96,7 +96,7 @@ All 13 steps passed successfully. Cryptographic integrity, package resolution, v
 - Located acquired `/var/lib/apt/lists/127.0.0.1:9678_dists_stable_InRelease`.
 - Executed GPG verification against `/etc/apt/keyrings/m3tal-archive-keyring.gpg`:
   - `Good signature from "M3tal-Creates <jakej985@gmail.com>"`
-  - Primary key fingerprint: `B95A 45C6 4757 7DEB CC87 7C49 AF61 90B0 C013 46DD`
+  - Primary key fingerprint: `9DFE D0A1 9DF5 3512 98FE 812A ED1D AE19 80AD 1550`
 - Verified Release checksums match byte-for-byte with Packages and Packages.gz SHA256 hashes.
 - Status: **PASSED**
 
