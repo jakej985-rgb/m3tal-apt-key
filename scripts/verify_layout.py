@@ -36,7 +36,6 @@ def verify_directory_tree():
         "scripts",
         "docs",
         "registry",
-        "plan",
     ]
     for d in required_dirs:
         p = os.path.join(REPO_ROOT, d)

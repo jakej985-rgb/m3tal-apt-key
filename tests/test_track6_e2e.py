@@ -21,12 +21,14 @@ class TestTrack6Documentation(unittest.TestCase):
 
     def test_deliverable_documents_exist(self):
         required_docs = [
-            "README-repository.md",
             "user-setup-guide.md",
             "maintenance-guide.md",
-            "developer-guide.md",
             "security-and-key-rotation.md",
-            "e2e-validation-report.md"
+            "central-keyring-architecture.md",
+            "app-deb-publishing-guide.md",
+            "package-registry.md",
+            "package-retention-policy.md",
+            "universal-bootstrap.md"
         ]
         for doc in required_docs:
             p = os.path.join(DOCS_DIR, doc)
@@ -34,7 +36,7 @@ class TestTrack6Documentation(unittest.TestCase):
             self.assertGreater(os.path.getsize(p), 1000, f"Document {doc} appears too small/empty")
 
     def test_fingerprint_in_docs(self):
-        for doc in ["user-setup-guide.md", "security-and-key-rotation.md", "README-repository.md"]:
+        for doc in ["user-setup-guide.md", "security-and-key-rotation.md", "central-keyring-architecture.md", "universal-bootstrap.md"]:
             p = os.path.join(DOCS_DIR, doc)
             with open(p, "r", encoding="utf-8") as f:
                 content = f.read().replace(" ", "")

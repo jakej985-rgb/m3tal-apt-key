@@ -49,10 +49,12 @@ python3 scripts/ingest_deb.py --url https://github.com/jakej985-rgb/Monster-Lab/
 
 ## 📚 Architecture & Documentation Index
 
+- **User Setup & Bootstrap Guide**: [`docs/user-setup-guide.md`](docs/user-setup-guide.md)
 - **Central Keyring Architecture**: [`docs/central-keyring-architecture.md`](docs/central-keyring-architecture.md)
 - **App Deb Publishing Guide**: [`docs/app-deb-publishing-guide.md`](docs/app-deb-publishing-guide.md)
-- **Application Installation Standard**: [`docs/12-app-installation-standard.md`](docs/12-app-installation-standard.md)
-- **Package Registry Manifest**: [`registry/packages.yml`](registry/packages.yml)
-- **Repository Operations & Maintenance Guide**: [`docs/maintenance-guide.md`](docs/maintenance-guide.md)
+- **Package Registry Specification**: [`docs/package-registry.md`](docs/package-registry.md)
+- **Package Retention Policy**: [`docs/package-retention-policy.md`](docs/package-retention-policy.md)
+- **Repository Operations & Maintenance**: [`docs/maintenance-guide.md`](docs/maintenance-guide.md)
 - **Security & Key Rotation Protocols**: [`docs/security-and-key-rotation.md`](docs/security-and-key-rotation.md)
-- **End-to-End Validation Report**: [`docs/e2e-validation-report.md`](docs/e2e-validation-report.md)
+- **Universal Bootstrap Technical Specification**: [`docs/universal-bootstrap.md`](docs/universal-bootstrap.md)
+
