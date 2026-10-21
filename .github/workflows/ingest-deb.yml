@@ -46,6 +46,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends gnupg curl dpkg-dev
+          python3 -m pip install --upgrade pip pyyaml
 
       - name: Configure GPG Signing Key
         id: gpg-setup
