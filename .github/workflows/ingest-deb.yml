@@ -90,6 +90,8 @@ jobs:
           echo "Ingesting package ${PKG_ID} version ${VER} from ${DEB_URL}"
 
       - name: Ingest Package into Repository Pool & Update Indices
+        env:
+          GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE || secrets.GPG_PASSPHRASE }}
         run: |
           EXTRA_FLAGS=""
           if [ "${{ steps.params.outputs.allow_replace }}" = "true" ]; then
