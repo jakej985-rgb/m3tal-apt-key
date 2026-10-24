@@ -534,3 +534,19 @@ SHA512: 9a85a9dee7570cbc12217198fb967f6040014516b9941f35c5bf73d91de57af3c93cc486
 Description: M3TAL official plugin for docker-monitor
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-docker-monitor
+Architecture: amd64
+Version: 0.2.0
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-docker-monitor/m3tal-plugin-docker-monitor_0.2.0_amd64.deb
+Size: 828196
+MD5sum: be2e23711b73dfad61c8fd510fd2b381
+SHA1: 4f0cdd14498078e22a18848f01de78c7fcb46450
+SHA256: 8ce4fca74058720ac7499e73609ae998d49d097a46832ce0f49805efd3e282cd
+SHA512: 574f8a72ae4975c6ebd9ef7084a2ab780113ea3216159684ddafad9dc990f9747981efcb3406cc17c5f23ac59b0d74d1a8f5f6de72e2a2f2080b1dd2aaa670d6
+Description: M3TAL official plugin for m3tal-docker
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
