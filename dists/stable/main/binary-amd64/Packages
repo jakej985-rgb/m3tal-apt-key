@@ -1036,6 +1036,22 @@ SHA512: 3ebb836b9664afb103547fc50ce65b927219f8822e9dd70526e2b9b30bc092a5f3716090
 Description: M3TAL official plugin for m3tal-mesh
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-mesh
+Architecture: amd64
+Version: 0.1.1
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.1.1_amd64.deb
+Size: 874830
+MD5sum: 2a016520d41f3c909f3fc68d2e5df5d4
+SHA1: 1525f35425372e6177d549fd8fbc8fc6c7355adf
+SHA256: e1677a009952c4c611bb13013dc4ec8db595c8a0fabdfc687417caa539ef839d
+SHA512: 51788c97109ee64d42fabd4d90c805ce8e75a102b8902ada47c499a662dd30074c98fb4f04239307f73681c785a1ba9814b0ecec639fe339d02cc50c76a2c1dc
+Description: M3TAL official plugin for m3tal-mesh
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
 Package: m3tal-plugin-mesh-cluster
 Architecture: amd64
 Version: 0.1.0
@@ -1049,6 +1065,24 @@ MD5sum: 56b0bfa96488ab0096700eade962e4dd
 SHA1: 48c9387a20c447173b2c969f2387c19f373facc3
 SHA256: d8f1316dce012e3952a9f55195b4a7dd41e3f2b8632d40fdb1a4ea2743a3c4e2
 SHA512: c2a5663cc3d71f2a70ec196f8fa40dae18a2914ce66272b6f33cac5105812ec7ddc2600cc781343ed9398716094b718b0f25405102194d1a81a46b790bfa7821
+Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
+ Personal Cloud & Fleet Federation Metapackage.
+ Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
+ headless telemetry broadcaster, making this machine a full peer node.
+
+Package: m3tal-plugin-mesh-cluster
+Architecture: amd64
+Version: 0.1.1
+Priority: optional
+Section: utils
+Maintainer: jakej985-rgb <jakej985@gmail.com>
+Depends: m3tal-plugin-mesh (>= 0.1.1), m3tal-plugin-mesh-node (>= 0.1.1)
+Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.1.1_amd64.deb
+Size: 926
+MD5sum: 92c9176395301a6d9144709ca4325ec6
+SHA1: 8c40c940e082d76e3540ab6407185f691994ac06
+SHA256: 22a2e9eb1f8bc469b5b51bc98f7af7e6f66021270c58e2c17d9cd2e896f9ff86
+SHA512: 0da2b6d8528e5a65881d42a3758b5e2c725375b422e548f280c3ee5ff5309f27f74ed430d6c9671b40517f6bc7c5c0bb023bc221da541c255fb8cdbe49640a87
 Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
  Personal Cloud & Fleet Federation Metapackage.
  Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
