@@ -13,6 +13,9 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
+
+import manage_retention
 
 from manage_retention import (
     VersionKey,
@@ -71,6 +74,39 @@ class TestRetentionPolicyLogic(unittest.TestCase):
 
 
 class TestMockRepositoryPruning(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.original_gnupghome = os.environ.get("GNUPGHOME")
+        cls.original_key_id = os.environ.get("APT_GPG_KEY_ID")
+        cls.gnupghome = tempfile.mkdtemp(prefix="m3tal-retention-gpg-")
+        subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--batch", "--passphrase", "", "--quick-generate-key",
+             "M3tal Retention Test <retention-test@m3tal.invalid>", "rsa2048", "sign", "0"],
+            check=True,
+            capture_output=True,
+        )
+        keys = subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--with-colons", "--list-secret-keys"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        cls.test_fingerprint = next(line.split(":")[9] for line in keys.splitlines() if line.startswith("fpr:"))
+        os.environ["GNUPGHOME"] = cls.gnupghome
+        os.environ["APT_GPG_KEY_ID"] = cls.test_fingerprint
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.original_gnupghome is None:
+            os.environ.pop("GNUPGHOME", None)
+        else:
+            os.environ["GNUPGHOME"] = cls.original_gnupghome
+        if cls.original_key_id is None:
+            os.environ.pop("APT_GPG_KEY_ID", None)
+        else:
+            os.environ["APT_GPG_KEY_ID"] = cls.original_key_id
+        shutil.rmtree(cls.gnupghome, ignore_errors=True)
+
     def setUp(self):
         self.test_dir = tempfile.mkdtemp(prefix="m3tal_retention_test_")
         self.dist_dir = os.path.join(self.test_dir, "dists", "stable")
@@ -221,7 +257,35 @@ class TestMockRepositoryPruning(unittest.TestCase):
             real_sha256 = hashlib.sha256(f.read()).hexdigest()
         with open(os.path.join(self.dist_dir, "Release"), "r", encoding="utf-8") as f:
             rel_content = f.read()
+
+        inrelease = os.path.join(self.dist_dir, "InRelease")
+        release_gpg = os.path.join(self.dist_dir, "Release.gpg")
+        self.assertTrue(os.path.isfile(inrelease))
+        self.assertTrue(os.path.isfile(release_gpg))
+        subprocess.run(["gpg", "--homedir", self.gnupghome, "--verify", inrelease], check=True, capture_output=True)
+        subprocess.run(["gpg", "--homedir", self.gnupghome, "--verify", release_gpg, os.path.join(self.dist_dir, "Release")], check=True, capture_output=True)
         self.assertIn(real_sha256, rel_content)
+
+    def test_signing_failure_restores_removed_packages_and_old_indexes(self):
+        policy = {
+            "keep_recent_per_series": 2,
+            "min_retained_packages": 2,
+            "pinned_versions": ["1.0.0", "1.1.0"],
+            "deprecation": {"archive_obsolete": False},
+        }
+        packages_path = os.path.join(self.bin_dir, "Packages")
+        with open(packages_path, "rb") as f:
+            original_packages = f.read()
+        pruned_path = os.path.join(self.pool_dir, "m3tal_v1.0.1_amd64.deb")
+
+        with patch.object(manage_retention, "regenerate_repository_indexes", side_effect=RuntimeError("sign failed")):
+            with self.assertRaisesRegex(RuntimeError, "sign failed"):
+                execute_prune(self.test_dir, policy, dry_run=False)
+
+        self.assertTrue(os.path.isfile(pruned_path))
+        with open(packages_path, "rb") as f:
+            self.assertEqual(f.read(), original_packages)
+        self.assertFalse(any(name.startswith(".retention-quarantine-") for name in os.listdir(self.test_dir)))
 
 
 if __name__ == "__main__":
