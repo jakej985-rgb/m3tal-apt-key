@@ -39,6 +39,45 @@ jobs:
           name: validation-report
           path: validation-report.json
 
+  deploy-pages:
+    name: Deploy validated repository snapshot
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [validate-repository, lintian-checks, clean-install-matrix, bootstrap-installer-test]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: apt-repository-publishing
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout validated commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure this is still the latest main commit
+        run: |
+          git fetch origin main
+          test "$(git rev-parse FETCH_HEAD)" = "$GITHUB_SHA" || {
+            echo "::error ::Refusing to deploy stale commit $GITHUB_SHA; main has advanced."
+            exit 1
+          }
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact from validated commit
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify public repository after deployment
+        run: python3 scripts/verify_deployed_repository.py --base-url "${{ steps.deployment.outputs.page_url }}"
+
   lintian-checks:
     name: Debian Package Lintian Analysis
     runs-on: ubuntu-latest
