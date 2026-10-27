@@ -8,7 +8,6 @@ snapshot creation, safe pruning, and metadata index regeneration.
 import argparse
 import datetime
 import glob
-import gzip
 import hashlib
 import json
 import os
@@ -16,6 +15,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -322,84 +322,19 @@ def create_snapshot(repo_root: str = REPO_ROOT, snapshot_dir: Optional[str] = No
     return manifest_path
 
 
-def regenerate_repository_indexes(repo_root: str = REPO_ROOT, retained_items: List[Dict[str, Any]] = None):
-    """Regenerate Packages, Packages.gz, and dists/stable/Release checksums."""
-    print("--> [INDEX] Regenerating APT Packages and Packages.gz indexes...")
-    pkg_index_path = os.path.join(repo_root, "dists", "stable", "main", "binary-amd64", "Packages")
-    gz_index_path = os.path.join(repo_root, "dists", "stable", "main", "binary-amd64", "Packages.gz")
-    release_path = os.path.join(repo_root, "dists", "stable", "Release")
+def regenerate_repository_indexes(repo_root: str = REPO_ROOT):
+    """Regenerate and sign every index via the single authoritative publisher."""
+    from publish_package import AptPublisher
+    from ingest_deb import DEFAULT_KEY_FINGERPRINT
 
-    if retained_items is None:
-        inventory = build_inventory(repo_root)
-        retained_items = [i for i in inventory if i["status"] != "PRUNE_CANDIDATE"]
-
-    # Rebuild Packages content
-    blocks = []
-    for item in retained_items:
-        raw = item["raw_entry"]
-        # Format RFC 822 block
-        lines = []
-        for k, v in raw.items():
-            lines.append(f"{k}: {v}")
-        blocks.append("\n".join(lines))
-
-    new_packages_content = "\n\n".join(blocks) + "\n"
-
-    # Write Packages
-    with open(pkg_index_path, "w", encoding="utf-8") as f:
-        f.write(new_packages_content)
-
-    # Write Packages.gz
-    with gzip.open(gz_index_path, "wb") as f_gz:
-        f_gz.write(new_packages_content.encode("utf-8"))
-
-    # Compute new hashes
-    pkg_hashes = compute_file_hashes(pkg_index_path)
-    gz_hashes = compute_file_hashes(gz_index_path)
-
-    # Read existing Release
-    with open(release_path, "r", encoding="utf-8") as f:
-        rel_content = f.read()
-
-    # Update checksum tables in Release
-    lines = rel_content.splitlines()
-    new_lines = []
-    current_sec = None
-    table_files_seen = set()
-
-    for line in lines:
-        if line.endswith(":") and ("MD5" in line or "SHA" in line):
-            current_sec = line.strip(":").lower()
-            new_lines.append(line)
-            table_files_seen.clear()
-            continue
-
-        if current_sec and (line.startswith(" ") or line.startswith("\t")):
-            parts = line.strip().split()
-            if len(parts) == 3:
-                _, _, path = parts
-                alg = "md5" if "md5" in current_sec else current_sec.replace("sum", "")
-                if path == "main/binary-amd64/Packages":
-                    h = pkg_hashes[alg]
-                    sz = pkg_hashes["size"]
-                    new_lines.append(f" {h} {sz:>16} {path}")
-                    table_files_seen.add(path)
-                    continue
-                elif path == "main/binary-amd64/Packages.gz":
-                    h = gz_hashes[alg]
-                    sz = gz_hashes["size"]
-                    new_lines.append(f" {h} {sz:>16} {path}")
-                    table_files_seen.add(path)
-                    continue
-            new_lines.append(line)
-        else:
-            current_sec = None
-            new_lines.append(line)
-
-    with open(release_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(new_lines) + "\n")
-
-    print(f"--> [INDEX] Updated Packages ({pkg_hashes['size']} bytes) and Release checksums successfully.")
+    key_id = os.environ.get("APT_GPG_KEY_ID", DEFAULT_KEY_FINGERPRINT)
+    publisher = AptPublisher(repo_dir=repo_root, suite="stable", component="main", pool_style="structured")
+    result = publisher.generate_indexes(
+        gpg_key_id=key_id,
+        gpg_passphrase=os.environ.get("APT_GPG_PASSPHRASE") or os.environ.get("GPG_PASSPHRASE"),
+        sign=True,
+    )
+    print(f"--> [INDEX] Regenerated and signed metadata for {result['package_count']} packages.")
 
 
 def execute_prune(repo_root: str = REPO_ROOT, policy: Optional[Dict[str, Any]] = None, dry_run: bool = True) -> int:
@@ -429,24 +364,50 @@ def execute_prune(repo_root: str = REPO_ROOT, policy: Optional[Dict[str, Any]] =
     # 1. Snapshot first
     create_snapshot(repo_root)
 
-    # 2. Archive or delete obsolete debs
+    # Move candidates out of the pool only after preserving them in a rollback area.
     archive_enabled = policy.get("deprecation", {}).get("archive_obsolete", True)
     archive_dir = os.path.join(repo_root, policy.get("deprecation", {}).get("archive_directory", "archive/pool/main"))
-    if archive_enabled:
-        os.makedirs(archive_dir, exist_ok=True)
-
+    quarantine = tempfile.mkdtemp(prefix=".retention-quarantine-", dir=repo_root)
+    quarantined = []
+    archived = []
+    indexes_regenerated = False
     print(f"--> [EXECUTE] Removing {len(to_prune)} obsolete deb files from pool/main...")
-    for item in to_prune:
-        src = item["abs_path"]
-        if os.path.isfile(src):
-            if archive_enabled:
-                dst = os.path.join(archive_dir, os.path.basename(src))
-                shutil.move(src, dst)
-            else:
-                os.remove(src)
+    try:
+        for item in to_prune:
+            src = item["abs_path"]
+            if not os.path.isfile(src):
+                continue
+            held = os.path.join(quarantine, os.path.relpath(src, repo_root))
+            os.makedirs(os.path.dirname(held), exist_ok=True)
+            shutil.move(src, held)
+            quarantined.append((src, held))
 
-    # 3. Regenerate indexes
-    regenerate_repository_indexes(repo_root, retained_items=to_retain)
+        # The publisher scans the remaining pool and signs before replacing indexes.
+        regenerate_repository_indexes(repo_root)
+        indexes_regenerated = True
+
+        if archive_enabled:
+            os.makedirs(archive_dir, exist_ok=True)
+            for src, held in quarantined:
+                archived_path = os.path.join(archive_dir, os.path.basename(src))
+                shutil.move(held, archived_path)
+                archived.append((src, archived_path))
+        shutil.rmtree(quarantine, ignore_errors=True)
+    except Exception:
+        # Restore every removed package and regenerate the matching signed indexes.
+        for src, held in reversed(archived):
+            if os.path.exists(held):
+                os.makedirs(os.path.dirname(src), exist_ok=True)
+                shutil.move(held, src)
+        for src, held in reversed(quarantined):
+            if os.path.exists(held):
+                os.makedirs(os.path.dirname(src), exist_ok=True)
+                shutil.move(held, src)
+        shutil.rmtree(quarantine, ignore_errors=True)
+        if indexes_regenerated:
+            regenerate_repository_indexes(repo_root)
+        raise
+
     print("--> [EXECUTE] Package pruning and metadata regeneration finished.")
     return 0
 

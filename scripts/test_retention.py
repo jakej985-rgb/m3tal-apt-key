@@ -10,8 +10,12 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
+
+import manage_retention
 
 from manage_retention import (
     VersionKey,
@@ -70,6 +74,39 @@ class TestRetentionPolicyLogic(unittest.TestCase):
 
 
 class TestMockRepositoryPruning(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.original_gnupghome = os.environ.get("GNUPGHOME")
+        cls.original_key_id = os.environ.get("APT_GPG_KEY_ID")
+        cls.gnupghome = tempfile.mkdtemp(prefix="m3tal-retention-gpg-")
+        subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--batch", "--passphrase", "", "--quick-generate-key",
+             "M3tal Retention Test <retention-test@m3tal.invalid>", "rsa2048", "sign", "0"],
+            check=True,
+            capture_output=True,
+        )
+        keys = subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--with-colons", "--list-secret-keys"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        cls.test_fingerprint = next(line.split(":")[9] for line in keys.splitlines() if line.startswith("fpr:"))
+        os.environ["GNUPGHOME"] = cls.gnupghome
+        os.environ["APT_GPG_KEY_ID"] = cls.test_fingerprint
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.original_gnupghome is None:
+            os.environ.pop("GNUPGHOME", None)
+        else:
+            os.environ["GNUPGHOME"] = cls.original_gnupghome
+        if cls.original_key_id is None:
+            os.environ.pop("APT_GPG_KEY_ID", None)
+        else:
+            os.environ["APT_GPG_KEY_ID"] = cls.original_key_id
+        shutil.rmtree(cls.gnupghome, ignore_errors=True)
+
     def setUp(self):
         self.test_dir = tempfile.mkdtemp(prefix="m3tal_retention_test_")
         self.dist_dir = os.path.join(self.test_dir, "dists", "stable")
@@ -78,7 +115,8 @@ class TestMockRepositoryPruning(unittest.TestCase):
         os.makedirs(self.bin_dir, exist_ok=True)
         os.makedirs(self.pool_dir, exist_ok=True)
 
-        # Create dummy deb files and Packages index
+        # Create valid tiny deb files so the authoritative publisher can rebuild
+        # Packages from the pool rather than trusting stale index records.
         self.versions = [
             "1.0.0", "1.0.1", "1.0.2", "1.0.3",  # Series 1.0 (1.0.0 pinned, top 2 are 1.0.3, 1.0.2)
             "1.1.0", "1.1.1", "1.1.2", "1.1.3", "1.1.4"  # Series 1.1 (top 2 are 1.1.4, 1.1.3; 1.1.0 pinned)
@@ -88,11 +126,27 @@ class TestMockRepositoryPruning(unittest.TestCase):
         for ver in self.versions:
             deb_name = f"m3tal_v{ver}_amd64.deb"
             deb_path = os.path.join(self.pool_dir, deb_name)
-            with open(deb_path, "wb") as f:
-                f.write(f"dummy debian payload for {ver}".encode("utf-8"))
+            build_dir = tempfile.mkdtemp(prefix="deb-build-", dir=self.test_dir)
+            os.makedirs(os.path.join(build_dir, "DEBIAN"))
+            os.makedirs(os.path.join(build_dir, "usr", "share", "m3tal"))
+            control = (
+                "Package: m3tal\n"
+                f"Version: {ver}\n"
+                "Architecture: amd64\n"
+                "Maintainer: Test <test@m3tal.io>\n"
+                "Description: Test package\n"
+            )
+            with open(os.path.join(build_dir, "DEBIAN", "control"), "w", encoding="utf-8") as f:
+                f.write(control)
+            with open(os.path.join(build_dir, "usr", "share", "m3tal", "version"), "w", encoding="utf-8") as f:
+                f.write(ver + "\n")
+            subprocess.run(["dpkg-deb", "--build", build_dir, deb_path], check=True, capture_output=True)
+            shutil.rmtree(build_dir)
+            with open(deb_path, "rb") as f:
+                deb_bytes = f.read()
             sz = os.path.getsize(deb_path)
-            md5_h = hashlib.md5(f"dummy debian payload for {ver}".encode("utf-8")).hexdigest()
-            sha256_h = hashlib.sha256(f"dummy debian payload for {ver}".encode("utf-8")).hexdigest()
+            md5_h = hashlib.md5(deb_bytes).hexdigest()
+            sha256_h = hashlib.sha256(deb_bytes).hexdigest()
 
             entry = (
                 f"Package: m3tal\n"
@@ -203,7 +257,35 @@ class TestMockRepositoryPruning(unittest.TestCase):
             real_sha256 = hashlib.sha256(f.read()).hexdigest()
         with open(os.path.join(self.dist_dir, "Release"), "r", encoding="utf-8") as f:
             rel_content = f.read()
+
+        inrelease = os.path.join(self.dist_dir, "InRelease")
+        release_gpg = os.path.join(self.dist_dir, "Release.gpg")
+        self.assertTrue(os.path.isfile(inrelease))
+        self.assertTrue(os.path.isfile(release_gpg))
+        subprocess.run(["gpg", "--homedir", self.gnupghome, "--verify", inrelease], check=True, capture_output=True)
+        subprocess.run(["gpg", "--homedir", self.gnupghome, "--verify", release_gpg, os.path.join(self.dist_dir, "Release")], check=True, capture_output=True)
         self.assertIn(real_sha256, rel_content)
+
+    def test_signing_failure_restores_removed_packages_and_old_indexes(self):
+        policy = {
+            "keep_recent_per_series": 2,
+            "min_retained_packages": 2,
+            "pinned_versions": ["1.0.0", "1.1.0"],
+            "deprecation": {"archive_obsolete": False},
+        }
+        packages_path = os.path.join(self.bin_dir, "Packages")
+        with open(packages_path, "rb") as f:
+            original_packages = f.read()
+        pruned_path = os.path.join(self.pool_dir, "m3tal_v1.0.1_amd64.deb")
+
+        with patch.object(manage_retention, "regenerate_repository_indexes", side_effect=RuntimeError("sign failed")):
+            with self.assertRaisesRegex(RuntimeError, "sign failed"):
+                execute_prune(self.test_dir, policy, dry_run=False)
+
+        self.assertTrue(os.path.isfile(pruned_path))
+        with open(packages_path, "rb") as f:
+            self.assertEqual(f.read(), original_packages)
+        self.assertFalse(any(name.startswith(".retention-quarantine-") for name in os.listdir(self.test_dir)))
 
 
 if __name__ == "__main__":

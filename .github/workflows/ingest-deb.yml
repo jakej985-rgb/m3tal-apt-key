@@ -25,11 +25,14 @@ on:
 
 permissions:
   contents: write
+  statuses: write
 
 jobs:
   ingest-and-publish:
     name: Ingest and Sign Debian Package
     runs-on: ubuntu-latest
+    outputs:
+      commit_sha: ${{ steps.publish.outputs.commit_sha }}
     steps:
       - name: Checkout Central Repository
         uses: actions/checkout@v4
@@ -59,8 +62,8 @@ jobs:
             echo "$GPG_PRIVATE_KEY" | gpg --batch --import
             echo "has_key=true" >> $GITHUB_OUTPUT
           else
-            echo "::warning ::No GPG_PRIVATE_KEY secret configured. Indexes will be generated without GPG signature."
-            echo "has_key=false" >> $GITHUB_OUTPUT
+            echo "::error ::No GPG_PRIVATE_KEY secret configured; refusing unsigned publication."
+            exit 1
           fi
 
       - name: Resolve Ingestion Parameters
@@ -89,34 +92,57 @@ jobs:
           echo "allow_replace=${ALLOW_REPLACE}" >> $GITHUB_OUTPUT
           echo "Ingesting package ${PKG_ID} version ${VER} from ${DEB_URL}"
 
-      - name: Ingest Package into Repository Pool & Update Indices
+      - name: Ingest, validate, and push with conflict retries
+        id: publish
         env:
           GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE || secrets.GPG_PASSPHRASE }}
-        run: |
-          EXTRA_FLAGS=""
-          if [ "${{ steps.params.outputs.allow_replace }}" = "true" ]; then
-            EXTRA_FLAGS="--allow-replace"
-          fi
-          if [ "${{ steps.gpg-setup.outputs.has_key }}" = "false" ]; then
-            EXTRA_FLAGS="${EXTRA_FLAGS} --no-sign"
-          fi
-
-          python3 scripts/ingest_deb.py --url "${{ steps.params.outputs.deb_url }}" ${EXTRA_FLAGS}
-
-      - name: Validate Repository Integrity
-        run: |
-          python3 scripts/validate_repository.py --strict --skip-container-test
-
-      - name: Commit and Push Repository Updates
+          DEB_URL: ${{ steps.params.outputs.deb_url }}
+          PKG_ID: ${{ steps.params.outputs.pkg_id }}
+          PKG_VERSION: ${{ steps.params.outputs.version }}
+          ALLOW_REPLACE: ${{ steps.params.outputs.allow_replace }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pool/ dists/ registry/packages.yml
-          if git diff --staged --quiet; then
-            echo "No repository changes to commit."
-          else
-            PKG_NAME="${{ steps.params.outputs.pkg_id }}"
-            PKG_VER="${{ steps.params.outputs.version }}"
-            git commit -m "feat(repo): publish ${PKG_NAME} ${PKG_VER} to central repository [skip ci]"
-            git push origin main
-          fi
+          candidate="$RUNNER_TEMP/incoming-package.deb"
+          trap 'rm -f "$candidate"' EXIT
+          curl --fail --location --retry 3 "$DEB_URL" --output "$candidate"
+          PACKAGE=$(dpkg-deb -f "$candidate" Package)
+          VERSION=$(dpkg-deb -f "$candidate" Version)
+          ARCH=$(dpkg-deb -f "$candidate" Architecture)
+          target="pool/main/$PACKAGE/${PACKAGE}_${VERSION}_${ARCH}.deb"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            if [ -f "$target" ]; then
+              if cmp --silent "$candidate" "$target"; then
+                echo "Package already published byte-for-byte by another request."
+                echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+              if [ "$ALLOW_REPLACE" != "true" ]; then
+                echo "::error ::This package version already exists with different bytes."
+                exit 1
+              fi
+            fi
+            EXTRA_FLAGS=""
+            if [ "$ALLOW_REPLACE" = "true" ]; then EXTRA_FLAGS="--allow-replace"; fi
+            python3 scripts/ingest_deb.py "$candidate" $EXTRA_FLAGS
+            python3 scripts/validate_repository.py --strict --skip-container-test
+            git add pool/ dists/ registry/packages.yml
+            git commit -m "feat(repo): publish ${PKG_ID} ${PKG_VERSION} to central repository [skip ci]"
+            if git push origin HEAD:main; then
+              echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Push raced with another writer; retrying from latest main (attempt $attempt/5)."
+            sleep "$((attempt * 2))"
+          done
+          echo "::error ::Could not publish after five fresh-checkout attempts."
+          exit 1
+
+  validate-and-deploy:
+    needs: [ingest-and-publish]
+    uses: ./.github/workflows/ci-validation.yml
+    with:
+      ref: ${{ needs.ingest-and-publish.outputs.commit_sha }}
+    secrets: inherit

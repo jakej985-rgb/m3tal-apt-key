@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit SHA to validate before Pages reconciliation
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -17,6 +23,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,6 +35,9 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y gnupg
+
+      - name: Test public repository verifier
+        run: python3 scripts/test_verify_deployed_repository.py
 
       - name: Run Repository Integrity Validation
         run: |
@@ -39,12 +50,42 @@ jobs:
           name: validation-report
           path: validation-report.json
 
+  publish-validation-status:
+    name: Mark commit validated and request Pages reconciliation
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || inputs.ref != ''
+    needs: [validate-repository, lintian-checks, clean-install-matrix, bootstrap-installer-test]
+    permissions:
+      contents: write
+      statuses: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record successful validation and wake the Pages worker
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sha = "${{ inputs.ref || github.sha }}";
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha,
+              state: "success",
+              context: "apt-repository-validation",
+              description: "All repository publication checks passed for this commit"
+            });
+            await github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: "deploy-latest"
+            });
+
   lintian-checks:
     name: Debian Package Lintian Analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Install Lintian
         run: |
@@ -81,6 +122,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Test APT Installation in Clean ${{ matrix.os_name }} Container
         run: |
@@ -125,6 +168,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Test install.sh in Clean Container
         run: |
