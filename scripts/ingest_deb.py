@@ -89,7 +89,6 @@ def ingest_deb_file(
     allow_replace: bool = False,
     allow_downgrade: bool = False,
     skip_validation: bool = False,
-    sign: bool = True,
     key_id: Optional[str] = None,
     passphrase: Optional[str] = None,
     update_registry: bool = True,
@@ -118,9 +117,6 @@ def ingest_deb_file(
     pkg_arch = fields.get("Architecture", "unknown")
 
     print(f"--> Package Details: {pkg_name} {pkg_ver} ({pkg_arch})")
-
-    if not sign:
-        raise ValueError("Unsigned repository publication is disabled; signing is required.")
 
     signing_key = key_id or find_default_signing_key()
     if not signing_key:
