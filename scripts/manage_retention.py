@@ -323,83 +323,17 @@ def create_snapshot(repo_root: str = REPO_ROOT, snapshot_dir: Optional[str] = No
 
 
 def regenerate_repository_indexes(repo_root: str = REPO_ROOT, retained_items: List[Dict[str, Any]] = None):
-    """Regenerate Packages, Packages.gz, and dists/stable/Release checksums."""
-    print("--> [INDEX] Regenerating APT Packages and Packages.gz indexes...")
-    pkg_index_path = os.path.join(repo_root, "dists", "stable", "main", "binary-amd64", "Packages")
-    gz_index_path = os.path.join(repo_root, "dists", "stable", "main", "binary-amd64", "Packages.gz")
-    release_path = os.path.join(repo_root, "dists", "stable", "Release")
+    """Regenerate and sign every index via the single authoritative publisher."""
+    from publish_package import AptPublisher
 
-    if retained_items is None:
-        inventory = build_inventory(repo_root)
-        retained_items = [i for i in inventory if i["status"] != "PRUNE_CANDIDATE"]
-
-    # Rebuild Packages content
-    blocks = []
-    for item in retained_items:
-        raw = item["raw_entry"]
-        # Format RFC 822 block
-        lines = []
-        for k, v in raw.items():
-            lines.append(f"{k}: {v}")
-        blocks.append("\n".join(lines))
-
-    new_packages_content = "\n\n".join(blocks) + "\n"
-
-    # Write Packages
-    with open(pkg_index_path, "w", encoding="utf-8") as f:
-        f.write(new_packages_content)
-
-    # Write Packages.gz
-    with gzip.open(gz_index_path, "wb") as f_gz:
-        f_gz.write(new_packages_content.encode("utf-8"))
-
-    # Compute new hashes
-    pkg_hashes = compute_file_hashes(pkg_index_path)
-    gz_hashes = compute_file_hashes(gz_index_path)
-
-    # Read existing Release
-    with open(release_path, "r", encoding="utf-8") as f:
-        rel_content = f.read()
-
-    # Update checksum tables in Release
-    lines = rel_content.splitlines()
-    new_lines = []
-    current_sec = None
-    table_files_seen = set()
-
-    for line in lines:
-        if line.endswith(":") and ("MD5" in line or "SHA" in line):
-            current_sec = line.strip(":").lower()
-            new_lines.append(line)
-            table_files_seen.clear()
-            continue
-
-        if current_sec and (line.startswith(" ") or line.startswith("\t")):
-            parts = line.strip().split()
-            if len(parts) == 3:
-                _, _, path = parts
-                alg = "md5" if "md5" in current_sec else current_sec.replace("sum", "")
-                if path == "main/binary-amd64/Packages":
-                    h = pkg_hashes[alg]
-                    sz = pkg_hashes["size"]
-                    new_lines.append(f" {h} {sz:>16} {path}")
-                    table_files_seen.add(path)
-                    continue
-                elif path == "main/binary-amd64/Packages.gz":
-                    h = gz_hashes[alg]
-                    sz = gz_hashes["size"]
-                    new_lines.append(f" {h} {sz:>16} {path}")
-                    table_files_seen.add(path)
-                    continue
-            new_lines.append(line)
-        else:
-            current_sec = None
-            new_lines.append(line)
-
-    with open(release_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(new_lines) + "\n")
-
-    print(f"--> [INDEX] Updated Packages ({pkg_hashes['size']} bytes) and Release checksums successfully.")
+    key_id = os.environ.get("APT_GPG_KEY_ID", "5F84FE50A40111C981410E11775AD1473BF25102")
+    publisher = AptPublisher(repo_dir=repo_root, suite="stable", component="main", pool_style="structured")
+    result = publisher.generate_indexes(
+        gpg_key_id=key_id,
+        gpg_passphrase=os.environ.get("APT_GPG_PASSPHRASE") or os.environ.get("GPG_PASSPHRASE"),
+        sign=True,
+    )
+    print(f"--> [INDEX] Regenerated and signed metadata for {result['package_count']} packages.")
 
 
 def execute_prune(repo_root: str = REPO_ROOT, policy: Optional[Dict[str, Any]] = None, dry_run: bool = True) -> int:
