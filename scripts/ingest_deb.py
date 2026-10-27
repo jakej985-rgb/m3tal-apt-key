@@ -120,7 +120,7 @@ def ingest_deb_file(
 
     signing_key = key_id or find_default_signing_key()
     if not signing_key:
-        raise RuntimeError("Signing was requested but no GPG signing key is available; refusing to publish unsigned metadata.")
+        raise RuntimeError("No GPG signing key is available; refusing to publish unsigned metadata.")
 
     # 2. Stage into pool
     publisher = AptPublisher(
@@ -195,7 +195,6 @@ def ingest_deb_file(
         "version": pkg_ver,
         "architecture": pkg_arch,
         "staged_path": staged_path,
-        "signed": True,
     }
 
 
