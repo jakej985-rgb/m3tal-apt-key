@@ -8,7 +8,6 @@ snapshot creation, safe pruning, and metadata index regeneration.
 import argparse
 import datetime
 import glob
-import gzip
 import hashlib
 import json
 import os
@@ -322,11 +321,12 @@ def create_snapshot(repo_root: str = REPO_ROOT, snapshot_dir: Optional[str] = No
     return manifest_path
 
 
-def regenerate_repository_indexes(repo_root: str = REPO_ROOT, retained_items: List[Dict[str, Any]] = None):
+def regenerate_repository_indexes(repo_root: str = REPO_ROOT):
     """Regenerate and sign every index via the single authoritative publisher."""
     from publish_package import AptPublisher
+    from ingest_deb import DEFAULT_KEY_FINGERPRINT
 
-    key_id = os.environ.get("APT_GPG_KEY_ID", "5F84FE50A40111C981410E11775AD1473BF25102")
+    key_id = os.environ.get("APT_GPG_KEY_ID", DEFAULT_KEY_FINGERPRINT)
     publisher = AptPublisher(repo_dir=repo_root, suite="stable", component="main", pool_style="structured")
     result = publisher.generate_indexes(
         gpg_key_id=key_id,
@@ -363,24 +363,50 @@ def execute_prune(repo_root: str = REPO_ROOT, policy: Optional[Dict[str, Any]] =
     # 1. Snapshot first
     create_snapshot(repo_root)
 
-    # 2. Archive or delete obsolete debs
+    # Move candidates out of the pool only after preserving them in a rollback area.
     archive_enabled = policy.get("deprecation", {}).get("archive_obsolete", True)
     archive_dir = os.path.join(repo_root, policy.get("deprecation", {}).get("archive_directory", "archive/pool/main"))
-    if archive_enabled:
-        os.makedirs(archive_dir, exist_ok=True)
-
+    quarantine = tempfile.mkdtemp(prefix=".retention-quarantine-", dir=repo_root)
+    quarantined = []
+    archived = []
+    indexes_regenerated = False
     print(f"--> [EXECUTE] Removing {len(to_prune)} obsolete deb files from pool/main...")
-    for item in to_prune:
-        src = item["abs_path"]
-        if os.path.isfile(src):
-            if archive_enabled:
-                dst = os.path.join(archive_dir, os.path.basename(src))
-                shutil.move(src, dst)
-            else:
-                os.remove(src)
+    try:
+        for item in to_prune:
+            src = item["abs_path"]
+            if not os.path.isfile(src):
+                continue
+            held = os.path.join(quarantine, os.path.relpath(src, repo_root))
+            os.makedirs(os.path.dirname(held), exist_ok=True)
+            shutil.move(src, held)
+            quarantined.append((src, held))
 
-    # 3. Regenerate indexes
-    regenerate_repository_indexes(repo_root, retained_items=to_retain)
+        # The publisher scans the remaining pool and signs before replacing indexes.
+        regenerate_repository_indexes(repo_root)
+        indexes_regenerated = True
+
+        if archive_enabled:
+            os.makedirs(archive_dir, exist_ok=True)
+            for src, held in quarantined:
+                archived_path = os.path.join(archive_dir, os.path.basename(src))
+                shutil.move(held, archived_path)
+                archived.append((src, archived_path))
+        shutil.rmtree(quarantine, ignore_errors=True)
+    except Exception:
+        # Restore every removed package and regenerate the matching signed indexes.
+        for src, held in reversed(archived):
+            if os.path.exists(held):
+                os.makedirs(os.path.dirname(src), exist_ok=True)
+                shutil.move(held, src)
+        for src, held in reversed(quarantined):
+            if os.path.exists(held):
+                os.makedirs(os.path.dirname(src), exist_ok=True)
+                shutil.move(held, src)
+        shutil.rmtree(quarantine, ignore_errors=True)
+        if indexes_regenerated:
+            regenerate_repository_indexes(repo_root)
+        raise
+
     print("--> [EXECUTE] Package pruning and metadata regeneration finished.")
     return 0
 
