@@ -30,10 +30,6 @@ jobs:
   retention-audit-and-prune:
     name: Package Retention Engine
     runs-on: ubuntu-latest
-    concurrency:
-      # Keep every run alive; repository pushes use optimistic retries below.
-      group: apt-retention-${{ github.run_id }}
-      cancel-in-progress: false
     outputs:
       commit_sha: ${{ steps.prune.outputs.commit_sha }}
     steps:
