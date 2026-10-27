@@ -64,6 +64,36 @@ def build_mock_deb(output_path: str, pkg_name: str = "monster-lab", version: str
 
 
 class TestDebIngestion(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.original_gnupghome = os.environ.get("GNUPGHOME")
+        cls.gnupghome = tempfile.mkdtemp(prefix="m3tal-ingest-gpg-")
+        subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--batch", "--passphrase", "",
+             "--quick-generate-key", "M3tal Ingest Test <ingest-test@m3tal.invalid>",
+             "rsa2048", "sign", "0"],
+            check=True,
+            capture_output=True,
+        )
+        keys = subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--with-colons", "--list-secret-keys"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        cls.test_fingerprint = next(
+            line.split(":")[9] for line in keys.splitlines() if line.startswith("fpr:")
+        )
+        os.environ["GNUPGHOME"] = cls.gnupghome
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.original_gnupghome is None:
+            os.environ.pop("GNUPGHOME", None)
+        else:
+            os.environ["GNUPGHOME"] = cls.original_gnupghome
+        shutil.rmtree(cls.gnupghome, ignore_errors=True)
+
     def setUp(self):
         self.temp_dir = tempfile.mkdtemp(prefix="m3tal_test_ingest_")
         self.mock_repo = os.path.join(self.temp_dir, "repo")
@@ -99,7 +129,7 @@ class TestDebIngestion(unittest.TestCase):
         res = ingest_deb_file(
             deb_path=self.mock_deb,
             repo_dir=self.mock_repo,
-            sign=False,
+            key_id=self.test_fingerprint,
             update_registry=False,
         )
 
@@ -137,15 +167,15 @@ class TestDebIngestion(unittest.TestCase):
 
     def test_duplicate_rejection(self):
         # Ingest first time
-        ingest_deb_file(self.mock_deb, repo_dir=self.mock_repo, sign=False, update_registry=False)
+        ingest_deb_file(self.mock_deb, repo_dir=self.mock_repo, key_id=self.test_fingerprint, update_registry=False)
 
         # Ingest second time without allow_replace should fail
         with self.assertRaises(ValueError) as ctx:
-            ingest_deb_file(self.mock_deb, repo_dir=self.mock_repo, allow_replace=False, sign=False, update_registry=False)
+            ingest_deb_file(self.mock_deb, repo_dir=self.mock_repo, allow_replace=False, key_id=self.test_fingerprint, update_registry=False)
         self.assertIn("already exists", str(ctx.exception))
 
         # Ingest second time with allow_replace should succeed
-        res = ingest_deb_file(self.mock_deb, repo_dir=self.mock_repo, allow_replace=True, sign=False, update_registry=False)
+        res = ingest_deb_file(self.mock_deb, repo_dir=self.mock_repo, allow_replace=True, key_id=self.test_fingerprint, update_registry=False)
         self.assertEqual(res["version"], "0.1.4")
 
 
