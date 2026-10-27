@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Verify GitHub Pages serves the exact signed repository metadata in this checkout."""
+"""Verify that Pages serves this commit's signed APT metadata."""
 import argparse
+import gzip
 import hashlib
 import os
 import subprocess
@@ -8,6 +9,9 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
+
+from validate_repository import EXPECTED_FINGERPRINT
 
 
 FILES = (
@@ -17,12 +21,23 @@ FILES = (
     "dists/stable/main/binary-amd64/Packages",
     "dists/stable/main/binary-amd64/Packages.gz",
 )
+PACKAGES = "dists/stable/main/binary-amd64/Packages"
+PACKAGES_GZ = PACKAGES + ".gz"
 
 
 def fetch(url):
     request = urllib.request.Request(url, headers={"Cache-Control": "no-cache", "Pragma": "no-cache"})
     with urllib.request.urlopen(request, timeout=20) as response:
         return response.read()
+
+
+def verify_signature(gpg_home, *paths):
+    return subprocess.run(
+        ["gpg", "--batch", "--homedir", gpg_home, "--verify", *paths],
+        capture_output=True,
+        text=True,
+        timeout=20,
+    )
 
 
 def main():
@@ -32,14 +47,30 @@ def main():
     parser.add_argument("--delay", type=int, default=10)
     args = parser.parse_args()
     base = args.base_url.rstrip("/") + "/"
-    expected = {path: open(path, "rb").read() for path in FILES}
+    expected = {path: Path(path).read_bytes() for path in FILES}
     errors = []
 
-    with tempfile.TemporaryDirectory(prefix="apt-pages-check-") as temp:
-        keyring = os.path.join(temp, "keyring")
-        imported = subprocess.run(["gpg", "--batch", "--homedir", temp, "--import", "public.key"], capture_output=True)
+    with tempfile.TemporaryDirectory(prefix="apt-pages-check-") as gpg_home:
+        imported = subprocess.run(
+            ["gpg", "--batch", "--homedir", gpg_home, "--import", "public.key"],
+            capture_output=True,
+            text=True,
+            timeout=20,
+        )
         if imported.returncode:
-            raise SystemExit(f"Cannot import repository public key: {imported.stderr.decode(errors='replace')}")
+            raise SystemExit(f"Cannot import repository public key: {imported.stderr}")
+        listed = subprocess.run(
+            ["gpg", "--batch", "--homedir", gpg_home, "--with-colons", "--fingerprint", "--list-keys"],
+            capture_output=True,
+            text=True,
+            timeout=20,
+        )
+        fingerprints = [line.split(":")[9] for line in listed.stdout.splitlines() if line.startswith("fpr:")]
+        if EXPECTED_FINGERPRINT not in fingerprints:
+            raise SystemExit(
+                f"public.key fingerprint mismatch: expected {EXPECTED_FINGERPRINT}, found {fingerprints}"
+            )
+
         for attempt in range(1, args.attempts + 1):
             errors = []
             actual = {}
@@ -47,27 +78,34 @@ def main():
                 try:
                     actual[path] = fetch(base + path + "?verify=" + str(attempt))
                     if actual[path] != expected[path]:
-                        errors.append(f"{path}: deployed SHA256 {hashlib.sha256(actual[path]).hexdigest()} differs from commit SHA256 {hashlib.sha256(expected[path]).hexdigest()}")
-                except (OSError, urllib.error.URLError) as exc:
+                        errors.append(
+                            f"{path}: expected {len(expected[path])} bytes / "
+                            f"{hashlib.sha256(expected[path]).hexdigest()}, got {len(actual[path])} bytes / "
+                            f"{hashlib.sha256(actual[path]).hexdigest()}"
+                        )
+                except (OSError, urllib.error.URLError, TimeoutError) as exc:
                     errors.append(f"{path}: fetch failed: {exc}")
+
             if not errors:
-                for path in ("InRelease",):
-                    p = os.path.join(temp, path)
-                    open(p, "wb").write(actual["dists/stable/" + path])
-                    check = subprocess.run(["gpg", "--batch", "--homedir", temp, "--verify", p], capture_output=True)
-                    if check.returncode:
-                        errors.append(f"{path}: signature verification failed: {check.stderr.decode(errors='replace')}")
-                rel = os.path.join(temp, "Release")
-                sig = os.path.join(temp, "Release.gpg")
-                open(rel, "wb").write(actual["dists/stable/Release"])
-                open(sig, "wb").write(actual["dists/stable/Release.gpg"])
-                check = subprocess.run(["gpg", "--batch", "--homedir", temp, "--verify", sig, rel], capture_output=True)
-                if check.returncode:
-                    errors.append("Release.gpg: detached signature verification failed")
-                if actual["dists/stable/main/binary-amd64/Packages.gz"]:
-                    import gzip
-                    if gzip.decompress(actual["dists/stable/main/binary-amd64/Packages.gz"]) != actual["dists/stable/main/binary-amd64/Packages"]:
+                with tempfile.TemporaryDirectory(prefix="apt-pages-data-") as data_dir:
+                    inrelease = os.path.join(data_dir, "InRelease")
+                    release = os.path.join(data_dir, "Release")
+                    detached = os.path.join(data_dir, "Release.gpg")
+                    Path(inrelease).write_bytes(actual["dists/stable/InRelease"])
+                    Path(release).write_bytes(actual["dists/stable/Release"])
+                    Path(detached).write_bytes(actual["dists/stable/Release.gpg"])
+                    for label, result in (
+                        ("InRelease", verify_signature(gpg_home, inrelease)),
+                        ("Release.gpg", verify_signature(gpg_home, detached, release)),
+                    ):
+                        if result.returncode:
+                            errors.append(f"{label}: signature verification failed: {result.stderr.strip()}")
+                try:
+                    if gzip.decompress(actual[PACKAGES_GZ]) != actual[PACKAGES]:
                         errors.append("Packages.gz does not decompress to Packages byte-for-byte")
+                except (OSError, EOFError, gzip.BadGzipFile) as exc:
+                    errors.append(f"Packages.gz decompression failed: {exc}")
+
             if not errors:
                 print(f"Public repository matches validated commit ({os.environ.get('GITHUB_SHA', 'unknown')}).")
                 return
