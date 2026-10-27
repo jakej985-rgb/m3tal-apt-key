@@ -32,10 +32,6 @@ jobs:
   ingest-and-publish:
     name: Ingest and Sign Debian Package
     runs-on: ubuntu-latest
-    concurrency:
-      # Unique per event: GitHub replaces an existing pending run in a shared group.
-      group: apt-ingest-${{ github.run_id }}
-      cancel-in-progress: false
     outputs:
       commit_sha: ${{ steps.publish.outputs.commit_sha }}
     steps:
