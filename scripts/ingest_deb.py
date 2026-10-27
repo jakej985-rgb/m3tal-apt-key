@@ -147,7 +147,7 @@ def ingest_deb_file(
     signing_key = key_id or find_default_signing_key()
     should_sign = sign and bool(signing_key)
     if sign and not signing_key:
-        print("--> Warning: No GPG signing key found in keyring. Proceeding with unsigned index.")
+        raise RuntimeError("Signing was requested but no GPG signing key is available; refusing to publish unsigned metadata.")
 
     # 5. Regenerate APT indices
     print("--> 3. Regenerating Packages, Packages.gz, and Release indices...")
@@ -160,15 +160,9 @@ def ingest_deb_file(
         print(f"    [OK] Indices updated ({index_info['package_count']} packages for {index_info['architectures']}).")
         if should_sign:
             print(f"    [OK] Cryptographically signed InRelease and Release.gpg with key {signing_key}.")
-    except Exception as e:
-        if should_sign:
-            print(f"--> Warning: GPG signing failed ({e}).", file=sys.stderr)
-            print("--> Regenerating repository indices without GPG signature...", file=sys.stderr)
-            index_info = publisher.generate_indexes(sign=False)
-            print(f"    [OK] Indices updated successfully without signature ({index_info['package_count']} packages for {index_info['architectures']}).")
-            should_sign = False
-        else:
-            raise
+    except Exception:
+        # Never replace signed metadata with unsigned indexes after a signing failure.
+        raise
 
     print("==================================================")
     print(f" ✅ Successfully Published {pkg_name} ({pkg_ver}) to Central Repository!")
