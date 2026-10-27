@@ -26,6 +26,11 @@ on:
 permissions:
   contents: write
 
+# Queue every repository writer so indexes, signatures and Pages source cannot race.
+concurrency:
+  group: apt-repository-publishing
+  cancel-in-progress: false
+
 jobs:
   ingest-and-publish:
     name: Ingest and Sign Debian Package
@@ -59,8 +64,8 @@ jobs:
             echo "$GPG_PRIVATE_KEY" | gpg --batch --import
             echo "has_key=true" >> $GITHUB_OUTPUT
           else
-            echo "::warning ::No GPG_PRIVATE_KEY secret configured. Indexes will be generated without GPG signature."
-            echo "has_key=false" >> $GITHUB_OUTPUT
+            echo "::error ::No GPG_PRIVATE_KEY secret configured; refusing unsigned publication."
+            exit 1
           fi
 
       - name: Resolve Ingestion Parameters
@@ -97,10 +102,6 @@ jobs:
           if [ "${{ steps.params.outputs.allow_replace }}" = "true" ]; then
             EXTRA_FLAGS="--allow-replace"
           fi
-          if [ "${{ steps.gpg-setup.outputs.has_key }}" = "false" ]; then
-            EXTRA_FLAGS="${EXTRA_FLAGS} --no-sign"
-          fi
-
           python3 scripts/ingest_deb.py --url "${{ steps.params.outputs.deb_url }}" ${EXTRA_FLAGS}
 
       - name: Validate Repository Integrity
