@@ -143,7 +143,10 @@ def ingest_deb_file(
 
     registry_path = os.path.join(repo_dir, "registry", "packages.yml")
     registry_existed = os.path.isfile(registry_path)
-    registry_backup = open(registry_path, "rb").read() if registry_existed else None
+    registry_backup = None
+    if registry_existed:
+        with open(registry_path, "rb") as registry_file:
+            registry_backup = registry_file.read()
 
     print("--> 2. Publishing package and regenerating signed metadata...")
     print("--> 3. Regenerating Packages, Packages.gz, and Release indices...")
