@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit SHA to validate and publish
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -17,6 +23,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,6 +35,9 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y gnupg
+
+      - name: Test public repository verifier
+        run: python3 scripts/test_verify_deployed_repository.py
 
       - name: Run Repository Integrity Validation
         run: |
@@ -41,7 +52,7 @@ jobs:
 
   deploy-pages:
     name: Deploy validated repository snapshot
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || inputs.ref != ''
     needs: [validate-repository, lintian-checks, clean-install-matrix, bootstrap-installer-test]
     permissions:
       contents: read
@@ -59,11 +70,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ inputs.ref || github.sha }}
+      - name: Record validated commit
+        id: validated
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Ensure this is still the latest main commit
+        env:
+          TARGET_SHA: ${{ steps.validated.outputs.sha }}
         run: |
           git fetch origin main
-          test "$(git rev-parse FETCH_HEAD)" = "$GITHUB_SHA" || {
-            echo "::error ::Refusing to deploy stale commit $GITHUB_SHA; main has advanced."
+          test "$(git rev-parse FETCH_HEAD)" = "$TARGET_SHA" || {
+            echo "::error ::Refusing to deploy stale commit $TARGET_SHA; main has advanced."
             exit 1
           }
       - name: Configure Pages
@@ -84,6 +101,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Install Lintian
         run: |
@@ -120,6 +139,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Test APT Installation in Clean ${{ matrix.os_name }} Container
         run: |
@@ -164,6 +185,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Test install.sh in Clean Container
         run: |
