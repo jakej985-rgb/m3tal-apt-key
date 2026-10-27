@@ -23,8 +23,7 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
+  statuses: write
 
 jobs:
   retention-audit-and-prune:
