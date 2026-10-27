@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import tempfile
 import unittest
 
@@ -78,7 +79,8 @@ class TestMockRepositoryPruning(unittest.TestCase):
         os.makedirs(self.bin_dir, exist_ok=True)
         os.makedirs(self.pool_dir, exist_ok=True)
 
-        # Create dummy deb files and Packages index
+        # Create valid tiny deb files so the authoritative publisher can rebuild
+        # Packages from the pool rather than trusting stale index records.
         self.versions = [
             "1.0.0", "1.0.1", "1.0.2", "1.0.3",  # Series 1.0 (1.0.0 pinned, top 2 are 1.0.3, 1.0.2)
             "1.1.0", "1.1.1", "1.1.2", "1.1.3", "1.1.4"  # Series 1.1 (top 2 are 1.1.4, 1.1.3; 1.1.0 pinned)
@@ -88,11 +90,27 @@ class TestMockRepositoryPruning(unittest.TestCase):
         for ver in self.versions:
             deb_name = f"m3tal_v{ver}_amd64.deb"
             deb_path = os.path.join(self.pool_dir, deb_name)
-            with open(deb_path, "wb") as f:
-                f.write(f"dummy debian payload for {ver}".encode("utf-8"))
+            build_dir = tempfile.mkdtemp(prefix="deb-build-", dir=self.test_dir)
+            os.makedirs(os.path.join(build_dir, "DEBIAN"))
+            os.makedirs(os.path.join(build_dir, "usr", "share", "m3tal"))
+            control = (
+                "Package: m3tal\n"
+                f"Version: {ver}\n"
+                "Architecture: amd64\n"
+                "Maintainer: Test <test@m3tal.io>\n"
+                "Description: Test package\n"
+            )
+            with open(os.path.join(build_dir, "DEBIAN", "control"), "w", encoding="utf-8") as f:
+                f.write(control)
+            with open(os.path.join(build_dir, "usr", "share", "m3tal", "version"), "w", encoding="utf-8") as f:
+                f.write(ver + "\n")
+            subprocess.run(["dpkg-deb", "--build", build_dir, deb_path], check=True, capture_output=True)
+            shutil.rmtree(build_dir)
+            with open(deb_path, "rb") as f:
+                deb_bytes = f.read()
             sz = os.path.getsize(deb_path)
-            md5_h = hashlib.md5(f"dummy debian payload for {ver}".encode("utf-8")).hexdigest()
-            sha256_h = hashlib.sha256(f"dummy debian payload for {ver}".encode("utf-8")).hexdigest()
+            md5_h = hashlib.md5(deb_bytes).hexdigest()
+            sha256_h = hashlib.sha256(deb_bytes).hexdigest()
 
             entry = (
                 f"Package: m3tal\n"
