@@ -22,6 +22,10 @@ on:
         required: false
         default: false
         type: boolean
+      sha256:
+        description: "Expected SHA-256 of the exact Debian package asset"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -68,6 +72,8 @@ jobs:
 
       - name: Resolve Ingestion Parameters
         id: params
+        env:
+          EXPECTED_SHA256: ${{ github.event.client_payload.sha256 || github.event.inputs.sha256 }}
         run: |
           if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
             PKG_ID="${{ github.event.client_payload.package_id || github.event.client_payload.app_id }}"
@@ -90,6 +96,14 @@ jobs:
           echo "version=${VER}" >> $GITHUB_OUTPUT
           echo "deb_url=${DEB_URL}" >> $GITHUB_OUTPUT
           echo "allow_replace=${ALLOW_REPLACE}" >> $GITHUB_OUTPUT
+          if [ -n "$EXPECTED_SHA256" ]; then
+            if ! [[ "$EXPECTED_SHA256" =~ ^[0-9a-fA-F]{64}$ ]]; then
+              echo "::error ::sha256 must contain exactly 64 hexadecimal characters."
+              exit 1
+            fi
+            EXPECTED_SHA256=$(printf '%s' "$EXPECTED_SHA256" | tr '[:upper:]' '[:lower:]')
+          fi
+          echo "sha256=${EXPECTED_SHA256}" >> $GITHUB_OUTPUT
           echo "Ingesting package ${PKG_ID} version ${VER} from ${DEB_URL}"
 
       - name: Ingest, validate, and push with conflict retries
@@ -100,12 +114,21 @@ jobs:
           PKG_ID: ${{ steps.params.outputs.pkg_id }}
           PKG_VERSION: ${{ steps.params.outputs.version }}
           ALLOW_REPLACE: ${{ steps.params.outputs.allow_replace }}
+          EXPECTED_SHA256: ${{ steps.params.outputs.sha256 }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           candidate="$RUNNER_TEMP/incoming-package.deb"
           trap 'rm -f "$candidate"' EXIT
           curl --fail --location --retry 3 "$DEB_URL" --output "$candidate"
+          if [ -n "$EXPECTED_SHA256" ]; then
+            ACTUAL_SHA256=$(sha256sum "$candidate" | cut -d ' ' -f1)
+            if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
+              echo "::error ::Downloaded package SHA-256 $ACTUAL_SHA256 does not match expected $EXPECTED_SHA256."
+              exit 1
+            fi
+            echo "Downloaded package SHA-256 matches the tested release artifact."
+          fi
           PACKAGE=$(dpkg-deb -f "$candidate" Package)
           VERSION=$(dpkg-deb -f "$candidate" Version)
           ARCH=$(dpkg-deb -f "$candidate" Architecture)
@@ -127,6 +150,13 @@ jobs:
             EXTRA_FLAGS=""
             if [ "$ALLOW_REPLACE" = "true" ]; then EXTRA_FLAGS="--allow-replace"; fi
             python3 scripts/ingest_deb.py "$candidate" $EXTRA_FLAGS
+            if [ -n "$EXPECTED_SHA256" ]; then
+              PUBLISHED_SHA256=$(sha256sum "$target" | cut -d ' ' -f1)
+              if [ "$PUBLISHED_SHA256" != "$EXPECTED_SHA256" ]; then
+                echo "::error ::Staged package SHA-256 $PUBLISHED_SHA256 does not match expected $EXPECTED_SHA256."
+                exit 1
+              fi
+            fi
             python3 scripts/validate_repository.py --strict --skip-container-test
             git add pool/ dists/ registry/packages.yml
             git commit -m "feat(repo): publish ${PKG_ID} ${PKG_VERSION} to central repository [skip ci]"

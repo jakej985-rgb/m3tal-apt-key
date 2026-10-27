@@ -105,6 +105,11 @@ The workflow `.github/workflows/ingest-deb.yml` automatically:
 6. Signs `InRelease` and `Release.gpg` with GPG.
 7. Commits and deploys the change.
 
+New publishers should include a `sha256` field in the dispatch payload with the
+64-character SHA-256 of the tested `.deb`. When supplied, ingestion rejects the
+release if either the downloaded artifact or staged pool package has a different
+hash; the central signed APT indexes are then validated before deployment.
+
 ### Modality B: Local CLI Ingestion (`scripts/ingest_deb.py`)
 For local workstation builds or development tests, developers can ingest directly:
 
