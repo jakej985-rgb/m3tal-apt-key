@@ -23,15 +23,19 @@ on:
 
 permissions:
   contents: write
-
-concurrency:
-  group: apt-repository-publishing
-  cancel-in-progress: false
+  pages: write
+  id-token: write
 
 jobs:
   retention-audit-and-prune:
     name: Package Retention Engine
     runs-on: ubuntu-latest
+    concurrency:
+      # Keep every run alive; repository pushes use optimistic retries below.
+      group: apt-retention-${{ github.run_id }}
+      cancel-in-progress: false
+    outputs:
+      commit_sha: ${{ steps.prune.outputs.commit_sha }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -47,8 +51,10 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y gnupg
+          python3 -m pip install --upgrade pip pyyaml
 
       - name: Configure GPG Signing Key
+        if: github.event.inputs.action == 'execute'
         env:
           GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY || secrets.GPG_PRIVATE_KEY }}
         run: |
@@ -77,26 +83,40 @@ jobs:
         run: |
           python3 scripts/manage_retention.py prune --dry-run
 
-      - name: Execute Package Pruning & Index Regeneration
+      - name: Execute pruning, validate, and push with conflict retries
         if: github.event.inputs.action == 'execute'
+        id: prune
         env:
           APT_GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE || secrets.GPG_PASSPHRASE }}
         run: |
-          echo "Executing package pruning and metadata index regeneration..."
-          python3 scripts/manage_retention.py prune --execute
-          
-          echo "Validating regenerated repository integrity..."
-          python3 scripts/validate_repository.py --strict --skip-container-test
-
-      - name: Commit and Push Pruned Repository State
-        if: github.event.inputs.action == 'execute'
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pool/ dists/ snapshots/ config/
-          if git diff --staged --quiet; then
-            echo "No changes to commit."
-          else
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            python3 scripts/manage_retention.py prune --execute
+            python3 scripts/validate_repository.py --strict --skip-container-test
+            git add pool/ dists/ snapshots/ config/
+            if [ -d archive ]; then git add archive/; fi
+            if git diff --staged --quiet; then
+              echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             git commit -m "chore(retention): prune obsolete package builds and regenerate indexes [skip ci]"
-            git push origin main
-          fi
+            if git push origin HEAD:main; then
+              echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Push raced with another writer; retrying from latest main (attempt $attempt/5)."
+            sleep "$((attempt * 2))"
+          done
+          echo "::error ::Could not publish retention changes after five fresh-checkout attempts."
+          exit 1
+
+  validate-and-deploy:
+    if: github.event.inputs.action == 'execute'
+    needs: [retention-audit-and-prune]
+    uses: ./.github/workflows/ci-validation.yml
+    with:
+      ref: ${{ needs.retention-audit-and-prune.outputs.commit_sha }}
+    secrets: inherit
