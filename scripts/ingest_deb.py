@@ -33,7 +33,6 @@ from validate_package import validate_debian_package, extract_control_from_deb
 from deb_version import compare_debian_versions
 
 DEFAULT_KEY_FINGERPRINT = "5F84FE50A40111C981410E11775AD1473BF25102"
-REGISTRY_PATH = os.path.join(REPO_ROOT, "registry", "packages.yml")
 
 
 def find_default_signing_key() -> Optional[str]:
@@ -54,12 +53,13 @@ def find_default_signing_key() -> Optional[str]:
     return None
 
 
-def update_registry_manifest(package_name: str, new_version: str, pool_path: str):
+def update_registry_manifest(package_name: str, new_version: str, pool_path: str, repo_dir: str = REPO_ROOT):
     """Update registry/packages.yml with newly published package version and status."""
-    if not os.path.exists(REGISTRY_PATH):
+    registry_path = os.path.join(repo_dir, "registry", "packages.yml")
+    if not os.path.exists(registry_path):
         return
 
-    with open(REGISTRY_PATH, "r", encoding="utf-8") as f:
+    with open(registry_path, "r", encoding="utf-8") as f:
         registry = yaml.safe_load(f) or {}
 
     updated = False
@@ -79,7 +79,7 @@ def update_registry_manifest(package_name: str, new_version: str, pool_path: str
             break
 
     if updated:
-        with open(REGISTRY_PATH, "w", encoding="utf-8") as f:
+        with open(registry_path, "w", encoding="utf-8") as f:
             yaml.dump(registry, f, sort_keys=False, default_flow_style=False)
 
 
@@ -97,6 +97,7 @@ def ingest_deb_file(
     """Ingest a single Debian package into the central repository."""
     if not os.path.isfile(deb_path):
         raise FileNotFoundError(f"Package file not found: {deb_path}")
+    repo_dir = os.path.abspath(repo_dir)
 
     print(f"==================================================")
     print(f" Ingesting Debian Package: {os.path.basename(deb_path)}")
@@ -118,6 +119,13 @@ def ingest_deb_file(
 
     print(f"--> Package Details: {pkg_name} {pkg_ver} ({pkg_arch})")
 
+    if not sign:
+        raise ValueError("Unsigned repository publication is disabled; signing is required.")
+
+    signing_key = key_id or find_default_signing_key()
+    if not signing_key:
+        raise RuntimeError("Signing was requested but no GPG signing key is available; refusing to publish unsigned metadata.")
+
     # 2. Stage into pool
     publisher = AptPublisher(
         repo_dir=repo_dir,
@@ -129,40 +137,54 @@ def ingest_deb_file(
         pool_style="structured",
     )
 
-    print(f"--> 2. Publishing to repository pool...")
-    staged_path = publisher.publish_deb(
-        deb_path=deb_path,
-        allow_replace=allow_replace,
-        allow_downgrade=allow_downgrade,
-        skip_validation=True,  # already validated above
-    )
-    rel_staged = os.path.relpath(staged_path, repo_dir)
-    print(f"    [OK] Staged to: {rel_staged}")
+    target_path = os.path.join(repo_dir, "pool", "main", pkg_name, f"{pkg_name}_{pkg_ver}_{pkg_arch}.deb")
+    target_existed = os.path.isfile(target_path)
+    backup_path = None
+    if target_existed:
+        fd, backup_path = tempfile.mkstemp(prefix="apt-deb-rollback-")
+        os.close(fd)
+        shutil.copy2(target_path, backup_path)
 
-    # 3. Update registry manifest
-    if update_registry:
-        update_registry_manifest(pkg_name, pkg_ver, rel_staged)
+    registry_path = os.path.join(repo_dir, "registry", "packages.yml")
+    registry_existed = os.path.isfile(registry_path)
+    registry_backup = open(registry_path, "rb").read() if registry_existed else None
 
-    # 4. Determine signing key
-    signing_key = key_id or find_default_signing_key()
-    should_sign = sign and bool(signing_key)
-    if sign and not signing_key:
-        raise RuntimeError("Signing was requested but no GPG signing key is available; refusing to publish unsigned metadata.")
-
-    # 5. Regenerate APT indices
+    print("--> 2. Publishing package and regenerating signed metadata...")
     print("--> 3. Regenerating Packages, Packages.gz, and Release indices...")
     try:
+        staged_path = publisher.publish_deb(
+            deb_path=deb_path,
+            allow_replace=allow_replace,
+            allow_downgrade=allow_downgrade,
+            skip_validation=True,
+        )
+        rel_staged = os.path.relpath(staged_path, repo_dir)
+        if update_registry:
+            update_registry_manifest(pkg_name, pkg_ver, rel_staged, repo_dir=repo_dir)
         index_info = publisher.generate_indexes(
-            gpg_key_id=signing_key if should_sign else None,
+            gpg_key_id=signing_key,
             gpg_passphrase=passphrase,
-            sign=should_sign,
+            sign=True,
         )
         print(f"    [OK] Indices updated ({index_info['package_count']} packages for {index_info['architectures']}).")
-        if should_sign:
-            print(f"    [OK] Cryptographically signed InRelease and Release.gpg with key {signing_key}.")
+        print(f"    [OK] Cryptographically signed InRelease and Release.gpg with key {signing_key}.")
     except Exception:
-        # Never replace signed metadata with unsigned indexes after a signing failure.
+        if target_existed and backup_path:
+            os.replace(backup_path, target_path)
+            backup_path = None
+        elif os.path.isfile(target_path):
+            os.remove(target_path)
+        if registry_existed and registry_backup is not None:
+            fd, restore_path = tempfile.mkstemp(prefix="packages-yml-rollback-", dir=os.path.dirname(registry_path))
+            with os.fdopen(fd, "wb") as restored:
+                restored.write(registry_backup)
+            os.replace(restore_path, registry_path)
+        elif os.path.isfile(registry_path):
+            os.remove(registry_path)
         raise
+    finally:
+        if backup_path and os.path.exists(backup_path):
+            os.remove(backup_path)
 
     print("==================================================")
     print(f" ✅ Successfully Published {pkg_name} ({pkg_ver}) to Central Repository!")
@@ -174,7 +196,7 @@ def ingest_deb_file(
         "version": pkg_ver,
         "architecture": pkg_arch,
         "staged_path": staged_path,
-        "signed": should_sign,
+        "signed": True,
     }
 
 
@@ -245,14 +267,12 @@ def main():
     parser.add_argument("--allow-replace", action="store_true", help="Allow replacing identical existing package version")
     parser.add_argument("--allow-downgrade", action="store_true", help="Allow publishing older version than latest")
     parser.add_argument("--skip-validation", action="store_true", help="Skip deb validation checks")
-    parser.add_argument("--no-sign", action="store_true", help="Do not GPG sign repository indices")
     parser.add_argument("--key-id", help="GPG key ID/fingerprint to sign with")
     parser.add_argument("--passphrase", help="GPG key passphrase")
     parser.add_argument("--no-registry-update", action="store_true", help="Do not update registry/packages.yml")
 
     args = parser.parse_args()
 
-    sign_flag = not args.no_sign
     update_reg = not args.no_registry_update
 
     passphrase = args.passphrase or os.environ.get("APT_GPG_PASSPHRASE") or os.environ.get("GPG_PASSPHRASE")
@@ -268,7 +288,6 @@ def main():
         "allow_replace": args.allow_replace,
         "allow_downgrade": args.allow_downgrade,
         "skip_validation": args.skip_validation,
-        "sign": sign_flag,
         "key_id": args.key_id,
         "passphrase": passphrase,
         "update_registry": update_reg,
