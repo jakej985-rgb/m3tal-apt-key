@@ -931,6 +931,22 @@ SHA512: 9cfaf3b221e927b2edc954d0623e39b1660ffb057190d153b505f8c6016446b42041bc4b
 Description: M3TAL official plugin for m3tal-compose
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-compose
+Architecture: amd64
+Version: 0.5.0
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-compose/m3tal-plugin-compose_0.5.0_amd64.deb
+Size: 1068222
+MD5sum: a820fd4ec3ac01b0534022651ecad147
+SHA1: eb5d09f54ebf2e605210e8141c69b07f24c0477a
+SHA256: ce170d191d00c2ee0de151ee6131a77603176580378818e10eec3cef4e2e95b5
+SHA512: 37923ef76cedb0cd6580a670de8d502c4f1432ec34cd85a62e6cb3c22892e6d53c8ccdc5d2fbcae6f822a44ffd4cbad4750289d717ec8f9275fd368099d56142
+Description: M3TAL official plugin for m3tal-compose
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
 Package: m3tal-plugin-docker-monitor
 Architecture: amd64
 Version: 0.1.1

@@ -5,35 +5,35 @@ Origin: M3TAL
 Label: M3TAL
 Suite: stable
 Codename: stable
-Date: Tue, 27 Oct 2026 17:13:46 +0000
+Date: Tue, 27 Oct 2026 17:38:36 +0000
 Architectures: amd64
 Components: main
 Description: M3TAL Central Ecosystem APT Repository
 MD5Sum:
- e9383135e0bef220e63e439203301462            47371 main/binary-amd64/Packages
- 86a59db67687d1f0f6c5791369694909            13009 main/binary-amd64/Packages.gz
+ 37b88ae710b24f9acfa04c2ac9843623            48069 main/binary-amd64/Packages
+ b4f7b014fad1dd986befb39efb81d2b7            13189 main/binary-amd64/Packages.gz
 SHA1:
- 14197b9c6a0fcb33fcf937e7ed42c9824acd15bb            47371 main/binary-amd64/Packages
- 5d9721a568d74f67b016debe926044a2f9bc35a2            13009 main/binary-amd64/Packages.gz
+ 12e005fc89e77d1145f5d5a0fffa4995b9da19ba            48069 main/binary-amd64/Packages
+ ee1ea65ecd3069dcb79f3811c1b8fcb9c0b060f4            13189 main/binary-amd64/Packages.gz
 SHA256:
- 2898e99ca7ae662a445d3357c2251d6808631b119e0c36e30d69607230a2ce88            47371 main/binary-amd64/Packages
- c8fe8076c71c8b4817970242b5e944f73fb7fd29ad1b0be10488f4ea46cfdc59            13009 main/binary-amd64/Packages.gz
+ 798290752bdc307d6b387e19dc2e97334582508e52475de6b75d8e74c7de6e87            48069 main/binary-amd64/Packages
+ 5501a6c525b420ce1819d9db5c2e6a1af833ba4327618a479f1e7d5a484c5027            13189 main/binary-amd64/Packages.gz
 SHA512:
- 0548eec3000e73de1b1e5dee4c6414dd8b94642480ac8feda59cf719163f6bdb6866a5e1c6dfcf55dfc982cd1c104f6975072fb5c7b00050c07edf8378208ef2            47371 main/binary-amd64/Packages
- 99742814c1aecee15aef053d9675f0d35ff6c5949aa77ec7034ee8053a5ffcdc047830088f9d2b62b5dfc0d7f38f4f61d4b5a5429df238d36564687458ec1b26            13009 main/binary-amd64/Packages.gz
+ 2ea409ee1808eb2baf4ebe758db7b136f7f12abbb6be1f834191e003e3e55178460226a319bab90720228e05589809ed76417486d396644fe1f53ce0173dcd90            48069 main/binary-amd64/Packages
+ 69bae8ada7ef20511f2e342b336517fe3ee3359b22223d7bef75d4986b04d8a5e41f4179f9c374ee96e961ff428c7fb91b1bd4dfbf7d5f253de269992a2972ef            13189 main/binary-amd64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEX4T+UKQBEcmBQQ4Rd1rRRzvyUQIFAmrg28oACgkQd1rRRzvy
-UQKE9Q/9Fw6RxalWha4L1PXGAbua6y0oUSbrGSx3yboQU0zu/z6yV99vFBDzswXJ
-KJoyTPoK09y8p+KUibqO3ogFeWYtZa9Y+fe3xoqh57tHjX1KZsIJzDzApsOwYBth
-uIwgPIN8q4B5aucIVOWiwQoxYbbYyN+b3lyZAdMNj3wjGjNBjMZDhaRfqzI+SW97
-k8+x1gT2r1ciMRhhH0Fu4PrvCCXXXLk7uFd3eJSzURUt6Q+GeUXqaMSJ+vw8ltB6
-jvY/bOvZfftD5kWpXnkY4Y0m54flhmHu5sR57dAnjW/zMlOGPwlFem7SQJw2et0C
-tTiwzi+yqMsw+pzmoWbfP45wdTlOfWjIJ+skEqzLzvwwTWWaFL4r7w578df1eSHX
-FTcNJTVAOj7YxPpP+ZDTHbmD5LXElSENh200eKl69j8CeNG8mBq0VOBzl5jDAKp/
-Lvmx5i2M0t7Z0xJsQk4Yfka7ssf5TU9hP4JP88MGn7cDhK9ZZ+tfFTzGzpQ7Ihuv
-x5goJlCO2C/VfyuCyKXVMFjiT2/gsNUiFsHm3xq7KIwSck28aofcQdM6HluoAW0c
-QHGOJy+OX+iMuY6yIjqwoadApjqQ5sppc6ejfW3l6w0lsJrQqpVysKPf/2earFzQ
-PXSRB9Ct0Jhp+R/Ea1EOn3YH9eRpIlPAWVhxEfnUHuP33OY80KM=
-=Qk9U
+iQIzBAEBCgAdFiEEX4T+UKQBEcmBQQ4Rd1rRRzvyUQIFAmrg4ZwACgkQd1rRRzvy
+UQIIbg//ZFE8E04VhLcuBO4AjWbINM16xNCV7Yh5wkuOEZSl1rZNKFej7Ca5YX2Z
+7O6lGz5otKY5c0lpdxAPMzg0SGQa40G29aIcoh45O++JAe5rdfJVHGMzYIuSPpdt
+BCaHCZPcpycNzXi5BsriyiwlwjanK0/+FmSZFf4ZjHYmz+0mGarGgIy7fSy88yKN
+R6tTiIneXqU7YwNGQFURk1LZp04L/6sUawvPQ7tW6XxhxrLZUUAlPcJOcNgUDyej
+zy4zJ/WeUozuVzkpQ8TsnXmTENnXxhSTNcKNFGjhD4QbYND7AoNf/9n8Yp1A7aRP
+E1rFXuOX/4Dg4Nxm2h3GV0SeYfHeW4M1kWpIi8yqpQPWFQ9TA8QwRPpedBS85n4v
+DFuwGKxX/BTWOHUHDYybZWiJgZYMvBzHoVRJY4ksir0hk2voAGbWV8TjOr6tn5dd
+clIrZ7kWDndAFFCxB8AP6uN45W07Aiu/7XH2LELIvOJp1LIlfmrgKt43TvmFubCt
+CTEKQt03dmp5ICifZo59J0ypk29n74ZflvIJZMmaFyONjwB6BHdokGTrERKqK4HZ
+Iu/tl2bQ2vRjMsEXm+tNGnkyKIxO8Xy8UJKfuBY8UUI6aiFpXXizd2hcwRgttz3p
+bm2hmf4d8R3ziqTjpCR7GWpe/XepIkzfihW3ZXEG2Q1WqEoJWHQ=
+=jf9Y
 -----END PGP SIGNATURE-----
