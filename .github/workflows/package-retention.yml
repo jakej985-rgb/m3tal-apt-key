@@ -24,6 +24,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: apt-repository-publishing
+  cancel-in-progress: false
+
 jobs:
   retention-audit-and-prune:
     name: Package Retention Engine
@@ -43,6 +47,16 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y gnupg
+
+      - name: Configure GPG Signing Key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY || secrets.GPG_PRIVATE_KEY }}
+        run: |
+          if [ -z "$GPG_PRIVATE_KEY" ]; then
+            echo "::error ::No GPG private key configured; refusing to modify repository metadata."
+            exit 1
+          fi
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
 
       - name: Run Retention Unit & Integration Tests
         run: |
@@ -65,6 +79,8 @@ jobs:
 
       - name: Execute Package Pruning & Index Regeneration
         if: github.event.inputs.action == 'execute'
+        env:
+          APT_GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE || secrets.GPG_PASSPHRASE }}
         run: |
           echo "Executing package pruning and metadata index regeneration..."
           python3 scripts/manage_retention.py prune --execute
