@@ -899,6 +899,25 @@ Description: M3TAL Core — DEB-first infrastructure orchestration platform.
  Optimized for Traefik ecosystems and home lab automation.
 License: MIT
 
+Package: m3tal
+Architecture: amd64
+Version: 0.20.6
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46494
+Recommends: xdotool
+Filename: pool/main/m3tal/m3tal_0.20.6_amd64.deb
+Size: 25729294
+MD5sum: 125d296bfb28c7d326501a1dfaeceb16
+SHA1: fc63724df54d014a3dbab0c33819c8a89381eda4
+SHA256: efbe6d80776e633f5ac016856ec38e161876c979b911b64c43589953db0c2b26
+SHA512: fe4452a94c81eae86d9b89933246d4ec8849f00a8520829066966755242bffee329f4baa6915a57baf33ee6ef64b6e32d652b052c0d753184ffad65768582ac2
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+License: MIT
+
 Package: m3tal-plugin-compose
 Architecture: amd64
 Version: 0.2.0
