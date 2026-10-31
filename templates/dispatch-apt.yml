@@ -50,7 +50,7 @@ jobs:
           echo "tag=${TAG}" >> $GITHUB_OUTPUT
           echo "clean_version=${CLEAN_VER}" >> $GITHUB_OUTPUT
 
-      - name: Locate Release Deb Asset URL
+      - name: Locate and Checksum Release Deb Asset
         id: locate-asset
         if: steps.check-token.outputs.configured == 'true'
         env:
@@ -60,17 +60,27 @@ jobs:
           REPO="${{ github.repository }}"
 
           echo "Searching for .deb assets in release ${TAG} of ${REPO}..."
-          DEB_URL=$(gh release view "${TAG}" --repo "${REPO}" --json assets --jq '.assets[] | select(.name | endswith(".deb")) | .url' | head -n 1)
+          DEB_NAME=$(gh release view "${TAG}" --repo "${REPO}" --json assets --jq '.assets[] | select(.name | endswith(".deb")) | .name' | head -n 1)
 
-          if [ -z "$DEB_URL" ]; then
+          if [ -n "$DEB_NAME" ]; then
+            echo "Downloading release asset ${DEB_NAME} to verify checksum..."
+            gh release download "${TAG}" --repo "${REPO}" --pattern "${DEB_NAME}" --dir "$RUNNER_TEMP"
+            DEB_FILE="$RUNNER_TEMP/${DEB_NAME}"
+            DEB_URL=$(gh release view "${TAG}" --repo "${REPO}" --json assets --jq ".assets[] | select(.name == \"${DEB_NAME}\") | .url")
+            SHA256=$(sha256sum "$DEB_FILE" | cut -d ' ' -f1)
+            rm -f "$DEB_FILE"
+          else
             # Construct standard asset download URL fallback
             APP_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
             DEB_URL="https://github.com/${REPO}/releases/download/${TAG}/${APP_NAME}-${TAG}-linux.deb"
             echo "Falling back to conventional asset URL: ${DEB_URL}"
-          else
-            echo "Found asset URL: ${DEB_URL}"
+            curl --fail --location --retry 3 "$DEB_URL" --output "$RUNNER_TEMP/fallback.deb"
+            SHA256=$(sha256sum "$RUNNER_TEMP/fallback.deb" | cut -d ' ' -f1)
+            rm -f "$RUNNER_TEMP/fallback.deb"
           fi
           echo "deb_url=${DEB_URL}" >> $GITHUB_OUTPUT
+          echo "sha256=${SHA256}" >> $GITHUB_OUTPUT
+          echo "Discovered deb_url: ${DEB_URL} (sha256: ${SHA256})"
 
       - name: Dispatch Release Event to Central APT Keyring
         if: steps.check-token.outputs.configured == 'true'
@@ -85,7 +95,8 @@ jobs:
               "repo": "${{ github.repository }}",
               "version": "${{ steps.target.outputs.clean_version }}",
               "tag": "${{ steps.target.outputs.tag }}",
-              "deb_url": "${{ steps.locate-asset.outputs.deb_url }}"
+              "deb_url": "${{ steps.locate-asset.outputs.deb_url }}",
+              "sha256": "${{ steps.locate-asset.outputs.sha256 }}"
             }
 
       - name: Confirm Dispatch

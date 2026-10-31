@@ -80,8 +80,8 @@ In your application repository on GitHub:
 ### Step 2: Trigger Release
 When you publish a new release tag (e.g. `v0.1.5`):
 1. Your build workflow builds the Linux `.deb` asset and attaches it to the GitHub Release.
-2. `dispatch-apt.yml` detects the release, resolves the `.deb` asset URL, and sends a `publish-deb` event to `m3tal-apt-key`.
-3. `m3tal-apt-key` downloads, validates, signs, and publishes the package to GitHub Pages.
+2. `dispatch-apt.yml` detects the release, resolves the `.deb` asset URL, computes its SHA-256 checksum, and sends a `publish-deb` event (including `sha256`) to `m3tal-apt-key`.
+3. `m3tal-apt-key` downloads the asset, verifies the SHA-256 checksum, validates package architecture and metadata, signs, and publishes the package to GitHub Pages.
 
 ---
 
