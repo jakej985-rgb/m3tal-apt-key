@@ -880,6 +880,63 @@ Description: M3TAL Core — DEB-first infrastructure orchestration platform.
  Includes the m3tal CLI and control-plane API.
  Optimized for Traefik ecosystems and home lab automation.
 
+Package: m3tal
+Architecture: amd64
+Version: 0.20.5
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46489
+Recommends: xdotool
+Filename: pool/main/m3tal/m3tal_0.20.5_amd64.deb
+Size: 25727242
+MD5sum: d9f681a4ad42117f9f7d63ba534e6ced
+SHA1: eba4083eae1b2e88e005a0056203c5865aa59a90
+SHA256: 0f7bbebc98795af847d2634b9f87c479e09c119d7edeca8e2b736a10624508bd
+SHA512: ff634f19ad0be8e8014c53c59c7824045de6a128cb356e67b7264c6056a56d0be898b2c3e99f79da884be3b19725b8ab6eff31876930a7e27bcbfb7ddb50995b
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+License: MIT
+
+Package: m3tal
+Architecture: amd64
+Version: 0.20.6
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46494
+Recommends: xdotool
+Filename: pool/main/m3tal/m3tal_0.20.6_amd64.deb
+Size: 25729294
+MD5sum: 125d296bfb28c7d326501a1dfaeceb16
+SHA1: fc63724df54d014a3dbab0c33819c8a89381eda4
+SHA256: efbe6d80776e633f5ac016856ec38e161876c979b911b64c43589953db0c2b26
+SHA512: fe4452a94c81eae86d9b89933246d4ec8849f00a8520829066966755242bffee329f4baa6915a57baf33ee6ef64b6e32d652b052c0d753184ffad65768582ac2
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+License: MIT
+
+Package: m3tal
+Architecture: amd64
+Version: 0.20.7
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 46495
+Recommends: xdotool
+Filename: pool/main/m3tal/m3tal_0.20.7_amd64.deb
+Size: 25733538
+MD5sum: 5cf3c908e4c365f7bf42404ead5bcb3b
+SHA1: a34cb9f372c0a0c3c9a360d99a7830abb2e974fe
+SHA256: dde9ed70e0ffc1b706a3c957c4fb40556b870892fe6013f2b53ff07cfbdcfd25
+SHA512: 0b29140703e8dec01481fbc00d518efad635a1ce1901f4933cc554104755fb3b8d6e70cd52e25cfcb263daed33e396d5696af2c7718f6a3023dc3c15643c9513
+Description: M3TAL Core — DEB-first infrastructure orchestration platform.
+ Includes the m3tal CLI and control-plane API.
+ Optimized for Traefik ecosystems and home lab automation.
+License: MIT
+
 Package: m3tal-plugin-compose
 Architecture: amd64
 Version: 0.2.0
@@ -909,6 +966,22 @@ MD5sum: 34398b62d54c73018ecd685dd7a2c3d8
 SHA1: 08d16803d6bb6998087640c7b6f27da1cb20dfd0
 SHA256: f57a35b82a3f07aa9b159b56f831ad8a70973fec6c927455e539de8dfe8992ff
 SHA512: 9cfaf3b221e927b2edc954d0623e39b1660ffb057190d153b505f8c6016446b42041bc4bb4517cdfab4e6b00e0ffca7a7862a66219eeb52f03325e63024c1860
+Description: M3TAL official plugin for m3tal-compose
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
+Package: m3tal-plugin-compose
+Architecture: amd64
+Version: 0.5.0
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-compose/m3tal-plugin-compose_0.5.0_amd64.deb
+Size: 1068222
+MD5sum: a820fd4ec3ac01b0534022651ecad147
+SHA1: eb5d09f54ebf2e605210e8141c69b07f24c0477a
+SHA256: ce170d191d00c2ee0de151ee6131a77603176580378818e10eec3cef4e2e95b5
+SHA512: 37923ef76cedb0cd6580a670de8d502c4f1432ec34cd85a62e6cb3c22892e6d53c8ccdc5d2fbcae6f822a44ffd4cbad4750289d717ec8f9275fd368099d56142
 Description: M3TAL official plugin for m3tal-compose
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
