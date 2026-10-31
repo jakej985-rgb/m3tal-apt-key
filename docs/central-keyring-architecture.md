@@ -92,7 +92,8 @@ with:
     {
       "package_id": "monster-lab",
       "version": "0.1.4",
-      "deb_url": "https://github.com/jakej985-rgb/Monster-Lab/releases/download/v0.1.4/monster-lab-v0.1.4-linux.deb"
+      "deb_url": "https://github.com/jakej985-rgb/Monster-Lab/releases/download/v0.1.4/monster-lab-v0.1.4-linux.deb",
+      "sha256": "4a1d41865c3bb203e061801c38fa800bdfb5dfcb0a4c28f306fc6e2321528615"
     }
 ```
 
@@ -105,10 +106,12 @@ The workflow `.github/workflows/ingest-deb.yml` automatically:
 6. Signs `InRelease` and `Release.gpg` with GPG.
 7. Commits and deploys the change.
 
-New publishers should include a `sha256` field in the dispatch payload with the
-64-character SHA-256 of the tested `.deb`. When supplied, ingestion rejects the
-release if either the downloaded artifact or staged pool package has a different
-hash; the central signed APT indexes are then validated before deployment.
+Publishers should include a `sha256` field in the dispatch payload with the
+64-character SHA-256 of the tested `.deb` release asset (the official template
+`templates/dispatch-apt.yml` computes this automatically). When supplied, ingestion
+rejects the release if the downloaded artifact does not match the expected hash;
+if omitted, ingestion issues a workflow warning. The central signed APT indexes
+are always validated before deployment.
 
 ### Modality B: Local CLI Ingestion (`scripts/ingest_deb.py`)
 For local workstation builds or development tests, developers can ingest directly:

@@ -102,6 +102,8 @@ jobs:
               exit 1
             fi
             EXPECTED_SHA256=$(printf '%s' "$EXPECTED_SHA256" | tr '[:upper:]' '[:lower:]')
+          else
+            echo "::warning ::No sha256 checksum provided with ingestion request; package integrity cannot be verified against upstream release build."
           fi
           echo "sha256=${EXPECTED_SHA256}" >> $GITHUB_OUTPUT
           echo "Ingesting package ${PKG_ID} version ${VER} from ${DEB_URL}"
@@ -150,12 +152,9 @@ jobs:
             EXTRA_FLAGS=""
             if [ "$ALLOW_REPLACE" = "true" ]; then EXTRA_FLAGS="--allow-replace"; fi
             python3 scripts/ingest_deb.py "$candidate" $EXTRA_FLAGS
-            if [ -n "$EXPECTED_SHA256" ]; then
-              PUBLISHED_SHA256=$(sha256sum "$target" | cut -d ' ' -f1)
-              if [ "$PUBLISHED_SHA256" != "$EXPECTED_SHA256" ]; then
-                echo "::error ::Staged package SHA-256 $PUBLISHED_SHA256 does not match expected $EXPECTED_SHA256."
-                exit 1
-              fi
+            if ! cmp --silent "$candidate" "$target"; then
+              echo "::error ::Staged package $target differs from validated candidate."
+              exit 1
             fi
             python3 scripts/validate_repository.py --strict --skip-container-test
             git add pool/ dists/ registry/packages.yml
