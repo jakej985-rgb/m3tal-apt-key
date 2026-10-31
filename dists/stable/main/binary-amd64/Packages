@@ -1161,6 +1161,22 @@ SHA512: 51788c97109ee64d42fabd4d90c805ce8e75a102b8902ada47c499a662dd30074c98fb4f
 Description: M3TAL official plugin for m3tal-mesh
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-mesh
+Architecture: amd64
+Version: 0.1.5
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.1.5_amd64.deb
+Size: 2251526
+MD5sum: 14bee1befd4833ee672a6400e39b9c32
+SHA1: 5a36b6f78a12feb3dd5c3ca94522871687833ef7
+SHA256: 4cc0a940275583ab9db80f2d61ebe4f732f641bb34e42d0561ca669aee762110
+SHA512: 9770246935ad8f9f0b9f4f60308938e781302faa7c47bc2e749d5cd8e098f99a21791f5c840f08f2ca8521d26e5a23b7329469d663f636bf28c5a15ef0d8e099
+Description: M3TAL official plugin for m3tal-mesh
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
 Package: m3tal-plugin-mesh-cluster
 Architecture: amd64
 Version: 0.1.0
@@ -1197,6 +1213,24 @@ Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
  Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
  headless telemetry broadcaster, making this machine a full peer node.
 
+Package: m3tal-plugin-mesh-cluster
+Architecture: amd64
+Version: 0.1.5
+Priority: optional
+Section: utils
+Maintainer: jakej985-rgb <jakej985@gmail.com>
+Depends: m3tal-plugin-mesh (>= 0.1.5), m3tal-plugin-mesh-node (>= 0.1.5)
+Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.1.5_amd64.deb
+Size: 926
+MD5sum: c5df3016e8d806c5c0e426f75063e7e9
+SHA1: 81bc03ea76e80749b7e6e4afa606cb799e80bb15
+SHA256: 8c7a7ff1e8f9f12dc6b0b4102b3bbb055265630316ab9ab04ca8eb5caf3a6d53
+SHA512: daebbad1db443270449b9c508049fad1c02bdafaee497c187d9181e738b38a58edb7908c984f26d94c5951cfc086e14754cba8af5ef21377b477952029954eb9
+Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
+ Personal Cloud & Fleet Federation Metapackage.
+ Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
+ headless telemetry broadcaster, making this machine a full peer node.
+
 Package: m3tal-plugin-mesh-node
 Architecture: amd64
 Version: 0.1.0
@@ -1210,6 +1244,22 @@ MD5sum: cb407fc8d238ba424a66a8a75cf683b1
 SHA1: bbd57b7e463e8a716335c8dcd5355984b39f66fb
 SHA256: eeaef0aafe776d01071ecf85a40b991e994c030d95cb361097f2d703182cae0b
 SHA512: 2371dace79c39c6087b35b0c5d6eabbbe568731814ea99b2907b14907f83ec1d780042df43e38fab8d05931a572e0e91cecd4f6529b483dbd4f714fa89a0c0a3
+Description: M3TAL official plugin for m3tal-mesh-node
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
+Package: m3tal-plugin-mesh-node
+Architecture: amd64
+Version: 0.1.5
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.1.5_amd64.deb
+Size: 2250726
+MD5sum: 0265b8c30821fcabacfcc3d8db87c848
+SHA1: 768c7b7016a8afd19371b425d4678ca28ccf0ce1
+SHA256: 6fca39ff2be7bc3dc6bf23a34cae4dbac8ecdf438617c8ccafae113bc23e702f
+SHA512: 5fe477c000f19873161ca475da3c197a5025117c04435ae70fe072c9bea5b05f9ee448afa68368489585b04ee588c792605a800d6501239b35ea6c92dc94bb83
 Description: M3TAL official plugin for m3tal-mesh-node
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
