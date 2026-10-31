@@ -107,11 +107,11 @@ The workflow `.github/workflows/ingest-deb.yml` automatically:
 7. Commits and deploys the change.
 
 Publishers should include a `sha256` field in the dispatch payload with the
-64-character SHA-256 of the tested `.deb` release asset (the official template
+64-character SHA-256 of the `.deb` release asset (the official template
 `templates/dispatch-apt.yml` computes this automatically). When supplied, ingestion
-rejects the release if the downloaded artifact does not match the expected hash;
-if omitted, ingestion issues a workflow warning. The central signed APT indexes
-are always validated before deployment.
+rejects the release if the downloaded artifact does not match the checksum sent by
+the publisher; if omitted, ingestion issues a workflow warning. The central signed
+APT indexes are always validated before deployment.
 
 ### Modality B: Local CLI Ingestion (`scripts/ingest_deb.py`)
 For local workstation builds or development tests, developers can ingest directly:

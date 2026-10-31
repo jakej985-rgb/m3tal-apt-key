@@ -103,7 +103,7 @@ jobs:
             fi
             EXPECTED_SHA256=$(printf '%s' "$EXPECTED_SHA256" | tr '[:upper:]' '[:lower:]')
           else
-            echo "::warning ::No sha256 checksum provided with ingestion request; package integrity cannot be verified against upstream release build."
+            echo "::warning ::No sha256 checksum provided with ingestion request; package integrity cannot be verified against the checksum sent by the publisher."
           fi
           echo "sha256=${EXPECTED_SHA256}" >> $GITHUB_OUTPUT
           echo "Ingesting package ${PKG_ID} version ${VER} from ${DEB_URL}"
@@ -129,7 +129,7 @@ jobs:
               echo "::error ::Downloaded package SHA-256 $ACTUAL_SHA256 does not match expected $EXPECTED_SHA256."
               exit 1
             fi
-            echo "Downloaded package SHA-256 matches the tested release artifact."
+            echo "Downloaded package SHA-256 matches the checksum sent by the publisher."
           fi
           PACKAGE=$(dpkg-deb -f "$candidate" Package)
           VERSION=$(dpkg-deb -f "$candidate" Version)
