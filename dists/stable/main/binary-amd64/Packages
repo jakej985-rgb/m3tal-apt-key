@@ -1,293 +1,5 @@
 Package: m3tal
 Architecture: amd64
-Version: 0.1.0
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Depends: systemd
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.0_amd64.deb
-Size: 23118500
-MD5sum: d5f8c5f08975f2736632b726dce2aea5
-SHA1: 9df5f230852d35615b87ff99f1c326731518f178
-SHA256: ad91cad738255cd5be9e6315cf7f28ef6c8b24ed10998223290126687b9724ea
-SHA512: 583d3babca90725c9a1e10fa242dbad09ba2abcc675d9038af3ea911af3f8332fcaf4d76188335106e7db2fb5bc4304ddbbc4348f8c6cec5e41864826f329110
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API with embedded Web GUI.
- Optimized for home servers and homelab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.1
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46203
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.1_amd64.deb
-Size: 25602722
-MD5sum: 724a535026bc29c8397e32a51dc2dcec
-SHA1: 99ebac3bf28a7c7b928e38120a295948da984fff
-SHA256: d1611b9dfb86de6d1c66ffd3937e631780e722098999829fd21146932cf07d0b
-SHA512: 8df814a26839bee1cf851fde800a9e62993997fdc13840f33f1a9e48eb1d88b297ed81a55877a083ed1c9654ff96cd36f7e990a9b01f8acc5ef4b12da1de4061
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.2
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46203
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.2_amd64.deb
-Size: 25602722
-MD5sum: 2c1ea7fdad3aa6941373b27c8f32e877
-SHA1: 3ca60a93cdd8a175f01c256881a48449913fddad
-SHA256: 117dbbfd5a8302943af759f025dc21755a913f14ef7277952d8ba2477e06767b
-SHA512: 5c8e95aba197865ac42dae49d72b2e7117d6470bfaf0faad483a9687d8c35392174ead41540107f9a0cd840969ebc2d86c892a4030428c4a6f56f1feddcd2391
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.3
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46203
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.3_amd64.deb
-Size: 25602718
-MD5sum: 9486945592d78662fa57fe1b2f5f5c7c
-SHA1: 9a99a1672768b07eaff9cf569b5c270b7cb60502
-SHA256: 47a77645f2c177d97c1ca42fcc79d4c73b7a3feea45132a17f403b0d2d4c600c
-SHA512: cb67d74bf1a6142a1c39bbe254b811cfa692dd8f3424d0c2d88104e15b92530785dbd4f099eb40d735c2e2e43347ac3d4bafa325249f933a4a381c3afeee1d8b
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.4
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46203
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.4_amd64.deb
-Size: 25602726
-MD5sum: 1605d94fee6f550d488eb86b6f044b1d
-SHA1: 895a0d89f76ba382b01b5258471f30d419a88374
-SHA256: 78ed1bf1e07504a8b31e5b7ef37d0c3594942c8be2e25cb974fa0497530f816b
-SHA512: 100a3a731c2c8f8a93955a7ecb808c1fb9e019737153ad13f14d980a19355d199547306c951d80ecac6ce751e847cb8222250aff3809edc915c06023688f17dd
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.5
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46204
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.5_amd64.deb
-Size: 25605852
-MD5sum: 6d159417f65cb5dadc22685c984de5cd
-SHA1: 3e213a47ded9bd34271459a339b3f457f7d8e4dd
-SHA256: 5797d2306b8e86e990c85536b84456c906f50aeebc9e729a36ad4d0840b1e5a0
-SHA512: aaff166434be1f31cf41500263907c4105c9b88ac165078975a4632b6f0024694babcf54c9130b891998382e9de5d40472489d6f5d9ae4e22cfa5e8aa0ae6b97
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.6
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46204
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.6_amd64.deb
-Size: 25606436
-MD5sum: c33331f3f9c2dbfaa15092df240ce4ea
-SHA1: 16fe5dd0ff3a866525e218000dc645670e157c2d
-SHA256: 3a64f21fc2f4b56093c840ce4512d73bf479ce40b975982485b71a3b4b032672
-SHA512: f4609228f981c730aeedad9419d346523dde6790aab3474eab2fbb0e7fd80797e89876b01c124d9b4acb1f87c979c0b765fc546e8b22405f98bf756886a491c9
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.7
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46281
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.7_amd64.deb
-Size: 25629212
-MD5sum: 03bf3c38cd5c3e5968bd6a2f83609a0d
-SHA1: 768f2bfe6e33eeb4840222cc24d7466fed6d1dc1
-SHA256: 7530c19241793f4c5e6ec5a3ed9a0be8ee5a7b59f406d586de55d991f82e3571
-SHA512: 5f4179b762d7f5a4fd2dcc748a0207e730977b06abb12b44c083effbdc593319f46a36afb29103bace99bbc3e4fbe89b68c854f466b8dea3a51479d6990f6fef
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.8
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46293
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.8_amd64.deb
-Size: 25632776
-MD5sum: 90516d59b8ec06a89ce92451e505ca65
-SHA1: 255935f0612499567553c1afc461b4fa9fdad165
-SHA256: 4326a08787b438bb01651a65e9edfbde246c4fb73f82994cb631cbeffd107e49
-SHA512: 74d93f75bfcce0fbd7fc111421911202d9031b76eefa85b4605620f794597beec9eeb9dfddfdc9f06884b8a8598dd0a164fa7ac98a50e387a0afcd0503d6d814
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.9
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46626
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.9_amd64.deb
-Size: 25786468
-MD5sum: c4dadefee5530ed8586ee3a8ba5133c0
-SHA1: d833ebbd836420614659e6743729ac681df21c3a
-SHA256: ca9dbfa469289464c368f5a5dd8f17595acc26457894cd8913889977016ac946
-SHA512: 642148acbd1de1612ff97ec1971a5e6b5b6e6b67df906b68cc45570ce7819c8eacfc198f9278ed18549bd932e1afb7b90e0606c4f0d2704a889cf83b7e4945f2
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.10
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46646
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.10_amd64.deb
-Size: 25792180
-MD5sum: 7e9130378de096d4264591d3fbc21ef7
-SHA1: 27e87568c7b3d5f37ef2d7d70501f83b59b67744
-SHA256: 38394ecbec59278fdea9ebba2e01ac32093c4e2c3e5f844777791776bc879ea6
-SHA512: 7f7490ec5f491eb31e9fe90c623d7b9fe70ee63aaed141128e570d6d601ab01af53211c8116b1a87ca5f0ed776f9605ff5d43375cf649492d1110bb32c8941ac
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.11
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46646
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.11_amd64.deb
-Size: 25792174
-MD5sum: 2511cdad730dbee70c2ee9a0d6832b5f
-SHA1: 034934736488750654d8e5a94b0d4f5adda85a18
-SHA256: 79a10b2470c7791047b69a90d37a2a7d620bc6427f4e1a5726408451c5f5cd23
-SHA512: 93e33e158193b965b8be36806b80e0802cc0ead9e03ea68c5ae29902aea6b9e83c1d18e0c200c307abe915d0f83a47aed762942ab9d5202adaafd5f2fd82df21
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.12
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46651
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.12_amd64.deb
-Size: 25793662
-MD5sum: a8380b265bcdcd3fd64627bb97aa6a3a
-SHA1: 1c0a21a66c5a3a858b97b99c7912caac797dc223
-SHA256: 7959ab15d0ca3be781ab78548ce7bf92971a2aff1b423358a2ae596ac423986c
-SHA512: 1358350f44803de3ce932cc8f2a5057703ad0098317e1bdcb9b16fad52d8cf6afb449d99fe17c60064a3a2b19a929525fdc5aa1cb87cee191fb4739a85182a7e
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.13
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46656
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.13_amd64.deb
-Size: 25793588
-MD5sum: 2632a4d248266bb78d4bab910f05dcc7
-SHA1: 045821d246cc7aab08c13478a3c089589cbcab77
-SHA256: 6db203a583154b5a36a7438fbb19c38f5b533e08a02e20cc5152740f641e6fb8
-SHA512: c6a0acfa7f8865485b890e88af25f065412938ac930f67884735c07e9f49dca8e89dfd0779259a67f79a1b5631722a1e64c0aa7e5dd842be136dc8832f8749f5
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.14
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46651
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.14_amd64.deb
-Size: 25791642
-MD5sum: 9ce969b6f2d7e67eb5bdda973b7ab5c6
-SHA1: 17c88e029cf9802a5cb9247c94aab29737ce2712
-SHA256: 39da25248b6acc4ce4512c3768a71794780ece5d74e75a46c462c296d8ac3303
-SHA512: 0a3ab96cbcfafa8206443927fe55691d6201e14f224c546f7e0cbfc620df848412e3abc663f7d41c60a9d51acf17ebdc95551a39461a0983236c2d69fbf16fd9
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.1.15
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46651
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.1.15_amd64.deb
-Size: 25792692
-MD5sum: f151b074a4e9c0845bd44ec5d824c975
-SHA1: 70e56e955b698cadb08a93d32121c3098dfaeb62
-SHA256: bb1dfb0a9f747c1504887604697bf0fff0c973fcca7ca6b83320dd446729047f
-SHA512: 43708a9bb2e9c578b7d21083ffcbf93154a21c12242c8bec095b0ea4ae92d9eafc33a3b0b0c0e26550cb465b7a7dd1684711c416b0e0ca11e5300865067a5060
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
 Version: 0.1.16
 Priority: optional
 Section: utils
@@ -408,24 +120,6 @@ MD5sum: c73df5401964569b7a1a0eb544c23c94
 SHA1: 8fb560410202eb6e70068cc58ec98b230b65a6d4
 SHA256: 194063286ad3d4bb71fa00c2c3812d4522bea8d82bd37fbc88b04e90c3bf8786
 SHA512: 33098d8fa9cf6b0000b3f90d59dba96374fde2500bc13a3dc2e16d1c34fa370aca936e736b29b01e068f9f33833af21c7d5f6003ed86f585b37867ea49869b90
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.4.0
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46320
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.4.0_amd64.deb
-Size: 25625510
-MD5sum: f5ae92f4e8c60bc31fbecd2199a6284d
-SHA1: 97f208bbb1b7f678c3f3d56a80325882e4e57e48
-SHA256: 05e19628d42dc664052b0191076532d10c6a0f18ef464658013d43b0b7db9c1d
-SHA512: 8754807ce4d022b3e40da44cf784aaf86c128e2d9bac9f7e9b4bfba931f20f8e2ea13c71e4ba4da36398540d28613dc2c7bae410a2fa48dad5a69bd87d800d99
 Description: M3TAL Core — DEB-first infrastructure orchestration platform.
  Includes the m3tal CLI and control-plane API.
  Optimized for Traefik ecosystems and home lab automation.
@@ -792,60 +486,6 @@ Description: M3TAL Core — DEB-first infrastructure orchestration platform.
 
 Package: m3tal
 Architecture: amd64
-Version: 0.20.0
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46853
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.20.0_amd64.deb
-Size: 25830392
-MD5sum: a4befbe549507dad5867b73c43d2d370
-SHA1: 9aefcda54f5a9780592bc9e18e84f3c530441b8a
-SHA256: cee8755e42dff4d6c204509b9c45163314ade735da8d2b248b37a25aedd96b8d
-SHA512: b406cb4a500d6b2ea76f0b1ba2beab9f4a09001f702ebab2265b941fec52914ed8d6721669a05f3b0abb0ac3f0fd68f00de9f5823006d424eeef33f4ffe6d761
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.20.1
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46859
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.20.1_amd64.deb
-Size: 25831676
-MD5sum: 4d5dba64c014f05faef8791f4dbc6661
-SHA1: 8e960e5641b7f0a3e61ae433bf46219dc3ed2906
-SHA256: af4d77217c14c24c68ef43d6fa8b47fbc93317d3f9c05c7ace04ff4a5af77f07
-SHA512: fd81c39a47ccfd0835d34f0463cd1d7535845b8fe9dd582fe3f00ec7521eca0509964a455fdf9ca297fb61bdae7eda4c7a74f8aaea443b8690d43200f1ff6fef
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
-Version: 0.20.2
-Priority: optional
-Section: utils
-Maintainer: Jake Johnson <jake@m3tal.io>
-Installed-Size: 46867
-Recommends: xdotool
-Filename: pool/main/m3tal/m3tal_0.20.2_amd64.deb
-Size: 25832478
-MD5sum: 650851c330f06633bdc4b2b758792fac
-SHA1: eecb629de1625d43585b4b3884c9c26d9fa120ed
-SHA256: 06c493d32dd2d197e8fc72cb25191c655d0ff302ae8e9bd27a79a7836b368ac1
-SHA512: a4eda7af8e20f565602f1318f363240a9f817d20f45e1d3dbc128a3cba85bcb2838c27084af70dc12b8284184e768bbfea4018e61054df0431c820bbc447fc82
-Description: M3TAL Core — DEB-first infrastructure orchestration platform.
- Includes the m3tal CLI and control-plane API.
- Optimized for Traefik ecosystems and home lab automation.
-
-Package: m3tal
-Architecture: amd64
 Version: 0.20.3
 Priority: optional
 Section: utils
@@ -1165,38 +805,6 @@ Description: M3TAL official plugin for m3tal-compose
 
 Package: m3tal-plugin-docker-monitor
 Architecture: amd64
-Version: 0.1.1
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-docker-monitor/m3tal-plugin-docker-monitor_0.1.1_amd64.deb
-Size: 829072
-MD5sum: 423049cb02248d6cdc7bfb1f521711c0
-SHA1: 900d159dd78a380bf7f93714bd4bb522359cc7ea
-SHA256: 907c5849b8e50c2377c34f81ab0ca3eb515760e0edeee9f966264baa5f2c2f68
-SHA512: f447dc82cbcfefe7d381bd65552e26bac727f173ba878d4ced12b08167debfbc1344a7dead33b37ccc332e2ca510cc43fc91d943eda724c4eb4a7d8af30db921
-Description: M3TAL official plugin for docker-monitor
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-docker-monitor
-Architecture: amd64
-Version: 0.1.2
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-docker-monitor/m3tal-plugin-docker-monitor_0.1.2_amd64.deb
-Size: 826738
-MD5sum: e00632271aa9404e0bda7ed9312f65e9
-SHA1: 1ed33ec42e5b88a0cf149fd7761fb6fac0a566da
-SHA256: aa506ae3b6f175a90f5ba38d0724f9e9e0b925c8f3050cd029e52d67eeceb363
-SHA512: 9a85a9dee7570cbc12217198fb967f6040014516b9941f35c5bf73d91de57af3c93cc486f1d4052cd607211919447eb7306833cb6b02500127121ecc9df584dc
-Description: M3TAL official plugin for docker-monitor
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-docker-monitor
-Architecture: amd64
 Version: 0.2.0
 Priority: optional
 Section: utils
@@ -1240,22 +848,6 @@ MD5sum: bb3230b4f0551365b4fc0825c46b8fae
 SHA1: 1bd478d64766c75a5c41a04adac4d9976dfadbca
 SHA256: 1b96271b0095d71b85e680cb480b7fa9e57b7ab691ef718ff1137ac72492a277
 SHA512: fef00cedc973d08580b609d21121e996494484034a07052e66896d23a771aca7eeb8d470a41f2078b9751fc6787610bfd42fd63d8168d763a9f19e1ff288e49e
-Description: M3TAL official plugin for m3tal-docker
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-docker-monitor
-Architecture: amd64
-Version: 0.4.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-docker-monitor/m3tal-plugin-docker-monitor_0.4.0_amd64.deb
-Size: 828842
-MD5sum: 54e2f053809cd13e3b93f4d0545d2355
-SHA1: 0983411030b1b9e25bae337a4b290d68f3c8d2c7
-SHA256: 0869911045e05e02eff1d53e1781c83e1136fd75c445a533a56cba62aa480b4b
-SHA512: 80ec6bea0e8ac261297dbf91f4ed9b3d11264e5cc48b46e3da873806af8b5cf9c21958252e78ba46c326c2b62659af85422f47672f3da8ef35bda789937e2cfd
 Description: M3TAL official plugin for m3tal-docker
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
@@ -1373,54 +965,6 @@ Description: M3TAL official plugin for m3tal-docker
 
 Package: m3tal-plugin-mesh
 Architecture: amd64
-Version: 0.1.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.1.0_amd64.deb
-Size: 718106
-MD5sum: 47b367b0c7efccfd34c24a1d7529cf4b
-SHA1: 9add011f2dbb9eb12e00f669275f43be7bde6806
-SHA256: a6edda40a92ac9b34089d14953ebfc1ca9d3d9a2af07580aa50d2f2a185d507d
-SHA512: 3ebb836b9664afb103547fc50ce65b927219f8822e9dd70526e2b9b30bc092a5f371609019a1f8268f92f47c0b56ea177faae48c92b0527f3582899e4e1bbb11
-Description: M3TAL official plugin for m3tal-mesh
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh
-Architecture: amd64
-Version: 0.1.1
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.1.1_amd64.deb
-Size: 874830
-MD5sum: 2a016520d41f3c909f3fc68d2e5df5d4
-SHA1: 1525f35425372e6177d549fd8fbc8fc6c7355adf
-SHA256: e1677a009952c4c611bb13013dc4ec8db595c8a0fabdfc687417caa539ef839d
-SHA512: 51788c97109ee64d42fabd4d90c805ce8e75a102b8902ada47c499a662dd30074c98fb4f04239307f73681c785a1ba9814b0ecec639fe339d02cc50c76a2c1dc
-Description: M3TAL official plugin for m3tal-mesh
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh
-Architecture: amd64
-Version: 0.1.5
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.1.5_amd64.deb
-Size: 2251526
-MD5sum: 14bee1befd4833ee672a6400e39b9c32
-SHA1: 5a36b6f78a12feb3dd5c3ca94522871687833ef7
-SHA256: 4cc0a940275583ab9db80f2d61ebe4f732f641bb34e42d0561ca669aee762110
-SHA512: 9770246935ad8f9f0b9f4f60308938e781302faa7c47bc2e749d5cd8e098f99a21791f5c840f08f2ca8521d26e5a23b7329469d663f636bf28c5a15ef0d8e099
-Description: M3TAL official plugin for m3tal-mesh
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh
-Architecture: amd64
 Version: 0.2.0
 Priority: optional
 Section: utils
@@ -1448,22 +992,6 @@ MD5sum: cb63beba2034bf92f53eba76346af2a6
 SHA1: 11f483d11975cf94051d3933ba0b7e49ae69653f
 SHA256: 3ac09d594cacc4de93a8d465dbb5825ecae3a79672063ac9c32fae7695e843ca
 SHA512: 93db2e4fa4152df03d46f3fc25f459301ec24663f4ab96ba7be80134fa715c4dea5cd184252f3e1ce282ab6c2a0cc60e08cea8d178690dbb14a205d6323e1bfc
-Description: M3TAL official plugin for m3tal-mesh
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh
-Architecture: amd64
-Version: 0.4.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.4.0_amd64.deb
-Size: 2271100
-MD5sum: abfd28c2458c70db098246efb23191c1
-SHA1: c8ac2af42a8db63519da4237e544971f8b470ecd
-SHA256: be21a4077aae0f9a84cbbf91718c0b62c22b9877918f44b07d5591afe0863d73
-SHA512: e66ecf7bcb894c3a4feb9adfa27ed90c3d9335f7fa4daafbbc35e9936d11f803ec471276d72682e1f36447eb27d6e1e6753eceed4e3b0c7ce887b409dd455912
 Description: M3TAL official plugin for m3tal-mesh
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
@@ -1501,78 +1029,6 @@ Description: M3TAL official plugin for m3tal-mesh
 
 Package: m3tal-plugin-mesh-cluster
 Architecture: amd64
-Version: 0.1.0
-Priority: optional
-Section: utils
-Maintainer: jakej985-rgb <jakej985@gmail.com>
-Depends: m3tal-plugin-mesh (>= 0.1.0), m3tal-plugin-mesh-node (>= 0.1.0)
-Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.1.0_amd64.deb
-Size: 930
-MD5sum: 56b0bfa96488ab0096700eade962e4dd
-SHA1: 48c9387a20c447173b2c969f2387c19f373facc3
-SHA256: d8f1316dce012e3952a9f55195b4a7dd41e3f2b8632d40fdb1a4ea2743a3c4e2
-SHA512: c2a5663cc3d71f2a70ec196f8fa40dae18a2914ce66272b6f33cac5105812ec7ddc2600cc781343ed9398716094b718b0f25405102194d1a81a46b790bfa7821
-Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
- Personal Cloud & Fleet Federation Metapackage.
- Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
- headless telemetry broadcaster, making this machine a full peer node.
-
-Package: m3tal-plugin-mesh-cluster
-Architecture: amd64
-Version: 0.1.1
-Priority: optional
-Section: utils
-Maintainer: jakej985-rgb <jakej985@gmail.com>
-Depends: m3tal-plugin-mesh (>= 0.1.1), m3tal-plugin-mesh-node (>= 0.1.1)
-Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.1.1_amd64.deb
-Size: 926
-MD5sum: 92c9176395301a6d9144709ca4325ec6
-SHA1: 8c40c940e082d76e3540ab6407185f691994ac06
-SHA256: 22a2e9eb1f8bc469b5b51bc98f7af7e6f66021270c58e2c17d9cd2e896f9ff86
-SHA512: 0da2b6d8528e5a65881d42a3758b5e2c725375b422e548f280c3ee5ff5309f27f74ed430d6c9671b40517f6bc7c5c0bb023bc221da541c255fb8cdbe49640a87
-Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
- Personal Cloud & Fleet Federation Metapackage.
- Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
- headless telemetry broadcaster, making this machine a full peer node.
-
-Package: m3tal-plugin-mesh-cluster
-Architecture: amd64
-Version: 0.1.5
-Priority: optional
-Section: utils
-Maintainer: jakej985-rgb <jakej985@gmail.com>
-Depends: m3tal-plugin-mesh (>= 0.1.5), m3tal-plugin-mesh-node (>= 0.1.5)
-Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.1.5_amd64.deb
-Size: 926
-MD5sum: c5df3016e8d806c5c0e426f75063e7e9
-SHA1: 81bc03ea76e80749b7e6e4afa606cb799e80bb15
-SHA256: 8c7a7ff1e8f9f12dc6b0b4102b3bbb055265630316ab9ab04ca8eb5caf3a6d53
-SHA512: daebbad1db443270449b9c508049fad1c02bdafaee497c187d9181e738b38a58edb7908c984f26d94c5951cfc086e14754cba8af5ef21377b477952029954eb9
-Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
- Personal Cloud & Fleet Federation Metapackage.
- Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
- headless telemetry broadcaster, making this machine a full peer node.
-
-Package: m3tal-plugin-mesh-cluster
-Architecture: amd64
-Version: 0.2.0
-Priority: optional
-Section: utils
-Maintainer: jakej985-rgb <jakej985@gmail.com>
-Depends: m3tal-plugin-mesh (>= 0.2.0), m3tal-plugin-mesh-node (>= 0.2.0)
-Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.2.0_amd64.deb
-Size: 926
-MD5sum: ae99802953351f38a4b85cb2e9ea3b40
-SHA1: 66c1c5138f5b9e9d97c7e45d4d0fd19f493fb50d
-SHA256: 668d0ab04cacc295f679002f624c2d3757d2f3c87405bf464aefb599d3c3b5eb
-SHA512: f146bd3f2b98a13693d558b51cc62942463b4a1e688e41128c082b1c730f871f458a799d111b01b41bf3b9ed1afd2498fd96ce4ff5e5a86e8c0c60970f01efbe
-Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
- Personal Cloud & Fleet Federation Metapackage.
- Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
- headless telemetry broadcaster, making this machine a full peer node.
-
-Package: m3tal-plugin-mesh-cluster
-Architecture: amd64
 Version: 0.3.0
 Priority: optional
 Section: utils
@@ -1584,24 +1040,6 @@ MD5sum: cdd6caa0de90a784cbfd1bbc2f1f022c
 SHA1: 2cef0ada6e707f58c089ed0624797dce4d228f11
 SHA256: cd765e25ddb20f0ee57172ebd5ef9c2c78a2591f54b080b08d5e6688d7beb404
 SHA512: e05a4cb4bf8e485cb602dc21f8067d04f6854f9f42077696a83607b07abe528b813890d68b81928e2d7c75232a4337fe5903ec4b8e298e663bcedcc3443d18f2
-Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
- Personal Cloud & Fleet Federation Metapackage.
- Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
- headless telemetry broadcaster, making this machine a full peer node.
-
-Package: m3tal-plugin-mesh-cluster
-Architecture: amd64
-Version: 0.4.0
-Priority: optional
-Section: utils
-Maintainer: jakej985-rgb <jakej985@gmail.com>
-Depends: m3tal-plugin-mesh (>= 0.4.0), m3tal-plugin-mesh-node (>= 0.4.0)
-Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.4.0_amd64.deb
-Size: 926
-MD5sum: 9b2b258946da5ddc5239a16db3f4fb24
-SHA1: 0443efca80f94744b7e9c9853eeecd0c7f836421
-SHA256: d4441963f02505ded0a7906d66c8eecd93eb902382db45a198d81de9f34bcc7e
-SHA512: 44ac029e7b362950015617059f612ecd8ff704784df2c80ff57115c1ca4de678625a5198e54b32206ab882d1a45fa3e541f27868bc4b555efd71592b1197697d
 Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
  Personal Cloud & Fleet Federation Metapackage.
  Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
@@ -1625,104 +1063,6 @@ Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
  Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
  headless telemetry broadcaster, making this machine a full peer node.
 
-Package: m3tal-plugin-mesh-cluster
-Architecture: amd64
-Version: 0.5.0
-Priority: optional
-Section: utils
-Maintainer: jakej985-rgb <jakej985@gmail.com>
-Depends: m3tal-plugin-mesh (>= 0.5.0), m3tal-plugin-mesh-node (>= 0.5.0)
-Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.5.0_amd64.deb
-Size: 926
-MD5sum: e1981e98f1fa178f58b55b824cb183e9
-SHA1: da9a89aa5c6d14d858eab096dd7e942868c776aa
-SHA256: 0db81a380d280a213422205f2f94421d0f3502d038d69eb0936552bd1398b2eb
-SHA512: 95d80fd42fa5d8c5804ed8b1efd36ccf09bd1001f2574392be50f31b400351f5cfee242737eb44a871405cd8e52f436d638ecdb2fb0c30ac16d63d2401ea6394
-Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
- Personal Cloud & Fleet Federation Metapackage.
- Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
- headless telemetry broadcaster, making this machine a full peer node.
-
-Package: m3tal-plugin-mesh-node
-Architecture: amd64
-Version: 0.1.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.1.0_amd64.deb
-Size: 760174
-MD5sum: cb407fc8d238ba424a66a8a75cf683b1
-SHA1: bbd57b7e463e8a716335c8dcd5355984b39f66fb
-SHA256: eeaef0aafe776d01071ecf85a40b991e994c030d95cb361097f2d703182cae0b
-SHA512: 2371dace79c39c6087b35b0c5d6eabbbe568731814ea99b2907b14907f83ec1d780042df43e38fab8d05931a572e0e91cecd4f6529b483dbd4f714fa89a0c0a3
-Description: M3TAL official plugin for m3tal-mesh-node
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh-node
-Architecture: amd64
-Version: 0.1.5
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.1.5_amd64.deb
-Size: 2250726
-MD5sum: 0265b8c30821fcabacfcc3d8db87c848
-SHA1: 768c7b7016a8afd19371b425d4678ca28ccf0ce1
-SHA256: 6fca39ff2be7bc3dc6bf23a34cae4dbac8ecdf438617c8ccafae113bc23e702f
-SHA512: 5fe477c000f19873161ca475da3c197a5025117c04435ae70fe072c9bea5b05f9ee448afa68368489585b04ee588c792605a800d6501239b35ea6c92dc94bb83
-Description: M3TAL official plugin for m3tal-mesh-node
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh-node
-Architecture: amd64
-Version: 0.2.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.2.0_amd64.deb
-Size: 2252424
-MD5sum: d2875ab3b45dd0f88abd6eb14b12adcb
-SHA1: 33b27ae5fd8a74f712f4df1b1b8f1561f826c2b9
-SHA256: a4e0ead62a3433d520f12344070c09d0c3d27794c77017d74fcfa905f299aa9c
-SHA512: 746becc08e27d84a4bb818e959c2793db0757a75116ee15387e997bf2cf8a1abe537bf09ef6e13278435eb62eb0a4fc9beffac2035dee0965d8dffa88df76253
-Description: M3TAL official plugin for m3tal-mesh-node
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh-node
-Architecture: amd64
-Version: 0.3.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.3.0_amd64.deb
-Size: 2253190
-MD5sum: 669242c726dc0161cc506530176b4e22
-SHA1: c0fe4c8bc2129b8b941fe7f68a1e9b0576cac3db
-SHA256: b9e4ec259e50d7c738f5b2c15d469240e42c331d1fa3c3453d29bb87774efe25
-SHA512: 42f15bf80293de714b5c8245d1a7d3ab1c74d478a0385d96210aac0faf444cd898732303a2549e15c0244d14b598865a3370cc90660568c79f6a2d032f2118d9
-Description: M3TAL official plugin for m3tal-mesh-node
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh-node
-Architecture: amd64
-Version: 0.4.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.4.0_amd64.deb
-Size: 2255382
-MD5sum: c7cf2f885adf38ce9c57cb8a9a42824d
-SHA1: ba607353d15c07cb34e05dae9eeae87a6f04f9d5
-SHA256: 78108571675c0bd4e413b7bfae145113443ed3c440ff4dc8f5f2b124290799af
-SHA512: 2dbf749ac52da6d626787bd55a63c33ab078f7c2b8629451b6e83dd3245ca3e5de02ac877b5d78d1d3ec3141d067b5313e309cbac10cbff78db2dfb512445f11
-Description: M3TAL official plugin for m3tal-mesh-node
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
 Package: m3tal-plugin-mesh-node
 Architecture: amd64
 Version: 0.4.1
@@ -1736,22 +1076,6 @@ MD5sum: 6cf77b43e8aeff9d4182dd1935e01738
 SHA1: d34a119a556ade2604bd7605bf92254bee0de6b5
 SHA256: 492fe7f8b2c7512ade0f19b133ea2311e1e3eb2c74b359ec4a3dab21833cceb7
 SHA512: 7f3bba396c4ddde33efb51f7bcd34fa69a373abf6c8f688a345b80f0ee98a7130f900f500f1f254ffad550931162c08b402123d3269f63e4f7faa365d363c158
-Description: M3TAL official plugin for m3tal-mesh-node
- Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
-
-Package: m3tal-plugin-mesh-node
-Architecture: amd64
-Version: 0.5.0
-Priority: optional
-Section: utils
-Maintainer: M3tal Community <maintainers@m3tal.io>
-Depends: m3tal (>= 0.3.0)
-Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.5.0_amd64.deb
-Size: 2239836
-MD5sum: 9a1795997cba0790fe926dcf1d9b25ed
-SHA1: 4c79e118b3b0e3c6e879047256cfcb68c182bfdf
-SHA256: d045c7861ef34bf0766a65310198d87e7fd5472150d2624ae41242f5ff6f1d22
-SHA512: 0e0de12504758ed40e7da70b359938c8b34a046fd7cbd469ab3f798330cb665d44314892da1db0d4388f3779b3c5ad0ce5b37600f0a46a769f9dc80261303f72
 Description: M3TAL official plugin for m3tal-mesh-node
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
