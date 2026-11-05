@@ -1049,6 +1049,23 @@ Description: M3TAL Core — embedded Web GUI dashboard, system monitor, settings
  All workload features are provided by external plugins.
 License: MIT
 
+Package: m3tal
+Architecture: amd64
+Version: 0.24.3
+Priority: optional
+Section: utils
+Maintainer: Jake Johnson <jake@m3tal.io>
+Installed-Size: 18135
+Filename: pool/main/m3tal/m3tal_0.24.3_amd64.deb
+Size: 10139382
+MD5sum: 79b563b3977b3401ba4f36fbd4896e9b
+SHA1: 5af957d8e7cd4aa2182f5ccfaac029d1fbb561e1
+SHA256: 8d068d7c9f359c5cbc3f8f501cb94ae3a5fcc6a922ad61bed0ce322cffa1e0dd
+SHA512: 9c5cfde3b5b5ea6a6dc25d5aa37eac045efc5dd523bedc8b733e488f9d880cfa58c44639cabe993155b1c7b2bf9f175098f1a3ca736ec38d5162c436d54106e9
+Description: M3TAL Core — embedded Web GUI dashboard, system monitor, settings, GPU telemetry, and plugin host.
+ All workload features are provided by external plugins.
+License: MIT
+
 Package: m3tal-plugin-compose
 Architecture: amd64
 Version: 0.2.0
