@@ -1194,6 +1194,22 @@ SHA512: 7f3bba396c4ddde33efb51f7bcd34fa69a373abf6c8f688a345b80f0ee98a7130f900f50
 Description: M3TAL official plugin for m3tal-mesh-node
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-mesh-node
+Architecture: amd64
+Version: 0.5.1
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-mesh-node/m3tal-plugin-mesh-node_0.5.1_amd64.deb
+Size: 2239584
+MD5sum: dd3ef1f97df1355adb01cac2a0076571
+SHA1: 9a42249995b09a211af929ed691a7c83168dd5fb
+SHA256: aae0a14b87a446f6f1cab68fc96cafc2f2a92fa80a7dd5f967c05b4518dc840c
+SHA512: c24b40420df6935bad9ef87a63a6899c098f8eae461534fcda3b45d8963ac0579b4f2d61f6d8ddfb4d51a3d49707c8ade4b14eb2615c1e695d3d725d72eb2a38
+Description: M3TAL official plugin for m3tal-mesh-node
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
 Package: m3tal-plugin-samba-nfs
 Architecture: amd64
 Version: 0.1.1
