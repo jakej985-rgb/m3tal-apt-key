@@ -26,23 +26,35 @@ The M3tal APT repository operates as a static Debian repository hosted directly 
 │               ├── Packages            # Full RFC 822 package metadata block
 │               └── Packages.gz         # Gzip-compressed binary index
 ├── pool/
-│   └── main/                           # Binary package pool (.deb archives)
-│       ├── m3tal_v1.0.0_amd64.deb
-│       ├── ...
-│       └── m3tal_v1.1.62_amd64.deb
+│   └── main/                           # Structured binary package pool (.deb archives)
+│       └── <package>/                  # One directory per Debian package name
+│           └── <package>_<version>_amd64.deb
+│               # e.g. m3tal/m3tal_0.24.6_amd64.deb
 ├── docs/                               # Engineering specifications & manuals
-│   ├── current-state.md                # Phase 0 Baseline Audit
 │   ├── user-setup-guide.md             # End-user installation manual
 │   ├── maintenance-guide.md            # This operations manual
-│   ├── developer-guide.md              # Packaging standard for contributors
-│   ├── security-and-key-rotation.md   # Cryptographic policies and emergency protocols
-│   └── e2e-validation-report.md       # Phase 16 Validation Suite Record
-├── scripts/                            # Validation & release automation tools
-│   ├── verify_baseline.py              # Repository integrity & crypto audit script
-│   └── test_e2e_validation.py         # Full lifecycle end-to-end testing suite
-├── projects/                           # Project redirect shims
-│   └── m3tal-core/
-│       └── index.html                  # Legacy URL redirect shim
+│   ├── ecosystem-distribution.md       # Authoritative distribution & trust guide
+│   ├── central-keyring-architecture.md # Keyring & ingestion architecture
+│   ├── app-deb-publishing-guide.md     # Publisher guide for app repositories
+│   ├── package-registry.md             # Registry schema & lifecycle spec
+│   ├── package-retention-policy.md     # Retention & pruning policy
+│   ├── security-and-key-rotation.md    # Cryptographic policies & emergency protocols
+│   ├── universal-bootstrap.md          # install.sh technical specification
+│   └── plan-repository-integrity-and-publishing.md  # Integrity remediation plan
+├── scripts/                            # Validation, ingestion & release automation
+│   ├── ingest_deb.py                   # Package ingestion (dispatch handler core)
+│   ├── generate_indices.py             # RFC 822 Packages/Release index generator
+│   ├── validate_repository.py          # Repository integrity & crypto audit
+│   ├── validate_registry.py            # Registry manifest validator
+│   ├── manage_retention.py             # Retention inventory/prune engine
+│   ├── verify_baseline.py              # Baseline structural validation
+│   ├── verify_deployed_repository.py   # Post-deploy public endpoint check
+│   └── verify_trust.py                 # Client-side trust verification
+├── registry/
+│   ├── packages.yml                    # Authoritative package registry manifest
+│   └── schema.json                     # Registry JSON Schema
+├── templates/
+│   └── dispatch-apt.yml                # App-side repository_dispatch template
 ├── KEY.gpg                             # ASCII-armored OpenPGP public key (backward compat)
 ├── public.key                          # Canonical ASCII-armored OpenPGP public key
 ├── install.sh                          # Universal curl-to-bash repository installer
@@ -54,27 +66,52 @@ The M3tal APT repository operates as a static Debian repository hosted directly 
 
 ## 2. Ingestion & Release Generation Workflow
 
-Whenever a new package build (e.g. `m3tal_1.1.63_amd64.deb`) is ready to publish, follow this standard release lifecycle:
+Package publication is **not** a manual maintainer workflow. The supported pipeline is triggered by app repositories and executed by GitHub Actions:
 
-### Step 1: Place Package into the Pool
-Move the freshly built `.deb` into `pool/main/`:
-```bash
-cp /path/to/build/m3tal_1.1.63_amd64.deb pool/main/
+```text
+App repo release tag
+   │  .github/workflows/dispatch-apt.yml (templates/dispatch-apt.yml)
+   ▼
+repository_dispatch event: publish-deb  ──►  .github/workflows/ingest-deb.yml
+   │                                            │
+   │   payload: { package_id, version,          ▼
+   │              deb_url, sha256 }      scripts/ingest_deb.py
+   │                                            │  download .deb, verify sha256,
+   │                                            │  validate arch/control/deps
+   │                                            ▼
+   │                                     pool/main/<package>/<package>_<version>_amd64.deb
+   │                                            │
+   │                                            ▼
+   │                                     validate (validate_package.py /
+   │                                     validate_registry.py / validate_repository.py)
+   │                                            │
+   │                                            ▼
+   │                                     sign Release → InRelease + Release.gpg
+   │                                     (key 775AD1473BF25102)
+   │                                            │
+   │                                            ▼
+   │                                     generate indices → Packages, Packages.gz,
+   │                                     Release (scripts/generate_indices.py)
+   │                                            │
+   │                                            ▼
+   │                                     atomic commit to main
+   │                                            │
+   │                                            ▼
+   │                                     gated GitHub Pages deploy
+   │                                     (deploy-latest-validated.yml)
+   ▼
+Live at https://jakej985-rgb.github.io/m3tal-apt-key
 ```
 
-### Step 2: Regenerate the Binary Package Index
-Run `dpkg-scanpackages` from the repository root to produce the uncompressed `Packages` index:
-```bash
-dpkg-scanpackages --multiversion pool/main > dists/stable/main/binary-amd64/Packages
-```
+### Key operational rules
 
-Compress the index using `gzip -9` while preserving the uncompressed version:
-```bash
-gzip -9c dists/stable/main/binary-amd64/Packages > dists/stable/main/binary-amd64/Packages.gz
-```
+1. **Never hand-edit `dists/` or run `dpkg-scanpackages` in production.** The signing key is only available inside the protected ingest workflow; locally generated unsigned or wrongly-signed metadata will break clients. Local copies of the generation scripts (`generate_indices.py`, `ingest_deb.py`) exist for verification, dry-runs, and testing — not for publishing.
+2. **Pool layout is structured**: each package lives in `pool/main/<package-name>/` with filenames `<package>_<version>_amd64.deb` (underscore separator, e.g. `pool/main/m3tal/m3tal_0.24.6_amd64.deb`). Do not place flat `.deb` files at `pool/main/`.
+3. **Atomic commits**: the `.deb`, regenerated `Packages`/`Packages.gz`, `Release`, `InRelease`, `Release.gpg`, and any `registry/packages.yml` update must land in a single commit produced by the ingest workflow.
 
-### Step 3: Regenerate the `Release` Descriptor
-The `Release` file lists checksums (MD5, SHA1, SHA256, SHA512) and file sizes for all index files under `dists/stable/`.
+### Release metadata format (reference)
+
+The `Release` file lists checksums (MD5, SHA1, SHA256, SHA512) and file sizes for all index files under `dists/stable/`:
 
 Template for `dists/stable/Release`:
 ```text
@@ -100,14 +137,14 @@ SHA512:
  <SHA512> <SIZE> main/binary-amd64/Packages.gz
 ```
 
-### Step 4: Cryptographically Sign the Release
-Using the official M3tal GPG signing key (`775AD1473BF25102`):
+### Signing the Release (reference — performed by the ingest workflow)
+The ingest workflow signs `dists/stable/Release` with the official M3tal GPG signing key (`775AD1473BF25102`) to produce both signature formats:
 
-1. Generate detached signature:
+1. Detached signature → `dists/stable/Release.gpg`
    ```bash
    gpg --default-key 775AD1473BF25102 --armor --detach-sign --output dists/stable/Release.gpg dists/stable/Release
    ```
-2. Generate inline clearsigned signature (`InRelease`):
+2. Inline clearsigned signature → `dists/stable/InRelease`
    ```bash
    gpg --default-key 775AD1473BF25102 --clearsign --output dists/stable/InRelease dists/stable/Release
    ```
@@ -120,13 +157,13 @@ Using the official M3tal GPG signing key (`775AD1473BF25102`):
 As audited in Phase 0, storing every historical build inside git creates repository bloat (~5.8 GB footprint across 124 builds).
 
 To maintain long-term scalability without breaking existing users:
-1. **Active Stable Version**: The current candidate (e.g. `1.1.62`) MUST always be preserved.
+1. **Active Stable Version**: The current candidate (e.g. `0.24.6` for `m3tal`) MUST always be preserved.
 2. **Previous Versions Window**: Preserve the **5 most recent minor/patch releases** for rollback purposes.
-3. **Explicitly Pinned LTS Releases**: Any version flagged in production manifests (e.g. `1.0.60`) must be pinned and retained.
+3. **Explicitly Pinned Releases**: Any version flagged in production manifests must be pinned and retained.
 4. **Obsolete Package Cleanup**:
-   - Move obsolete `.deb` packages out of `pool/main/` to an external cold storage / archive bucket.
-   - Regenerate `Packages`, `Packages.gz`, `Release`, `InRelease`, and `Release.gpg`.
-   - Run `scripts/verify_baseline.py` and `scripts/test_e2e_validation.py` to ensure no broken references remain.
+   - Move obsolete `.deb` packages out of `pool/main/<package>/` to an external cold storage / archive bucket.
+   - Regenerate `Packages`, `Packages.gz`, `Release`, `InRelease`, and `Release.gpg` through the ingest/retention pipeline (never by hand).
+   - Run `scripts/validate_registry.py`, `scripts/validate_repository.py`, and `scripts/verify_deployed_repository.py` to ensure no broken references remain.
 
 ---
 
@@ -163,11 +200,14 @@ When updating public key files:
 Before merging or pushing any changes to branch `main`, run the repository audit suites:
 
 ```bash
-# 1. Baseline structural & cryptographic validation:
-python3 scripts/verify_baseline.py
+# 1. Registry manifest validation:
+python3 scripts/validate_registry.py
 
-# 2. End-to-end containerized client lifecycle test:
-python3 scripts/test_e2e_validation.py
+# 2. Repository integrity & cryptographic validation:
+python3 scripts/validate_repository.py --skip-container-test
+
+# 3. Post-deployment public endpoint verification:
+python3 scripts/verify_deployed_repository.py
 ```
 
-Both test suites must exit with return code `0` before any release is deployed.
+All validation commands must exit with return code `0` before any release is deployed. The canonical publish path (`ingest-deb.yml`) enforces these checks automatically and gates the GitHub Pages deployment on them.

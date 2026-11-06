@@ -136,7 +136,7 @@ The package pool uses structured paths per package identity:
 pool/
 └── main/
     ├── m3tal/
-    │   └── m3tal_1.1.62_amd64.deb
+    │   └── m3tal_0.24.6_amd64.deb
     ├── monster-lab/
     │   └── monster-lab_0.1.4_amd64.deb
     └── <other-apps>/

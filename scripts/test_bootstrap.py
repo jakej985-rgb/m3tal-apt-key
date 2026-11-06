@@ -129,13 +129,13 @@ def test_debian_container_bootstrap():
         f"dart:stable bash -c '"
         f"set -e\n"
         f"/repo/install.sh --key-url /repo/public.key --repo-url file:///repo\n"
-        f"apt-cache policy m3tal | grep -q \"Candidate: 1.1.62\"\n"
+        f"apt-cache policy m3tal | grep -q \"Candidate: 0.24.6\"\n"
         f"apt-get install -d -y m3tal > /dev/null\n"
         f"echo \"Container bootstrap and package fetch succeeded.\"\n"
         f"'"
     )
     res = run(test_cmd)
-    assert "Candidate: 1.1.62" in res.stdout or "succeeded" in res.stdout, "Docker bootstrap verification failed"
+    assert "Candidate: 0.24.6" in res.stdout or "succeeded" in res.stdout, "Docker bootstrap verification failed"
     print("    [OK] Clean Debian container completed bootstrap and downloaded package.")
 
 def test_piped_execution_and_repo_url():

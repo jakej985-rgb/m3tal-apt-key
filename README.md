@@ -3,7 +3,7 @@
 Official URL: [https://jakej985-rgb.github.io/m3tal-apt-key](https://jakej985-rgb.github.io/m3tal-apt-key)  
 Keyring Fingerprint: `5F84FE50A40111C981410E11775AD1473BF25102`
 
-This repository serves as the **authoritative, central Debian package keyring and repository** for the entire M3tal developer ecosystem. All applications built with Debian packages (such as Monster Lab, M3tal Core, GoDash, Specs-n-Parts, and Shop Manager) publish and distribute their `.deb` packages here.
+This repository serves as the **authoritative, central Debian package keyring and repository** for the entire M3tal developer ecosystem. It distributes the `m3tal` core platform package (the `m3tal-api` daemon/service) and `m3tal-plugin-*` plugins (built from `m3tal-plugins` releases), plus — as they are published — other ecosystem applications' `.deb` packages.
 
 ---
 
@@ -16,11 +16,11 @@ curl -fsSL https://jakej985-rgb.github.io/m3tal-apt-key/install.sh | sudo bash
 
 ### Install Ecosystem Applications
 ```bash
-# Install core platform daemon
+# Install the core platform package (m3tal-api daemon + web GUI/API service)
 sudo apt install m3tal
 
-# Install Monster Lab learning studio
-sudo apt install monster-lab
+# Install M3tal plugins (built from m3tal-plugins releases)
+sudo apt install m3tal-plugin-compose m3tal-plugin-mesh
 ```
 
 ---
@@ -49,6 +49,7 @@ python3 scripts/ingest_deb.py --url https://github.com/jakej985-rgb/Monster-Lab/
 
 ## 📚 Architecture & Documentation Index
 
+- **Ecosystem Distribution Guide (authoritative)**: [`docs/ecosystem-distribution.md`](docs/ecosystem-distribution.md)
 - **User Setup & Bootstrap Guide**: [`docs/user-setup-guide.md`](docs/user-setup-guide.md)
 - **Central Keyring Architecture**: [`docs/central-keyring-architecture.md`](docs/central-keyring-architecture.md)
 - **App Deb Publishing Guide**: [`docs/app-deb-publishing-guide.md`](docs/app-deb-publishing-guide.md)

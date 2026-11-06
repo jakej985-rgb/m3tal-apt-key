@@ -11,19 +11,15 @@
 
 ## 1. Executive Summary & Problem Statement
 
-The M3tal APT repository serves as the central Debian package distribution host for the M3tal orchestration ecosystem. Since its initial release (`v1.0.0`), every build has been packaged into an individual Debian binary archive (`.deb`) and committed directly into the Git repository tree under `pool/main/`.
+The M3tal APT repository serves as the central Debian package distribution host for the M3tal orchestration ecosystem. The `m3tal` package is currently versioned on the `0.x` line; the current candidate is `0.24.6`. An earlier `1.x` line (`1.0.x` through `1.1.62`) was published historically and has been **retired** — those versions are no longer part of the active index and must not be referenced as current.
 
-### 1.1 Empirical Baseline Metrics (Phase 0 Audit)
-- **Total Published Releases**: 124 `.deb` packages
-- **Release Streams**:
-  - `v1.0.x` series: 61 releases (`1.0.0` through `1.0.60`)
-  - `v1.1.x` series: 63 releases (`1.1.0` through `1.1.62`)
-- **Physical Package Storage**: ~2,847 MB (~2.85 GB) in working tree
-- **Git Packfile Storage**: ~3.0 GB in `.git/objects/pack/`
-- **Total Repository Footprint**: ~5.8 GB
+### 1.1 Empirical Baseline Metrics
+- **Current Pool**: 65 `.deb` packages across six published packages (`m3tal` plus five `m3tal-plugin-*` packages), all `amd64`.
+- **Active Series**: `0.x` releases (`0.1.x` through `0.24.x` for `m3tal`; `0.2.x`–`0.8.x` for plugins).
+- **Historical Note**: the retired `1.x` line previously contributed ~124 builds (~2.85 GB working tree, ~5.8 GB total footprint) before pruning; the lessons below remain the governing rationale.
 
 ### 1.2 The Indefinite Growth Hazard
-Debian packages contain compiled Go binaries (`/usr/bin/m3tal` ~27.8 MB, `/usr/bin/m3tal-api` ~20.5 MB). Each release adds ~25 MB of uncompressed binary diffs to Git history. Without a rigorous package retention and pruning policy:
+Debian packages contain compiled binaries (e.g. `/usr/bin/m3tal-api` ~20 MB for the core `m3tal` package). Each release adds tens of MB of binary data to Git history. Without a rigorous package retention and pruning policy:
 1. **Repository Bloat**: Pushing 50 more releases would add ~1.25 GB of working tree data and another ~1.25 GB of packfiles, exceeding GitHub's recommended repository size limit (5 GB) and causing cloning timeouts.
 2. **Bandwidth Costs**: APT index files (`Packages` / `Packages.gz`) and metadata transfers scale with total packages, increasing latency for end-user installations.
 3. **Operational Overhead**: Auditing, indexing, and validating thousands of legacy point-release binaries degrades CI pipeline execution times.
@@ -38,8 +34,8 @@ The M3tal retention engine enforces a deterministic, multi-tiered lifecycle mode
 
 | Tier | Classification | Criteria | Action |
 | :--- | :--- | :--- | :--- |
-| **Tier 0** | **Current Candidate** | Highest semantic Debian version across the entire repository (currently `1.1.62`). | **Mandatory Retain**. Cannot be pruned under any circumstances. |
-| **Tier 1** | **Pinned Milestones** | Explicitly designated landmark or LTS releases (`1.0.0`, `1.0.60`, `1.1.0`, `1.1.62`, or custom pins). | **Mandatory Retain**. Preserves foundational history and long-term compatibility. |
+| **Tier 0** | **Current Candidate** | Highest semantic Debian version across the entire repository (currently `0.24.6` for `m3tal`). | **Mandatory Retain**. Cannot be pruned under any circumstances. |
+| **Tier 1** | **Pinned Milestones** | Explicitly designated landmark or LTS releases (`0.24.0`, `0.24.5`, `0.24.6`, or custom pins). | **Mandatory Retain**. Preserves foundational history and long-term compatibility. |
 | **Tier 2** | **Recent Active Window** | Top $N$ most recent releases within each active or supported series (default $N=5$). | **Retain Active**. Accommodates rollback requirements for existing deployments. |
 | **Tier 3** | **Obsolete / Deprecated** | Releases older than the recent window not covered by milestone pins. | **Prune Candidate**. Transitioned to archive/snapshot manifest and removed from active pool. |
 
@@ -93,9 +89,9 @@ Every snapshot captured by `scripts/manage_retention.py snapshot` generates a st
 {
   "timestamp": "20261001T180251Z",
   "repo_root": "/home/m3tal/apps/m3tal-apt-key",
-  "total_packages": 124,
+  "total_packages": 65,
   "pool_files": {
-    "m3tal_v1.0.0_amd64.deb": {
+    "m3tal_0.24.6_amd64.deb": {
       "md5": "490c1156dafb12e2dfc16593fb72dddc",
       "sha1": "232d7abbd4c487adcc7fde8e2a8a27abcd16b825",
       "sha256": "0f74d46d3ff1b3385e3a69a05628f976cbfab59e9a42421927a5597d004f2cf1",
@@ -154,8 +150,4 @@ Tests cover:
 
 ## 6. Storage Savings Assessment
 
-Applying the standard retention profile (`keep_recent_per_series: 5`, `pinned_versions: ["1.0.0", "1.0.60", "1.1.0", "1.1.62"]`) reclaims:
-- **Pruned Packages**: 112 obsolete builds
-- **Retained Packages**: 12 critical versions
-- **Reclaimed Disk Space**: **2,570.74 MB (~2.57 GB)** (a **90.3%** footprint reduction)
-- **Active Working Tree**: Reduced from ~2.85 GB to **~276 MB**, ensuring sustainable GitHub Pages deployment and fast Git clones.
+Applying the standard retention profile (`keep_recent_per_series: 5`, `pinned_versions: ["0.24.0", "0.24.5", "0.24.6"]`) bounds the active pool to a small set of recent, rollback-capable builds per package series. Historically, applying the equivalent profile to the retired `1.x` line reclaimed ~2.57 GB (**~90%** footprint reduction) by pruning 112 obsolete builds while retaining 12 critical versions — the same mechanics now keep the `0.x` pool lean.

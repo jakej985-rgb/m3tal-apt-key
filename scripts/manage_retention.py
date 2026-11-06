@@ -157,8 +157,8 @@ def load_policy(config_path: str = CONFIG_PATH) -> Dict[str, Any]:
         "keep_recent_per_series": 5,
         "keep_recent_overall": 10,
         "min_retained_packages": 10,
-        "protected_series": ["1.1", "1.0"],
-        "pinned_versions": ["1.0.0", "1.0.60", "1.1.0", "1.1.62"],
+        "protected_series": ["0.24"],
+        "pinned_versions": ["0.24.0", "0.24.5", "0.24.6"],
         "snapshot": {"enabled": True, "directory": "snapshots", "max_snapshots_retained": 50},
         "deprecation": {"grace_period_days": 90, "archive_obsolete": True, "archive_directory": "archive/pool/main"}
     }
@@ -173,7 +173,7 @@ def load_policy(config_path: str = CONFIG_PATH) -> Dict[str, Any]:
 
 
 def extract_series(version_str: str) -> str:
-    """Extract major.minor series from version (e.g. '1.1.62' -> '1.1')."""
+    """Extract major.minor series from version (e.g. '0.24.6' -> '0.24')."""
     _, upstream, _ = parse_debian_version(version_str)
     parts = upstream.split(".")
     if len(parts) >= 2:

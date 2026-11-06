@@ -6,14 +6,12 @@
     "keep_recent_overall": 10,
     "min_retained_packages": 10,
     "protected_series": [
-      "1.1",
-      "1.0"
+      "0.24"
     ],
     "pinned_versions": [
-      "1.0.0",
-      "1.0.60",
-      "1.1.0",
-      "1.1.62"
+      "0.24.0",
+      "0.24.5",
+      "0.24.6"
     ],
     "snapshot": {
       "enabled": true,

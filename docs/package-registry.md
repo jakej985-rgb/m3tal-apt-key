@@ -38,7 +38,6 @@ repository:
     - "main"
   architectures:
     - "amd64"
-    - "arm64"
   keyring:
     fingerprint: "5F84FE50A40111C981410E11775AD1473BF25102"
     path: "/etc/apt/keyrings/m3tal-archive-keyring.gpg"
@@ -63,7 +62,7 @@ Each entry under `packages:` specifies:
     retention_count: 10                 # Number of historical releases to retain
     auto_publish: true                  # Eligible for CI automated publication
   metadata:
-    latest_version: "1.1.62"            # Current latest package version
+    latest_version: "0.24.6"            # Current latest package version
     section: "admin"                    # Debian archive section
     priority: "optional"                # Debian package priority
     maintainer: "M3tal-Creates <jakej985@gmail.com>"
@@ -109,18 +108,23 @@ Each entry under `packages:` specifies:
 
 ## 4. Current Ecosystem Registry Inventory
 
-| Package ID | Debian Name | Type | Status | Supported Arch | Source Repository |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `m3tal` | `m3tal` | `cli` | `published` | `amd64` | `jakej985-rgb/m3tal-apt-key` |
-| `m3tal-core` | `m3tal-core` | `core-system` | `active` | `amd64`, `arm64`, `all` | `jakej985-rgb/m3tal-core` |
-| `m3tal-api` | `m3tal-api` | `service` | `planned` | `amd64`, `arm64` | `jakej985-rgb/m3tal-api` |
-| `m3tal-godash` | `m3tal-godash` | `service` | `planned` | `amd64`, `arm64` | `jakej985-rgb/m3tal-godash` |
-| `m3tal-stack` | `m3tal-stack` | `cli` | `planned` | `amd64`, `arm64` | `jakej985-rgb/m3tal-stack` |
-| `monster-lab` | `monster-lab` | `desktop` | `active` | `amd64` | `jakej985-rgb/Monster-Lab` |
-| `red-music-locker` | `red-music-locker` | `service` | `active` | `amd64` | `jakej985-rgb/red-music-locker` |
-| `shop-manager` | `shop-manager` | `desktop` | `active` | `amd64` | `jakej985-rgb/shop-manager` |
-| `specs-n-parts` | `specs-n-parts` | `desktop` | `active` | `amd64` | `jakej985-rgb/specs-n-parts` |
-| `comicinfo-generator` | `comicinfo-generator` | `cli` | `active` | `amd64`, `all` | `jakej985-rgb/comicinfo-generator` |
+| Package ID | Debian Name | Type | Status | Latest Version | Supported Arch | Source Repository |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `m3tal` | `m3tal` | `service` | `published` | `0.24.6` | `amd64` | `jakej985-rgb/m3tal-apt-key` |
+| `m3tal-plugin-compose` | `m3tal-plugin-compose` | `library` | `published` | `0.6.0` | `amd64` | `jakej985-rgb/m3tal-plugins` |
+| `m3tal-plugin-docker-monitor` | `m3tal-plugin-docker-monitor` | `library` | `published` | `0.8.1` | `amd64` | `jakej985-rgb/m3tal-plugins` |
+| `m3tal-plugin-mesh` | `m3tal-plugin-mesh` | `library` | `published` | `0.5.0` | `amd64` | `jakej985-rgb/m3tal-plugins` |
+| `m3tal-plugin-mesh-cluster` | `m3tal-plugin-mesh-cluster` | `library` | `published` | `0.4.1` | `amd64` | `jakej985-rgb/m3tal-plugins` |
+| `m3tal-plugin-mesh-node` | `m3tal-plugin-mesh-node` | `library` | `published` | `0.4.1` | `amd64` | `jakej985-rgb/m3tal-plugins` |
+| `m3tal-core` | `m3tal-core` | `core-system` | `planned` | `1.0.0` | `amd64` | `jakej985-rgb/m3tal-core` |
+| `m3tal-api` | `m3tal-api` | `service` | `planned` | `0.1.0` | `amd64` | `jakej985-rgb/m3tal-api` |
+| `m3tal-godash` | `m3tal-godash` | `service` | `planned` | `0.1.0` | `amd64` | `jakej985-rgb/m3tal-godash` |
+| `m3tal-stack` | `m3tal-stack` | `cli` | `planned` | `0.1.0` | `amd64` | `jakej985-rgb/m3tal-stack` |
+| `monster-lab` | `monster-lab` | `desktop` | `planned` | `0.1.4` | `amd64` | `jakej985-rgb/Monster-Lab` |
+| `red-music-locker` | `red-music-locker` | `service` | `planned` | `1.0.0` | `amd64` | `jakej985-rgb/red-music-locker` |
+| `shop-manager` | `shop-manager` | `desktop` | `planned` | `0.0.1` | `amd64` | `jakej985-rgb/shop-manager` |
+| `specs-n-parts` | `specs-n-parts` | `desktop` | `planned` | `0.0.1` | `amd64` | `jakej985-rgb/specs-n-parts` |
+| `comicinfo-generator` | `comicinfo-generator` | `cli` | `planned` | `0.0.1` | `amd64` | `jakej985-rgb/comicinfo-generator` |
 
 ---
 
