@@ -8,7 +8,8 @@ This guide describes how to configure any application in the M3tal developer eco
 
 To ensure your application is recognized, signed, and installable via `apt`:
 
-- [x] Package name follows standard convention: `monster-lab`, `m3tal-core`, `m3tal-<appname>`.
+- [x] Package name follows standard convention: `m3tal` (core platform package), `m3tal-plugin-*` (plugins released from `m3tal-plugins`), or the app's own name for non-core apps.
+- [x] Target architecture is `amd64` — the repository currently publishes `amd64` packages only.
 - [x] Application control file declared in `DEBIAN/control` conforms to Debian Policy.
 - [x] Binary placed in `/usr/bin/` and desktop entry placed in `/usr/share/applications/`.
 - [x] Keyring reference uses the canonical `m3tal-archive-keyring.gpg` (never generate an independent GPG key).

@@ -166,12 +166,12 @@ Expected output:
 ```text
 m3tal:
   Installed: (none)
-  Candidate: 1.1.62
+  Candidate: 0.24.6
   Version table:
-     1.1.62 500
+     0.24.6 500
         500 https://jakej985-rgb.github.io/m3tal-apt-key stable/main amd64 Packages
 ```
 
 ### Common Issues
 - **`GPG error: ... NO_PUBKEY`**: The keyring file `/etc/apt/keyrings/m3tal-archive-keyring.gpg` was not found or lacks read permissions (`chmod 0644 /etc/apt/keyrings/m3tal-archive-keyring.gpg`).
-- **`Architecture 'arm64' is not supported`**: The core package `m3tal` is built for `amd64`. Run on `x86_64`/`amd64` or wait for multi-architecture builds.
+- **`Architecture 'arm64' is not supported`** or no candidate found: the `m3tal` package and `m3tal-plugin-*` packages are built for `amd64` only. Run on `x86_64`/`amd64`; multi-architecture builds are not currently published.

@@ -40,7 +40,7 @@ if not os.path.isdir(M3TAL_APT_KEY_ROOT):
     M3TAL_APT_KEY_ROOT = os.path.abspath(os.path.join(CWD, ".."))
 
 EXPECTED_FINGERPRINT = "5F84FE50A40111C981410E11775AD1473BF25102"
-EXPECTED_CANDIDATE = "1.1.62"
+EXPECTED_CANDIDATE = "0.24.6"
 TEST_CONTAINER_IMAGE = "dart:stable"  # Clean Debian 13 (trixie) amd64 image
 
 class SilentHTTPHandler(http.server.SimpleHTTPRequestHandler):
@@ -124,23 +124,21 @@ echo "[PASS] APT policy confirms candidate {EXPECTED_CANDIDATE}."
 
 echo "=== Step 6: Install m3tal ==="
 apt-get install -y m3tal
-test -x /usr/bin/m3tal
 test -x /usr/bin/m3tal-api
+test -f /lib/systemd/system/m3tal-api.service
 test -f /etc/m3tal/.env
-test -d /opt/m3tal/stack
-/usr/bin/m3tal help > /dev/null
-echo "[PASS] m3tal installed and CLI verified."
+echo "[PASS] m3tal core platform package installed (m3tal-api binary + service verified)."
 
 echo "=== Step 7: Version Pinning & Multi-Version Resolution ==="
-# Install specific historical version (1.1.0)
-apt-get install -y --allow-downgrades m3tal=1.1.0
+# Install specific historical version (0.24.5)
+apt-get install -y --allow-downgrades m3tal=0.24.5
 CURRENT_VER=$(dpkg-query -W -f='${{Version}}' m3tal)
 echo "Current Version after downgrade: $CURRENT_VER"
-if [ "$CURRENT_VER" != "1.1.0" ]; then
-    echo "ERROR: Expected version 1.1.0, got $CURRENT_VER" >&2
+if [ "$CURRENT_VER" != "0.24.5" ]; then
+    echo "ERROR: Expected version 0.24.5, got $CURRENT_VER" >&2
     exit 1
 fi
-echo "[PASS] Pinned historical release 1.1.0 installed successfully."
+echo "[PASS] Pinned historical release 0.24.5 installed successfully."
 
 echo "=== Step 8: Upgrade packages ==="
 apt-get --only-upgrade -y install m3tal
@@ -154,8 +152,8 @@ echo "[PASS] Package upgraded smoothly back to latest candidate {EXPECTED_CANDID
 
 echo "=== Step 9: Remove application ==="
 apt-get remove -y m3tal
-if [ -f /usr/bin/m3tal ]; then
-    echo "ERROR: /usr/bin/m3tal still exists after removal!" >&2
+if [ -f /usr/bin/m3tal-api ]; then
+    echo "ERROR: /usr/bin/m3tal-api still exists after removal!" >&2
     exit 1
 fi
 test -f /etc/m3tal/.env  # Conffile must be retained on remove
@@ -163,7 +161,7 @@ echo "[PASS] Package cleanly removed, configurations preserved."
 
 echo "=== Step 10: Reinstall the application ==="
 apt-get install -y m3tal
-test -x /usr/bin/m3tal
+test -x /usr/bin/m3tal-api
 echo "[PASS] Package cleanly reinstalled."
 
 echo "=== Step 11: Verify signatures and checksums ==="

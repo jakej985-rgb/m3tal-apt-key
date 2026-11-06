@@ -22,7 +22,7 @@ The official M3tal APT repository distributes cryptographically signed Debian pa
 
 ### Architecture Requirements
 - **Architecture**: `amd64` (x86_64) exclusively.
-- *Notice for ARM64 (aarch64) users*: If your host is ARM-based (e.g. Raspberry Pi, AWS Graviton, Apple Silicon VMs), standard APT updates will skip or warn about missing architecture metadata. Always specify `[arch=amd64]` in source declarations to avoid unnecessary sync warnings.
+- *Notice for ARM64 (aarch64) users*: The repository currently publishes `amd64` packages only. On ARM-based hosts (e.g. Raspberry Pi, AWS Graviton, Apple Silicon VMs), `apt` will report no candidate for `m3tal` or the `m3tal-plugin-*` packages.
 
 ---
 
@@ -194,13 +194,13 @@ apt-cache policy m3tal
 Example Output:
 ```text
 m3tal:
-  Installed: 1.1.62
-  Candidate: 1.1.62
+  Installed: 0.24.6
+  Candidate: 0.24.6
   Version table:
- *** 1.1.62 500
+ *** 0.24.6 500
         500 https://jakej985-rgb.github.io/m3tal-apt-key stable/main amd64 Packages
         100 /var/lib/dpkg/status
-     1.1.61 500
+     0.24.5 500
         500 https://jakej985-rgb.github.io/m3tal-apt-key stable/main amd64 Packages
 ```
 
@@ -214,7 +214,7 @@ sudo apt-get install --only-upgrade -y m3tal
 To install a specific version and prevent automatic upgrades:
 ```bash
 # Install targeted release
-sudo apt-get install -y m3tal=1.1.60
+sudo apt-get install -y m3tal=0.24.5
 
 # Prevent automatic upgrade
 sudo apt-mark hold m3tal
@@ -229,7 +229,7 @@ sudo apt-mark unhold m3tal
 Or via APT Preferences (`/etc/apt/preferences.d/m3tal`):
 ```text
 Package: m3tal
-Pin: version 1.1.60*
+Pin: version 0.24.5*
 Pin-Priority: 1001
 ```
 
@@ -238,11 +238,10 @@ Pin-Priority: 1001
 dpkg -L m3tal
 ```
 Main installed assets include:
-- `/usr/bin/m3tal`: Core orchestrator CLI
-- `/usr/bin/m3tal-api`: Background control daemon
-- `/lib/systemd/system/m3tal.service`: Systemd orchestrator unit
-- `/lib/systemd/system/m3tal-api.service`: Systemd API unit
-- `/etc/m3tal/.env.example`: Configuration baseline
+- `/usr/bin/m3tal-api`: Core platform API daemon (served by `m3tal-api.service`, port 5050)
+- `/lib/systemd/system/m3tal-api.service`: Systemd API unit (web GUI at `/gui/`, REST API at `/api/v2`)
+- `/etc/m3tal/.env`: Runtime configuration environment file
+- `state.db`: Local state database used by the m3tal-api service
 
 ---
 

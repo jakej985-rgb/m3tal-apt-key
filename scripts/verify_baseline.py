@@ -22,11 +22,11 @@ REPO_ROOT = TARGET_DIR
 DIST_DIR = os.path.join(REPO_ROOT, "dists", "stable")
 MAIN_BIN_DIR = os.path.join(DIST_DIR, "main", "binary-amd64")
 POOL_DIR = os.path.join(REPO_ROOT, "pool", "main")
-LATEST_DEB = os.path.join(POOL_DIR, "m3tal_v1.1.62_amd64.deb")
+LATEST_DEB = os.path.join(POOL_DIR, "m3tal", "m3tal_0.24.6_amd64.deb")
 
 EXPECTED_FINGERPRINT = "5F84FE50A40111C981410E11775AD1473BF25102"
-EXPECTED_PACKAGE_COUNT = 124
-EXPECTED_PACKAGE_NAME = "m3tal"
+EXPECTED_PACKAGE_COUNT = 65
+EXPECTED_CANDIDATE = "0.24.6"
 
 def compute_hashes(file_path):
     md5 = hashlib.md5()
@@ -60,7 +60,6 @@ def verify_structure():
         "install.sh",
         "index.html",
         ".nojekyll",
-        "projects/m3tal-core/index.html",
     ]
     for rel in required_files:
         p = os.path.join(REPO_ROOT, rel)
@@ -190,14 +189,27 @@ def verify_pool_and_packages():
     packages = parse_packages_file()
     assert len(packages) == EXPECTED_PACKAGE_COUNT, f"Expected {EXPECTED_PACKAGE_COUNT} packages, found {len(packages)}"
 
-    pool_files = set(os.listdir(POOL_DIR))
+    # Structured pool: pool/main/<package>/<package>_<version>_amd64.deb
+    pool_files = []
+    for entry in sorted(os.listdir(POOL_DIR)):
+        subdir = os.path.join(POOL_DIR, entry)
+        if os.path.isdir(subdir):
+            pool_files.extend(
+                os.path.join(entry, f) for f in os.listdir(subdir) if f.endswith(".deb")
+            )
     assert len(pool_files) == EXPECTED_PACKAGE_COUNT, f"Expected {EXPECTED_PACKAGE_COUNT} pool files, found {len(pool_files)}"
+    pool_file_set = {f"pool/main/{p}" for p in pool_files}
 
     for pkg in packages:
-        assert pkg.get("Package") == EXPECTED_PACKAGE_NAME, f"Unexpected package name {pkg.get('Package')}"
         assert pkg.get("Architecture") == "amd64", f"Unexpected architecture {pkg.get('Architecture')}"
         rel_fn = pkg.get("Filename")
         assert rel_fn.startswith("pool/main/"), f"Unexpected Filename format {rel_fn}"
+        # Filename must live under pool/main/<package-name>/ matching Package field
+        parts = rel_fn.split("/")
+        assert len(parts) == 4 and parts[2] == pkg.get("Package"), (
+            f"Pool path {rel_fn} does not match package name {pkg.get('Package')}"
+        )
+        assert rel_fn in pool_file_set, f"Package {rel_fn} not found in pool tree"
         abs_fn = os.path.join(REPO_ROOT, rel_fn)
         assert os.path.isfile(abs_fn), f"Referenced deb does not exist: {abs_fn}"
 
@@ -243,7 +255,7 @@ def verify_multi_distro_apt():
                 f"rm -f /etc/apt/sources.list.d/* /etc/apt/sources.list\n"
                 f"echo \"deb [signed-by=/repo/public.key] file:///repo stable main\" > /etc/apt/sources.list.d/m3tal.list\n"
                 f"apt-get update > /dev/null\n"
-                f"apt-cache policy m3tal | grep -q \"Candidate: 1.1.62\"\n"
+                f"apt-cache policy m3tal | grep -q \"Candidate: 0.24.6\"\n"
                 f"'"
             )
             res = subprocess.run(cmd_armored, shell=True, capture_output=True, text=True)
@@ -259,13 +271,13 @@ def verify_multi_distro_apt():
                 f"rm -f /etc/apt/sources.list.d/* /etc/apt/sources.list\n"
                 f"echo \"deb [signed-by=/usr/share/keyrings/m3tal-archive-keyring.gpg] file:///repo stable main\" > /etc/apt/sources.list.d/m3tal.list\n"
                 f"apt-get update > /dev/null\n"
-                f"apt-cache policy m3tal | grep -q \"Candidate: 1.1.62\"\n"
+                f"apt-cache policy m3tal | grep -q \"Candidate: 0.24.6\"\n"
                 f"'"
             )
             res = subprocess.run(cmd_dearmored, shell=True, capture_output=True, text=True)
             assert res.returncode == 0, f"Failed APT policy test on {label} using dearmored keyring: {res.stderr}"
 
-            print(f"    [OK] {label}: Verified APT update and Candidate 1.1.62 resolution.")
+            print(f"    [OK] {label}: Verified APT update and Candidate 0.24.6 resolution.")
 
         # 5c: Verify KEY.gpg ASCII-armor extension defect on Debian 12 / Ubuntu 24.04
         cmd_key_gpg_fail = (
@@ -298,7 +310,7 @@ def verify_package_postinst_and_dependencies():
     cmd_fail_no_docker = (
         f"docker run --rm "
         f"-v '{REPO_ROOT}':/repo:ro "
-        f"debian:bookworm-slim bash -c 'dpkg -i /repo/pool/main/m3tal_v1.1.62_amd64.deb'"
+        f"debian:bookworm-slim bash -c 'dpkg -i /repo/pool/main/m3tal/m3tal_0.24.6_amd64.deb'"
     )
     res = subprocess.run(cmd_fail_no_docker, shell=True, capture_output=True, text=True)
     assert res.returncode != 0 and "invalid group: 'root:docker'" in res.stderr, (
@@ -310,7 +322,7 @@ def verify_package_postinst_and_dependencies():
     cmd_pass_docker = (
         f"docker run --rm "
         f"-v '{REPO_ROOT}':/repo:ro "
-        f"debian:bookworm-slim bash -c 'groupadd -r docker && dpkg -i /repo/pool/main/m3tal_v1.1.62_amd64.deb'"
+        f"debian:bookworm-slim bash -c 'groupadd -r docker && dpkg -i /repo/pool/main/m3tal/m3tal_0.24.6_amd64.deb'"
     )
     res = subprocess.run(cmd_pass_docker, shell=True, capture_output=True, text=True)
     assert res.returncode == 0, f"Expected dpkg -i to succeed when docker group exists, failed: {res.stderr}"

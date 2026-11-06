@@ -202,7 +202,7 @@ EOF
 
 apt-get update > /dev/null
 CANDIDATE=$(apt-cache policy m3tal | grep "Candidate:" | awk '{print $2}')
-test "$CANDIDATE" = "1.1.62"
+test "$CANDIDATE" = "0.24.6"
 echo "DEB822 candidate verified: $CANDIDATE"
 
 # Test 2: Traditional one-line sources style
@@ -212,7 +212,7 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/m3tal-archive-keyring.gpg] fil
 
 apt-get update > /dev/null
 CANDIDATE2=$(apt-cache policy m3tal | grep "Candidate:" | awk '{print $2}')
-test "$CANDIDATE2" = "1.1.62"
+test "$CANDIDATE2" = "0.24.6"
 echo "One-line candidate verified: $CANDIDATE2"
 
 echo "APT trust verification succeeded cleanly!"

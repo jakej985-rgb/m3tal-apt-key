@@ -9,7 +9,6 @@ repository:
   - main
   architectures:
   - amd64
-  - arm64
   keyring:
     fingerprint: 5F84FE50A40111C981410E11775AD1473BF25102
     path: /etc/apt/keyrings/m3tal-archive-keyring.gpg
@@ -17,7 +16,7 @@ packages:
 - id: m3tal
   name: m3tal
   source_repo: jakej985-rgb/m3tal-apt-key
-  type: cli
+  type: service
   status: published
   supported_architectures:
   - amd64
@@ -33,11 +32,13 @@ packages:
     priority: optional
     maintainer: M3tal-Creates <jakej985@gmail.com>
     homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
-    description: 'M3tal Agent - Autonomous terminal & workflow management daemon
+    description: 'M3tal - Core platform package for the M3tal ecosystem
 
-      M3tal is the central Linux CLI runtime and background process orchestrator
+      Installs the m3tal-api binary and m3tal-api.service (port 5050)
 
-      for the M3tal developer ecosystem.
+      with the web GUI at /gui/ and REST API at /api/v2. Configuration
+
+      lives in /etc/m3tal/.env with state tracked in state.db.
 
       '
   dependencies:
@@ -50,15 +51,150 @@ packages:
     - tmux
     build:
     - bash
+- id: m3tal-plugin-compose
+  name: m3tal-plugin-compose
+  source_repo: jakej985-rgb/m3tal-plugins
+  type: library
+  status: published
+  supported_architectures:
+  - amd64
+  publication:
+    component: main
+    distribution: stable
+    pool_path: pool/main/m3tal-plugin-compose
+    retention_count: 5
+    auto_publish: true
+  metadata:
+    latest_version: 0.6.0
+    section: admin
+    priority: optional
+    maintainer: M3tal-Creates <jakej985@gmail.com>
+    homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
+    description: 'M3tal plugin for Docker Compose service orchestration and lifecycle management
+
+      Extends the m3tal core platform with compose-based stack supervision.
+
+      '
+  dependencies:
+    runtime:
+    - m3tal
+- id: m3tal-plugin-docker-monitor
+  name: m3tal-plugin-docker-monitor
+  source_repo: jakej985-rgb/m3tal-plugins
+  type: library
+  status: published
+  supported_architectures:
+  - amd64
+  publication:
+    component: main
+    distribution: stable
+    pool_path: pool/main/m3tal-plugin-docker-monitor
+    retention_count: 5
+    auto_publish: true
+  metadata:
+    latest_version: 0.8.1
+    section: admin
+    priority: optional
+    maintainer: M3tal-Creates <jakej985@gmail.com>
+    homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
+    description: 'M3tal plugin for Docker container monitoring and telemetry
+
+      Provides container health probes, metrics, and status reporting to the
+
+      m3tal core platform.
+
+      '
+  dependencies:
+    runtime:
+    - m3tal
+- id: m3tal-plugin-mesh
+  name: m3tal-plugin-mesh
+  source_repo: jakej985-rgb/m3tal-plugins
+  type: library
+  status: published
+  supported_architectures:
+  - amd64
+  publication:
+    component: main
+    distribution: stable
+    pool_path: pool/main/m3tal-plugin-mesh
+    retention_count: 5
+    auto_publish: true
+  metadata:
+    latest_version: 0.5.0
+    section: net
+    priority: optional
+    maintainer: M3tal-Creates <jakej985@gmail.com>
+    homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
+    description: 'M3tal plugin providing mesh networking and inter-node communication
+
+      Base mesh plugin for the m3tal core platform.
+
+      '
+  dependencies:
+    runtime:
+    - m3tal
+- id: m3tal-plugin-mesh-cluster
+  name: m3tal-plugin-mesh-cluster
+  source_repo: jakej985-rgb/m3tal-plugins
+  type: library
+  status: published
+  supported_architectures:
+  - amd64
+  publication:
+    component: main
+    distribution: stable
+    pool_path: pool/main/m3tal-plugin-mesh-cluster
+    retention_count: 5
+    auto_publish: true
+  metadata:
+    latest_version: 0.4.1
+    section: net
+    priority: optional
+    maintainer: M3tal-Creates <jakej985@gmail.com>
+    homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
+    description: 'M3tal plugin for cluster-level mesh coordination
+
+      Cluster management companion to m3tal-plugin-mesh.
+
+      '
+  dependencies:
+    runtime:
+    - m3tal-plugin-mesh
+- id: m3tal-plugin-mesh-node
+  name: m3tal-plugin-mesh-node
+  source_repo: jakej985-rgb/m3tal-plugins
+  type: library
+  status: published
+  supported_architectures:
+  - amd64
+  publication:
+    component: main
+    distribution: stable
+    pool_path: pool/main/m3tal-plugin-mesh-node
+    retention_count: 5
+    auto_publish: true
+  metadata:
+    latest_version: 0.4.1
+    section: net
+    priority: optional
+    maintainer: M3tal-Creates <jakej985@gmail.com>
+    homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
+    description: 'M3tal plugin for node-level mesh participation
+
+      Per-node mesh agent companion to m3tal-plugin-mesh.
+
+      '
+  dependencies:
+    runtime:
+    - m3tal-plugin-mesh
 - id: m3tal-core
   name: m3tal-core
   source_repo: jakej985-rgb/m3tal-core
   type: core-system
-  status: active
+  status: planned
   supported_architectures:
   - amd64
-  - arm64
-  - all
   publication:
     component: main
     distribution: stable
@@ -92,7 +228,6 @@ packages:
   status: planned
   supported_architectures:
   - amd64
-  - arm64
   publication:
     component: main
     distribution: stable
@@ -113,7 +248,7 @@ packages:
       '
   dependencies:
     runtime:
-    - m3tal-core
+    - m3tal
 - id: m3tal-godash
   name: m3tal-godash
   source_repo: jakej985-rgb/m3tal-godash
@@ -121,7 +256,6 @@ packages:
   status: planned
   supported_architectures:
   - amd64
-  - arm64
   publication:
     component: main
     distribution: stable
@@ -150,7 +284,6 @@ packages:
   status: planned
   supported_architectures:
   - amd64
-  - arm64
   publication:
     component: main
     distribution: stable
@@ -170,12 +303,12 @@ packages:
       '
   dependencies:
     runtime:
-    - m3tal-core
+    - m3tal
 - id: monster-lab
   name: monster-lab
   source_repo: jakej985-rgb/Monster-Lab
   type: desktop
-  status: active
+  status: planned
   supported_architectures:
   - amd64
   publication:
@@ -207,7 +340,7 @@ packages:
   name: red-music-locker
   source_repo: jakej985-rgb/red-music-locker
   type: service
-  status: active
+  status: planned
   supported_architectures:
   - amd64
   publication:
@@ -235,7 +368,7 @@ packages:
   name: shop-manager
   source_repo: jakej985-rgb/shop-manager
   type: desktop
-  status: active
+  status: planned
   supported_architectures:
   - amd64
   publication:
@@ -261,7 +394,7 @@ packages:
   name: specs-n-parts
   source_repo: jakej985-rgb/specs-n-parts
   type: desktop
-  status: active
+  status: planned
   supported_architectures:
   - amd64
   publication:
@@ -287,10 +420,9 @@ packages:
   name: comicinfo-generator
   source_repo: jakej985-rgb/comicinfo-generator
   type: cli
-  status: active
+  status: planned
   supported_architectures:
   - amd64
-  - all
   publication:
     component: main
     distribution: stable
