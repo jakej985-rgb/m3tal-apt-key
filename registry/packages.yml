@@ -70,7 +70,8 @@ packages:
     priority: optional
     maintainer: M3tal-Creates <jakej985@gmail.com>
     homepage: https://jakej985-rgb.github.io/m3tal-apt-key/
-    description: 'M3tal plugin for Docker Compose service orchestration and lifecycle management
+    description: 'M3tal plugin for Docker Compose service orchestration and lifecycle
+      management
 
       Extends the m3tal core platform with compose-based stack supervision.
 
@@ -92,7 +93,7 @@ packages:
     retention_count: 5
     auto_publish: true
   metadata:
-    latest_version: 0.8.1
+    latest_version: 0.8.2
     section: admin
     priority: optional
     maintainer: M3tal-Creates <jakej985@gmail.com>
