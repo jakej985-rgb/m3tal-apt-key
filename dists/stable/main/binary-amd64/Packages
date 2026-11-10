@@ -1244,3 +1244,19 @@ SHA512: d2d0e00372c736737af09380c492bde801b9bc68a294364954b43c1138025dbf4f3eb47a
 Description: M3TAL official plugin for m3tal-samba-nfs
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-samba-nfs
+Architecture: amd64
+Version: 0.1.2
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-samba-nfs/m3tal-plugin-samba-nfs_0.1.2_amd64.deb
+Size: 957596
+MD5sum: a7d935344ad2a06eb95abb0a60c3688c
+SHA1: f646d8f2a43a06e77592065d785c4900e2113645
+SHA256: 767747400a4feea92f401caf8d158da89acb6398cd7d5d074933be6bd927878d
+SHA512: 532a4e98c850961902b8d90604fa51ce016a8a917abcaeaae2e9c3adb31b61240ed087e0dc3e5d9cc8189d180482a821794332891ceb8d10eca58392c7dfb7fc
+Description: M3TAL official plugin for m3tal-samba-nfs
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
