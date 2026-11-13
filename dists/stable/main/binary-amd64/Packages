@@ -1209,6 +1209,22 @@ SHA512: f12f8a98ecdfbff358053102ec58152a27df6b2ea237dfdf538108cdeeb685d4863b5354
 Description: M3TAL official plugin for m3tal-mesh
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: m3tal-plugin-mesh
+Architecture: amd64
+Version: 0.5.2
+Priority: optional
+Section: utils
+Maintainer: M3tal Community <maintainers@m3tal.io>
+Depends: m3tal (>= 0.3.0)
+Filename: pool/main/m3tal-plugin-mesh/m3tal-plugin-mesh_0.5.2_amd64.deb
+Size: 2257422
+MD5sum: d974bbb6b17d8c1a0325d962aff90f71
+SHA1: 8987c0ecee3a7dd78dcb8cdc9fe1e385f5051ec6
+SHA256: 4bfa8bc05c9e9ec7ae466ab35b2014250eaf1628d521c10048e5834f578f025b
+SHA512: 60f12b3e170bc5b55b9be0414a256abb1568977664d10c37b2749855de9d5e127a9d85c6ca5f32bdb1875f0a831e96bca4575addf9784e4e401e53105be981c6
+Description: M3TAL official plugin for m3tal-mesh
+ Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
+
 Package: m3tal-plugin-mesh-cluster
 Architecture: amd64
 Version: 0.3.0

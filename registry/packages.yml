@@ -122,7 +122,7 @@ packages:
     retention_count: 5
     auto_publish: true
   metadata:
-    latest_version: 0.5.1
+    latest_version: 0.5.2
     section: net
     priority: optional
     maintainer: M3tal-Creates <jakej985@gmail.com>
