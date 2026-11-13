@@ -1279,6 +1279,24 @@ Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
  Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
  headless telemetry broadcaster, making this machine a full peer node.
 
+Package: m3tal-plugin-mesh-cluster
+Architecture: amd64
+Version: 0.5.2
+Priority: optional
+Section: utils
+Maintainer: jakej985-rgb <jakej985@gmail.com>
+Depends: m3tal-plugin-mesh (>= 0.5.2), m3tal-plugin-mesh-node (>= 0.5.2)
+Filename: pool/main/m3tal-plugin-mesh-cluster/m3tal-plugin-mesh-cluster_0.5.2_amd64.deb
+Size: 924
+MD5sum: 0f42811f076027b726691d00904f7088
+SHA1: d3dcbf6fcd7a777be78b119001140e457e709ef4
+SHA256: b3b013395e086e35e194de48c01c9bb1651fbde608effb3bd244827f6ba0e003
+SHA512: 26c902ddc3fa5ed138996e1a3ff32147368253990dd5ed430ecf640e914ced41f305fe380280a6afd46f8b8b931d50eb698e8fab1d2a1dc5dcd3153a663c9ac9
+Description: M3TAL Mesh Cluster Metapackage (Full Peer: Send + Receive)
+ Personal Cloud & Fleet Federation Metapackage.
+ Installs both the m3tal-mesh reader dashboard and the m3tal-mesh-node
+ headless telemetry broadcaster, making this machine a full peer node.
+
 Package: m3tal-plugin-mesh-node
 Architecture: amd64
 Version: 0.4.1
