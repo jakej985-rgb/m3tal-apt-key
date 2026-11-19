@@ -34,7 +34,8 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y gnupg
+          sudo apt-get install -y gnupg dpkg-dev
+          python3 -m pip install --upgrade pyyaml
 
       - name: Test public repository verifier
         run: python3 scripts/test_verify_deployed_repository.py
