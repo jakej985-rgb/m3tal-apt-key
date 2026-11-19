@@ -66,6 +66,36 @@ def make_dummy_deb(output_path, package_name="monster-lab", version="0.3.0", arc
 
 
 class TestIngestionPipeline(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.original_gnupghome = os.environ.get("GNUPGHOME")
+        cls.gnupghome = tempfile.mkdtemp(prefix="m3tal-pipeline-gpg-")
+        subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--batch", "--passphrase", "",
+             "--quick-generate-key", "M3tal Pipeline Test <pipeline-test@m3tal.invalid>",
+             "rsa2048", "sign", "0"],
+            check=True,
+            capture_output=True,
+        )
+        keys = subprocess.run(
+            ["gpg", "--homedir", cls.gnupghome, "--with-colons", "--list-secret-keys"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        cls.test_fingerprint = next(
+            line.split(":")[9] for line in keys.splitlines() if line.startswith("fpr:")
+        )
+        os.environ["GNUPGHOME"] = cls.gnupghome
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.original_gnupghome is None:
+            os.environ.pop("GNUPGHOME", None)
+        else:
+            os.environ["GNUPGHOME"] = cls.original_gnupghome
+        shutil.rmtree(cls.gnupghome, ignore_errors=True)
+
     def setUp(self):
         self.test_dir = tempfile.mkdtemp(prefix="apt_test_repo_")
         self.pool_dir = os.path.join(self.test_dir, "pool", "main")
@@ -126,18 +156,17 @@ class TestIngestionPipeline(unittest.TestCase):
 
     def test_checksum_integrity_match(self):
         """Accept package if SHA256 matches."""
-        try:
-            res = ingest_deb_file(
-                self.deb_file,
-                repo_dir=self.test_dir,
-                expected_sha256=self.deb_sha256,
-            )
-            self.assertEqual(res["package"], "monster-lab")
-            self.assertEqual(res["version"], "0.3.0")
-            self.assertEqual(res["sha256"], self.deb_sha256)
-        except RuntimeError as e:
-            # On CI runners without GPG key, it will fail at signing step
-            self.assertTrue("gpg" in str(e).lower() or "signing" in str(e).lower())
+        res = ingest_deb_file(
+            self.deb_file,
+            repo_dir=self.test_dir,
+            expected_sha256=self.deb_sha256,
+            key_id=self.test_fingerprint,
+            passphrase="",
+        )
+        self.assertEqual(res["package"], "monster-lab")
+        self.assertEqual(res["version"], "0.3.0")
+        self.assertEqual(res["sha256"], self.deb_sha256)
+        self.assertTrue(os.path.isfile(os.path.join(self.dists_dir, "InRelease")))
 
     def test_package_identity_rejection(self):
         """Reject package if package name does not match expected_package."""
@@ -161,15 +190,28 @@ class TestIngestionPipeline(unittest.TestCase):
 
     def test_package_version_prefix_cleaning(self):
         """Accept expected_version with leading 'v' prefix."""
-        try:
-            res = ingest_deb_file(
-                self.deb_file,
-                repo_dir=self.test_dir,
-                expected_version="v0.3.0",
-            )
-            self.assertEqual(res["version"], "0.3.0")
-        except RuntimeError as e:
-            self.assertTrue("gpg" in str(e).lower() or "signing" in str(e).lower())
+        res = ingest_deb_file(
+            self.deb_file,
+            repo_dir=self.test_dir,
+            expected_version="v0.3.0",
+            key_id=self.test_fingerprint,
+            passphrase="",
+        )
+        self.assertEqual(res["version"], "0.3.0")
+
+    def test_arch_all_in_arm64_only_repo(self):
+        """Architecture: all verifies against generated arm64 index, not amd64."""
+        arm_deb = os.path.join(self.test_dir, "arm-app.deb")
+        make_dummy_deb(arm_deb, "arm-app", "1.0.0", "arm64")
+        ingest_deb_file(arm_deb, repo_dir=self.test_dir, key_id=self.test_fingerprint,
+                        passphrase="", update_registry=False)
+        all_deb = os.path.join(self.test_dir, "data-pkg.deb")
+        make_dummy_deb(all_deb, "data-pkg", "1.0.0", "all")
+        res = ingest_deb_file(all_deb, repo_dir=self.test_dir, key_id=self.test_fingerprint,
+                              passphrase="", update_registry=False)
+        self.assertEqual(res["architecture"], "all")
+        with open(os.path.join(self.dists_dir, "main", "binary-arm64", "Packages"), encoding="utf-8") as f:
+            self.assertIn("Package: data-pkg\n", f.read())
 
     def test_package_arch_rejection(self):
         """Reject package if architecture does not match expected_arch."""

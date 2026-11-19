@@ -155,7 +155,7 @@ jobs:
               for PKG in m3tal monster-lab; do
                 if grep -q "^Package: $PKG$" /repo/dists/stable/main/binary-amd64/Packages; then
                   echo "Checking candidate for $PKG..."
-                  CANDIDATE=$(apt-cache policy "$PKG" | grep "Candidate:" | awk '{print $2}')
+                  CANDIDATE=$(apt-cache policy "$PKG" | grep "Candidate:" | awk "{print \$2}")
                   echo "Found Candidate for $PKG: $CANDIDATE"
                   if [ -z "$CANDIDATE" ] || [ "$CANDIDATE" = "(none)" ]; then
                     echo "ERROR: Failed to resolve $PKG candidate!" >&2

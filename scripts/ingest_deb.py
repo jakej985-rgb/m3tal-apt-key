@@ -205,6 +205,14 @@ def ingest_deb_file(
         with open(registry_path, "rb") as registry_file:
             registry_backup = registry_file.read()
 
+    dists_path = os.path.join(repo_dir, "dists", "stable")
+    dists_existed = os.path.isdir(dists_path)
+    dists_backup = None
+    if dists_existed:
+        dists_backup = tempfile.mkdtemp(prefix="apt-dists-rollback-")
+        shutil.rmtree(dists_backup)
+        shutil.copytree(dists_path, dists_backup)
+
     print("--> 2. Publishing package and regenerating signed metadata...")
     print("--> 3. Regenerating Packages, Packages.gz, and Release indices...")
     try:
@@ -228,13 +236,20 @@ def ingest_deb_file(
         # 5. Post-publication verification
         if not os.path.isfile(staged_path):
             raise RuntimeError(f"Package missing from pool after publication: {staged_path}")
-        packages_index = os.path.join(repo_dir, "dists", "stable", "main", f"binary-{pkg_arch if pkg_arch != 'all' else 'amd64'}", "Packages")
-        if not os.path.isfile(packages_index):
-            raise RuntimeError(f"Packages index missing at {packages_index}")
-        with open(packages_index, "r", encoding="utf-8") as f_idx:
-            idx_text = f_idx.read()
-        if f"Package: {pkg_name}\n" not in idx_text or f"Version: {pkg_ver}\n" not in idx_text:
-            raise RuntimeError(f"Package {pkg_name} {pkg_ver} is not present in generated Packages index!")
+        generated_archs = index_info.get("architectures") or []
+        if isinstance(generated_archs, str):
+            generated_archs = [a for a in generated_archs.replace(",", " ").split() if a]
+        verify_archs = list(generated_archs) if pkg_arch == "all" else [pkg_arch]
+        if not verify_archs:
+            raise RuntimeError("No architecture indexes were generated!")
+        for verify_arch in verify_archs:
+            packages_index = os.path.join(repo_dir, "dists", "stable", "main", f"binary-{verify_arch}", "Packages")
+            if not os.path.isfile(packages_index):
+                raise RuntimeError(f"Packages index missing at {packages_index}")
+            with open(packages_index, "r", encoding="utf-8") as f_idx:
+                idx_text = f_idx.read()
+            if f"Package: {pkg_name}\n" not in idx_text or f"Version: {pkg_ver}\n" not in idx_text:
+                raise RuntimeError(f"Package {pkg_name} {pkg_ver} is not present in generated Packages index for {verify_arch}!")
         inrelease_path = os.path.join(repo_dir, "dists", "stable", "InRelease")
         if not os.path.isfile(inrelease_path):
             raise RuntimeError("InRelease missing after publication!")
@@ -252,10 +267,16 @@ def ingest_deb_file(
             os.replace(restore_path, registry_path)
         elif os.path.isfile(registry_path):
             os.remove(registry_path)
+        if os.path.isdir(dists_path):
+            shutil.rmtree(dists_path)
+        if dists_existed and dists_backup:
+            shutil.copytree(dists_backup, dists_path)
         raise
     finally:
         if backup_path and os.path.exists(backup_path):
             os.remove(backup_path)
+        if dists_backup and os.path.isdir(dists_backup):
+            shutil.rmtree(dists_backup, ignore_errors=True)
 
     print("==================================================")
     print(f" ✅ Successfully Published {pkg_name} ({pkg_ver}) to Central Repository!")
