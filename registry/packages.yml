@@ -309,7 +309,7 @@ packages:
   name: monster-lab
   source_repo: jakej985-rgb/Monster-Lab
   type: desktop
-  status: planned
+  status: published
   supported_architectures:
   - amd64
   publication:
@@ -319,7 +319,7 @@ packages:
     retention_count: 5
     auto_publish: true
   metadata:
-    latest_version: 0.1.4
+    latest_version: 0.3.0
     section: education
     priority: optional
     maintainer: Monster Lab Team <support@monsterlab.org>

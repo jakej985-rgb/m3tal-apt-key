@@ -151,7 +151,11 @@ jobs:
             fi
             EXTRA_FLAGS=""
             if [ "$ALLOW_REPLACE" = "true" ]; then EXTRA_FLAGS="--allow-replace"; fi
-            python3 scripts/ingest_deb.py "$candidate" $EXTRA_FLAGS
+            VALIDATION_FLAGS=""
+            if [ -n "$PKG_ID" ]; then VALIDATION_FLAGS="$VALIDATION_FLAGS --expected-package $PKG_ID"; fi
+            if [ -n "$PKG_VERSION" ]; then VALIDATION_FLAGS="$VALIDATION_FLAGS --expected-version $PKG_VERSION"; fi
+            if [ -n "$EXPECTED_SHA256" ]; then VALIDATION_FLAGS="$VALIDATION_FLAGS --sha256 $EXPECTED_SHA256"; fi
+            python3 scripts/ingest_deb.py "$candidate" $EXTRA_FLAGS $VALIDATION_FLAGS
             if ! cmp --silent "$candidate" "$target"; then
               echo "::error ::Staged package $target differs from validated candidate."
               exit 1

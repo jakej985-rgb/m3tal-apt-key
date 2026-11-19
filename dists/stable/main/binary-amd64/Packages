@@ -1393,3 +1393,23 @@ SHA512: 532a4e98c850961902b8d90604fa51ce016a8a917abcaeaae2e9c3adb31b61240ed087e0
 Description: M3TAL official plugin for m3tal-samba-nfs
  Standalone external plugin for the M3TAL Linux Supervisor and Control Plane.
 
+Package: monster-lab
+Architecture: amd64
+Version: 0.3.0
+Priority: optional
+Section: education
+Maintainer: Monster Lab Team <support@monsterlab.org>
+Installed-Size: 31290
+Depends: libc6 (>= 2.31), libgtk-3-0 (>= 3.24), libglib2.0-0, libserialport0
+Homepage: https://jakej985-rgb.github.io/M3tal-Hub/Monster-Lab/
+Filename: pool/main/monster-lab/monster-lab_0.3.0_amd64.deb
+Size: 10919658
+MD5sum: a124a00e7723ced16ff2bfe89847ecd2
+SHA1: 3bc7531a2f414ed9f665ca14f12f11ed3c705742
+SHA256: 2a6fd2fb26360bdab9c0680b77aa0b21c5387897e8a37e3517b4110ab205ee57
+SHA512: 9dd83dcb8a7816552acbe1fb69c32484fd31048f1b4475765f14d286b2261cdf1dbdd6610798014daba4fc9b1a02fd4d9a26d6ceca5b1047baa200d5214f4559
+Description: Monster Lab - Educational Arduino & Electronics Studio
+ Hands-on offline STEM robotics learning studio for kids.
+ Features 12 guided lessons, 38 sensor components, 20 build projects,
+ 24 troubleshooting challenges, and physical serial hardware companion.
+
