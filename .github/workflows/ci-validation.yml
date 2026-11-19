@@ -39,6 +39,9 @@ jobs:
       - name: Test public repository verifier
         run: python3 scripts/test_verify_deployed_repository.py
 
+      - name: Test Ingestion Pipeline Regression Suite
+        run: python3 scripts/test_ingestion_pipeline.py
+
       - name: Run Repository Integrity Validation
         run: |
           python3 scripts/validate_repository.py --strict --github-actions --skip-container-test --json validation-report.json
@@ -147,17 +150,21 @@ jobs:
               echo "--> 2. Running apt-get update..."
               apt-get update -qq
 
-              echo "--> 3. Querying candidate version..."
-              CANDIDATE=$(apt-cache policy m3tal | grep "Candidate:" | awk "{print \$2}")
-              echo "Found Candidate: $CANDIDATE"
-              if [ -z "$CANDIDATE" ] || [ "$CANDIDATE" = "(none)" ]; then
-                echo "ERROR: Failed to resolve m3tal candidate!" >&2
-                exit 1
-              fi
-
-              echo "--> 4. Simulating package installation and dependency resolution..."
-              apt-get install -d -y --no-install-recommends m3tal > /dev/null
-              echo "--> APT package download succeeded."
+              echo "--> 3. Querying candidate versions and simulating package downloads..."
+              for PKG in m3tal monster-lab; do
+                if grep -q "^Package: $PKG$" /repo/dists/stable/main/binary-amd64/Packages; then
+                  echo "Checking candidate for $PKG..."
+                  CANDIDATE=$(apt-cache policy "$PKG" | grep "Candidate:" | awk '{print $2}')
+                  echo "Found Candidate for $PKG: $CANDIDATE"
+                  if [ -z "$CANDIDATE" ] || [ "$CANDIDATE" = "(none)" ]; then
+                    echo "ERROR: Failed to resolve $PKG candidate!" >&2
+                    exit 1
+                  fi
+                  echo "--> Simulating $PKG download..."
+                  apt-get install -d -y --no-install-recommends "$PKG" > /dev/null
+                  echo "--> APT package download succeeded for $PKG."
+                fi
+              done
             '
           rm -f "${KEYRING_TMP}"
 

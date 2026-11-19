@@ -17,6 +17,7 @@ import urllib.request
 import tempfile
 import argparse
 import subprocess
+import re
 import yaml
 from typing import Optional, Dict, Any
 
@@ -28,7 +29,7 @@ SCRIPT_DIR = os.path.join(REPO_ROOT, "scripts")
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
-from publish_package import AptPublisher
+from publish_package import AptPublisher, compute_file_digests
 from validate_package import validate_debian_package, extract_control_from_deb
 from deb_version import compare_debian_versions
 
@@ -69,13 +70,17 @@ def update_registry_manifest(package_name: str, new_version: str, pool_path: str
         if pkg.get("id") == package_name or pkg.get("name") == package_name:
             metadata = pkg.setdefault("metadata", {})
             curr_ver = metadata.get("latest_version")
-            if not curr_ver or compare_debian_versions(new_version, curr_ver) > 0:
-                metadata["latest_version"] = new_version
+            curr_status = pkg.get("status")
+            is_upgrade = not curr_ver or compare_debian_versions(new_version, curr_ver) >= 0
+            is_not_published = curr_status != "published"
+            if is_upgrade or is_not_published:
+                if is_upgrade:
+                    metadata["latest_version"] = new_version
                 pkg["status"] = "published"
                 publication = pkg.setdefault("publication", {})
                 publication["pool_path"] = os.path.dirname(pool_path)
                 updated = True
-                print(f"--> [REGISTRY] Updated registry entry for '{package_name}' to v{new_version}")
+                print(f"--> [REGISTRY] Updated registry entry for '{package_name}' to v{metadata['latest_version']} (status: published)")
             break
 
     if updated:
@@ -86,6 +91,10 @@ def update_registry_manifest(package_name: str, new_version: str, pool_path: str
 def ingest_deb_file(
     deb_path: str,
     repo_dir: str = REPO_ROOT,
+    expected_package: Optional[str] = None,
+    expected_version: Optional[str] = None,
+    expected_arch: Optional[str] = None,
+    expected_sha256: Optional[str] = None,
     allow_replace: bool = False,
     allow_downgrade: bool = False,
     skip_validation: bool = False,
@@ -102,7 +111,18 @@ def ingest_deb_file(
     print(f" Ingesting Debian Package: {os.path.basename(deb_path)}")
     print(f"==================================================")
 
-    # 1. Validation
+    # 1. SHA256 checksum verification
+    digests = compute_file_digests(deb_path)
+    actual_sha256 = digests["sha256"]
+    if expected_sha256:
+        expected_clean = expected_sha256.strip().lower()
+        if actual_sha256.lower() != expected_clean:
+            raise ValueError(
+                f"Package SHA-256 mismatch:\n  Expected: {expected_clean}\n  Actual:   {actual_sha256}"
+            )
+        print("    [OK] Package SHA-256 matches expected checksum.")
+
+    # 2. Structure and control validation
     if not skip_validation:
         print("--> 1. Validating Debian package structure and metadata...")
         val_res = validate_debian_package(deb_path)
@@ -118,11 +138,48 @@ def ingest_deb_file(
 
     print(f"--> Package Details: {pkg_name} {pkg_ver} ({pkg_arch})")
 
+    # 3. Parameter and identity validation
+    if expected_package and pkg_name != expected_package:
+        raise ValueError(
+            f"Package identity mismatch: package defines name '{pkg_name}', expected '{expected_package}'"
+        )
+    if expected_version:
+        clean_exp = expected_version.lstrip("v")
+        clean_ver = pkg_ver.lstrip("v")
+        if clean_ver != clean_exp:
+            raise ValueError(
+                f"Package version mismatch: package defines version '{pkg_ver}', expected '{expected_version}'"
+            )
+    if expected_arch and pkg_arch != expected_arch and pkg_arch != "all":
+        raise ValueError(
+            f"Package architecture mismatch: package defines architecture '{pkg_arch}', expected '{expected_arch}'"
+        )
+
+    # Supported architectures check
+    allowed_archs = {"amd64", "arm64", "all", "armhf", "i386", "riscv64", "ppc64el", "s390x"}
+    if pkg_arch not in allowed_archs:
+        raise ValueError(f"Unsupported Debian package architecture: '{pkg_arch}'")
+
+    # Path safety and character validation
+    safe_re = re.compile(r"^[a-zA-Z0-9.+:~-]+$")
+    for field_name, field_val in [("Package", pkg_name), ("Version", pkg_ver), ("Architecture", pkg_arch)]:
+        if not field_val or not safe_re.match(field_val) or "/" in field_val or "\\" in field_val or ".." in field_val:
+            raise ValueError(f"Invalid or unsafe character in Debian control field '{field_name}': '{field_val}'")
+
     signing_key = key_id or find_default_signing_key()
     if not signing_key:
         raise RuntimeError("No GPG signing key is available; refusing to publish unsigned metadata.")
 
-    # 2. Stage into pool
+    if passphrase is None:
+        passphrase = os.environ.get("APT_GPG_PASSPHRASE") or os.environ.get("GPG_PASSPHRASE")
+        if not passphrase and os.path.exists(os.path.expanduser("~/.config/m3tal/apt_gpg_passphrase")):
+            try:
+                with open(os.path.expanduser("~/.config/m3tal/apt_gpg_passphrase"), "r") as pf:
+                    passphrase = pf.read().strip()
+            except Exception:
+                pass
+
+    # 4. Stage into pool
     publisher = AptPublisher(
         repo_dir=repo_dir,
         suite="stable",
@@ -167,6 +224,21 @@ def ingest_deb_file(
         )
         print(f"    [OK] Indices updated ({index_info['package_count']} packages for {index_info['architectures']}).")
         print(f"    [OK] Cryptographically signed InRelease and Release.gpg with key {signing_key}.")
+
+        # 5. Post-publication verification
+        if not os.path.isfile(staged_path):
+            raise RuntimeError(f"Package missing from pool after publication: {staged_path}")
+        packages_index = os.path.join(repo_dir, "dists", "stable", "main", f"binary-{pkg_arch if pkg_arch != 'all' else 'amd64'}", "Packages")
+        if not os.path.isfile(packages_index):
+            raise RuntimeError(f"Packages index missing at {packages_index}")
+        with open(packages_index, "r", encoding="utf-8") as f_idx:
+            idx_text = f_idx.read()
+        if f"Package: {pkg_name}\n" not in idx_text or f"Version: {pkg_ver}\n" not in idx_text:
+            raise RuntimeError(f"Package {pkg_name} {pkg_ver} is not present in generated Packages index!")
+        inrelease_path = os.path.join(repo_dir, "dists", "stable", "InRelease")
+        if not os.path.isfile(inrelease_path):
+            raise RuntimeError("InRelease missing after publication!")
+        print(f"    [OK] Verified package {pkg_name} ({pkg_ver}) is present in generated index.")
     except Exception:
         if target_existed and backup_path:
             os.replace(backup_path, target_path)
@@ -195,6 +267,7 @@ def ingest_deb_file(
         "version": pkg_ver,
         "architecture": pkg_arch,
         "staged_path": staged_path,
+        "sha256": actual_sha256,
     }
 
 
@@ -262,6 +335,10 @@ def main():
     parser.add_argument("--url", help="HTTP(S) URL of .deb file to download and ingest")
     parser.add_argument("--from-repo", help="Path to local app repository directory to ingest from")
     parser.add_argument("--repo-dir", default=REPO_ROOT, help="Path to central apt repository root")
+    parser.add_argument("--expected-package", help="Expected Debian package name (e.g. monster-lab)")
+    parser.add_argument("--expected-version", help="Expected Debian package version (e.g. 0.3.0)")
+    parser.add_argument("--expected-arch", help="Expected Debian architecture (e.g. amd64)")
+    parser.add_argument("--sha256", "--expected-sha256", dest="sha256", help="Expected SHA-256 checksum of the package")
     parser.add_argument("--allow-replace", action="store_true", help="Allow replacing identical existing package version")
     parser.add_argument("--allow-downgrade", action="store_true", help="Allow publishing older version than latest")
     parser.add_argument("--skip-validation", action="store_true", help="Skip deb validation checks")
@@ -283,6 +360,10 @@ def main():
 
     common_kwargs = {
         "repo_dir": args.repo_dir,
+        "expected_package": args.expected_package,
+        "expected_version": args.expected_version,
+        "expected_arch": args.expected_arch,
+        "expected_sha256": args.sha256,
         "allow_replace": args.allow_replace,
         "allow_downgrade": args.allow_downgrade,
         "skip_validation": args.skip_validation,

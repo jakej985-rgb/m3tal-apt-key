@@ -148,11 +148,16 @@ class AptPublisher:
             cmp = compare_debian_versions(cand_ver, ex_ver)
             if cmp == 0:
                 if not allow_replace:
-                    return (
-                        False,
-                        f"Exact version '{cand_ver}' for package '{pkg_name}' ({cand_arch}) already exists in repository.",
-                        cand_fields,
-                    )
+                    cand_digests = compute_file_digests(candidate_deb)
+                    if cand_digests["sha256"] == p.get("SHA256"):
+                        # Byte-for-byte identical package already exists in repository - safe idempotent no-op
+                        pass
+                    else:
+                        return (
+                            False,
+                            f"Exact version '{cand_ver}' for package '{pkg_name}' ({cand_arch}) already exists in repository with different content.",
+                            cand_fields,
+                        )
             if latest_pkg is None or compare_debian_versions(ex_ver, latest_pkg.get("Version")) > 0:
                 latest_pkg = p
 
@@ -211,6 +216,12 @@ class AptPublisher:
 
         os.makedirs(target_dir, exist_ok=True)
         target_path = os.path.join(target_dir, target_filename)
+
+        # Enforce path containment
+        real_target = os.path.realpath(target_path)
+        real_pool = os.path.realpath(self.pool_dir)
+        if not real_target.startswith(real_pool + os.sep):
+            raise ValueError(f"Path traversal detected: target {target_path} is outside pool {self.pool_dir}")
 
         # Atomic copy
         tmp_target = target_path + ".tmp"
