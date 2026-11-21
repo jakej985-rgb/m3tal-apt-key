@@ -2,19 +2,19 @@ Origin: M3TAL
 Label: M3TAL
 Suite: stable
 Codename: stable
-Date: Sat, 21 Nov 2026 04:28:28 +0000
+Date: Sat, 21 Nov 2026 05:40:51 +0000
 Architectures: amd64
 Components: main
 Description: M3TAL Central Ecosystem APT Repository
 MD5Sum:
- 149786568b15cc1682b47fdc63e1ee79            63279 main/binary-amd64/Packages
- 81529603a14d55b8923f3ab8aae96a65            17286 main/binary-amd64/Packages.gz
+ 8e95cf78a96d88b1809a03b0a86a4285            64234 main/binary-amd64/Packages
+ 0ee04eb2b9caf20d74ca87ff797efc81            17472 main/binary-amd64/Packages.gz
 SHA1:
- 4fb73fdc299d1bea470828ca09db107dae7e35c1            63279 main/binary-amd64/Packages
- 8b9e12a036a8b0dc80df24a5611cb883ee54aa9a            17286 main/binary-amd64/Packages.gz
+ 4d33432960776b6406eb43a92c198d1e2336a87b            64234 main/binary-amd64/Packages
+ 66dcbde35ddbf7bbaa320c36d535a6449e3c5d1d            17472 main/binary-amd64/Packages.gz
 SHA256:
- f70eb3039f4ec90b8673dab2fb2800eab81ddce3518408ff7e9c904b8e6fb3ed            63279 main/binary-amd64/Packages
- 2f8f7fea99f882e5b96f72803ebebaa334249cd567a721f978bd3b2c8946e923            17286 main/binary-amd64/Packages.gz
+ c66ffe31d3caeb7551471144fe9248cd42000587a9adf4b34e3eb159b3a1b195            64234 main/binary-amd64/Packages
+ e2fe4f32d3b441fc7cc91dae22b94dadde2e4610f27dc81a457735b69e228a4f            17472 main/binary-amd64/Packages.gz
 SHA512:
- fa626e22e20f7e01c1886aa6638b856d524d0366700a60e9d83c5e1bda582ca5f3f211c24af8b34415e2e2af2236d28d657be7623a5ff167cbdf91754aabb81f            63279 main/binary-amd64/Packages
- 3937cc87d4ad3b775802ecfd2fa636217ef076478889229d15e3e7158cf1d0377814a6a4c9525a2e156b625a34dd83e72949a025b55bd07b5431909ceab7747f            17286 main/binary-amd64/Packages.gz
+ 5351a165c866680536e5520ea5af34d3385d71e3de8261ec90f9b3aab4580957d8d22e7fd25ca9bd7e4a30141834ccc143cb8a9ebc29b55d36fee978d66eb3f2            64234 main/binary-amd64/Packages
+ d7417fb2298e3576305c893caebd2772c6758642cb1a8bc27266b48da9d2169e2ecc8537f518c84d43b84f57a6e75883f708e15d512b8ca4ec249f7564d80ad3            17472 main/binary-amd64/Packages.gz
