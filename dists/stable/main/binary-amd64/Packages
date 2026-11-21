@@ -1463,3 +1463,23 @@ Description: Monster Lab - Educational Arduino & Electronics Studio
  Features 12 guided lessons, 38 sensor components, 20 build projects,
  24 troubleshooting challenges, and physical serial hardware companion.
 
+Package: monster-lab
+Architecture: amd64
+Version: 0.4.0
+Priority: optional
+Section: education
+Maintainer: Monster Lab Team <support@monsterlab.org>
+Installed-Size: 31604
+Depends: libc6 (>= 2.31), libgtk-3-0 (>= 3.24), libglib2.0-0, libserialport0
+Homepage: https://jakej985-rgb.github.io/M3tal-Hub/Monster-Lab/
+Filename: pool/main/monster-lab/monster-lab_0.4.0_amd64.deb
+Size: 10990296
+MD5sum: 0392918b37abcddabbd0b4b205163f3b
+SHA1: 09b955831b6289e606cb60ad6c116fe810a1d92c
+SHA256: e020ccd3a33efbef196b096a14e11b689d7b59cb19590704eb4361ecda5b2093
+SHA512: bdb99d542d1340d5ff4cca4e09954e8c55e992310883ba745aa0f9422f65934d480577b5c7b68d73f427be5fb5bbee8dcd5f9cb3512e65f119ff678cb76a1649
+Description: Hands-on offline STEM robotics learning studio for kids.
+ Hands-on offline STEM robotics learning studio for kids.
+ Features 12 guided lessons, 38 sensor components, 20 build projects,
+ 24 troubleshooting challenges, and physical serial hardware companion.
+
