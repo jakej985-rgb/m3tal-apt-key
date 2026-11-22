@@ -319,7 +319,7 @@ packages:
     retention_count: 5
     auto_publish: true
   metadata:
-    latest_version: 0.5.2
+    latest_version: 0.6.0
     section: education
     priority: optional
     maintainer: Monster Lab Team <support@monsterlab.org>

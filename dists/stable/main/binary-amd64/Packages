@@ -1603,3 +1603,23 @@ Description: Hands-on offline STEM robotics learning studio for kids.
  Features 12 guided lessons, 38 sensor components, 20 build projects,
  24 troubleshooting challenges, and physical serial hardware companion.
 
+Package: monster-lab
+Architecture: amd64
+Version: 0.6.0
+Priority: optional
+Section: education
+Maintainer: Monster Lab Team <support@monsterlab.org>
+Installed-Size: 31684
+Depends: libc6 (>= 2.31), libgtk-3-0 (>= 3.24), libglib2.0-0, libserialport0
+Homepage: https://jakej985-rgb.github.io/M3tal-Hub/Monster-Lab/
+Filename: pool/main/monster-lab/monster-lab_0.6.0_amd64.deb
+Size: 11018838
+MD5sum: adbbd692fa41e239803646b76f86f819
+SHA1: 1dbf51ef36c74e3d589b960e9c5f6dc64165b49b
+SHA256: fcdd3549278c6d5e22d441ad2d1fd3075b9ec23f26d555168aca6d93c6726c67
+SHA512: fb414a3d9bb2b4d9b335922ca4b0f33160461fd959920dc6b57e83ae10b1e70b26c565876440f1a9f5a53a395d95f87343bd4de8d6f9fbd8842e6c3bb307ff6d
+Description: Hands-on offline STEM robotics learning studio for kids.
+ Hands-on offline STEM robotics learning studio for kids.
+ Features 12 guided lessons, 38 sensor components, 20 build projects,
+ 24 troubleshooting challenges, and physical serial hardware companion.
+
